@@ -1,0 +1,30 @@
+<!--
+ * Dgmjr.System.Extensions.props
+ * 
+ *   Created: 2022-11-12-07:27:11
+ *   Modified: 2022-11-12-07:27:11
+ * 
+ *   Author: David G. Mooore, Jr. <david@dgmjr.io>
+ *   
+ *   Copyright © 2022-2023 David G. Mooore, Jr., All Rights Reserved
+ *      License: MIT (https://opensource.org/licenses/MIT)
+-->
+<Project>
+  <ItemGroup>
+    <Compile Remove="./System.Xml/XmlExtensions.cs" Condition="!$(DefineConstants.Contains('NETSTANDARD2_0_OR_GREATER'))" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- <Compile Remove="./System.Text/*" Condition="!$(DefineConstants.Contains('INCLUDE_SYSTEM_TEXT'))" />
+    <Compile Remove="./System.Xml/*" Condition="!$(DefineConstants.Contains('INCLUDE_XML'))" />
+    <Compile Remove="./System.Linq/*" Condition="!$(DefineConstants.Contains('INCLUDE_LINQ'))" />
+    <Compile Remove="./System/Math.cs" Condition="!$(DefineConstants.Contains('INCLUDE_MATH_EXTENSIONS'))" />
+    <Compile Remove="./System/Randoms.cs" Condition="!$(DefineConstants.Contains('INCLUDE_RANDOMS'))" />
+    <Compile Remove="./System/*Uri*.cs" Condition="!$(DefineConstants.Contains('INCLUDE_URI_EXTENSIONS'))" /> -->
+    <PackageFile Include="@(Compile)" Except="$(IntermediateOutputPath)**/*" PackagePath="ContentFiles/%(RecursiveDir)%(Filename)%(Extension)" />
+    <!-- <Compile Remove="@(Compile)" /> -->
+    <!-- <Using Remove="@(Using)" /> -->
+    <None Remove="**/$(AssemblyName).*" />
+    <Using Remove="System.Net.Http" />
+    <Using Remove="System.Console" />
+  </ItemGroup>
+</Project>
