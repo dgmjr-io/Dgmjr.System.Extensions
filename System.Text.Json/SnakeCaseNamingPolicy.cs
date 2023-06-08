@@ -1,10 +1,16 @@
-
 namespace System.Text.Json;
 using System.Text.RegularExpressions;
 
-public class SnakeCaseNamingPolicy : JsonNamingPolicy
+public class SnakeCaseNamingPolicy
+#if NET6_0_OR_GREATER
+    : JsonNamingPolicy
+#endif
 {
-    public override string ConvertName(string name)
+    public
+#if NET6_0_OR_GREATER
+    override
+#endif
+    string ConvertName(string name)
     {
         return name.ToSnakeCase();
     }

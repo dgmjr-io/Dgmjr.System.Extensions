@@ -1,32 +1,29 @@
-﻿#if !NETSTANDARD2_0 && !NETSTANDARD2_1 && !NET5_0_OR_GREATER
-extern alias XDoc;
-extern alias XPathDoc;
-// #elif NETSTANDARD2_0 || NETSTANDARD2_1
-//  extern alias NetStd;
-#endif
+﻿// // // #if !NETSTANDARD1_0
+// #if NETSTANDARD2_0 || NETSTANDARD2_1// && !N`ET6_0_OR_GREATER
+// extern alias XDoc;
+// extern alias XPathDoc;
+// using XPathDoc::System.Xml.XPath;
+// using XA = XDoc::System.Xml.Linq.XAttribute;
+// using XC = XDoc::System.Xml.Linq.XComment;
+// using XD = XDoc::System.Xml.Linq.XDocument;
+// using XE = XDoc::System.Xml.Linq.XElement;
+// using XN = XDoc::System.Xml.Linq.XName;
+// using XNS = XDoc::System.Xml.Linq.XNamespace;
+// using XO = XDoc::System.Xml.Linq.XNode;
+// #else
+// using XA = System.Xml.Linq.XAttribute;
+// using XC = System.Xml.Linq.XComment;
+// using XD = System.Xml.Linq.XDocument;
+// using XE = System.Xml.Linq.XElement;
+// using XN = System.Xml.Linq.XName;
+// using XNS = System.Xml.Linq.XNamespace;
+// using XO = System.Xml.Linq.XNode;
+// #endif
 using System;
+
 namespace System.Xml.Linq;
-using global::System.Xml.XPath;
+using System.Xml.XPath;
 
-
-#if !NETSTANDARD2_0 && !NETSTANDARD2_1 && !NET6_0_OR_GREATER
-using XPathDoc::System.Xml.XPath;
-using XA = XDoc::System.Xml.Linq.XAttribute;
-using XC = XDoc::System.Xml.Linq.XComment;
-using XD = XDoc::System.Xml.Linq.XDocument;
-using XE = XDoc::System.Xml.Linq.XElement;
-using XN = XDoc::System.Xml.Linq.XName;
-using XNS = XDoc::System.Xml.Linq.XNamespace;
-using XO = XDoc::System.Xml.Linq.XNode;
-#else
-using XA = System.Xml.Linq.XAttribute;
-using XC = System.Xml.Linq.XComment;
-using XD = System.Xml.Linq.XDocument;
-using XE = System.Xml.Linq.XElement;
-using XN = System.Xml.Linq.XName;
-using XNS = System.Xml.Linq.XNamespace;
-using XO = System.Xml.Linq.XNode;
-#endif
 /// <summary>
 /// A set of extensions for <see cref="XE" />s.
 /// </summary>
@@ -104,20 +101,20 @@ public static class XElementExtensions
 #if !NETSTANDARD2_0_OR_GREATER
         throw new PlatformNotSupportedException("This method is not supported on this platform.");
 #else
-            try
+        try
+        {
+            var document = XD.Parse(xml);
+            return document.XPathSelectElements(xpath).ToArray();
+        }
+        catch
+        {
+            if (throwOnInvalidXml)
             {
-                var document = XD.Parse(xml);
-                return document.XPathSelectElements(xpath).ToArray();
+                throw;
             }
-            catch
-            {
-                if (throwOnInvalidXml)
-                {
-                    throw;
-                }
 
-                return Empty<XE>();
-            }
+            return Empty<XE>();
+        }
 #endif
     }
 }

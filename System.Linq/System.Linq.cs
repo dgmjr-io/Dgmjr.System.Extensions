@@ -11,6 +11,8 @@
  */
 
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace System.Linq;
 
@@ -28,8 +30,7 @@ public static class JustinsLinqExtensions
     ///     <see cref="IEnumerable{T}"/></typeparam>
     /// <returns><c>TRUE</c> if <paramref name="e"/> is <c>NULL</c> or empty,
     ///     <c>FALSE</c> otherwise.</returns>
-    public static bool IsNullOrEmpty<T>(this IEnumerable<T> e)
-        => e == null || !e.Any();
+    public static bool IsNullOrEmpty<T>(this IEnumerable<T> e) => e == null || !e.Any();
 
     /// <summary>
     /// Performs the specified action on each element of the
@@ -58,8 +59,10 @@ public static class JustinsLinqExtensions
     ///     <see cref="ICollection{T}"/>.</typeparam>
     /// <returns>The <see cref="ICollection{T}"/> with the added elements.
     ///     </returns>
-    public static TCollection AddRange<TCollection, T>(this TCollection collection, IEnumerable<T> thingsToAdd)
-        where TCollection : ICollection<T>
+    public static TCollection AddRange<TCollection, T>(
+        this TCollection collection,
+        IEnumerable<T> thingsToAdd
+    ) where TCollection : ICollection<T>
     {
         collection.ForEach(item => collection.Add(item));
         return collection;
@@ -78,7 +81,10 @@ public static class JustinsLinqExtensions
     ///     <see cref="ICollection{T}"/>.</typeparam>
     /// <returns>The <see cref="ICollection{T}"/> with the removed elements.
     ///     </returns>
-    public static TCollection RemoveRange<TCollection, T>(this TCollection collection, IEnumerable<T> removeRange) where TCollection : ICollection<T>
+    public static TCollection RemoveRange<TCollection, T>(
+        this TCollection collection,
+        IEnumerable<T> removeRange
+    ) where TCollection : ICollection<T>
     {
         removeRange.ToList().ForEach(item => collection.Remove(item));
         return collection;
@@ -87,6 +93,7 @@ public static class JustinsLinqExtensions
     /// <summary>
     /// Removes the elements from the collection that match the specified
     /// predicate.
+    /// **MUTATES** the collection!!
     /// </summary>
     /// <param name="collection">The collection from which to remove the
     ///     elements.</param>
@@ -98,7 +105,10 @@ public static class JustinsLinqExtensions
     ///     <see cref="ICollection{T}"/>.</typeparam>
     /// <returns>The <see cref="ICollection{T}"/> with the removed elements.
     ///     </returns>
-    public static TCollection Without<TCollection, T>(this TCollection collection, Func<T, bool> predicate) where TCollection : ICollection<T>
+    public static TCollection Without<TCollection, T>(
+        this TCollection collection,
+        Func<T, bool> predicate
+    ) where TCollection : ICollection<T>
     {
         collection.RemoveRange(collection.Where(predicate).ToList());
         return collection;
@@ -118,6 +128,32 @@ public static class JustinsLinqExtensions
     ///     <see cref="ICollection{T}"/>.</typeparam>
     /// <returns>The <see cref="ICollection{T}"/> without the matchings
     ///     elements.</returns>
-    public static ICollection<T> Except<TCollection, T>(this TCollection collection, Func<T, bool> predicate) where TCollection : ICollection<T>
-        => collection.Except(collection.Where(predicate)).ToList();
+    public static ICollection<T> Except<TCollection, T>(
+        this TCollection collection,
+        Func<T, bool> predicate
+    ) where TCollection : ICollection<T> => collection.Except(collection.Where(predicate)).ToList();
+
+    /// <summary>
+    /// This function appends a new value to an existing IEnumerable collection and returns the updated
+    /// collection.
+    /// </summary>
+    /// <param name="values">An IEnumerable of type T representing the collection of values to which a new
+    /// value will be appended.</param>
+    /// <param name="T">T is a generic type parameter that can be replaced with any type at runtime. It is
+    /// used to define the type of elements in the input IEnumerable and the type of the new value to be
+    /// appended to it.</param>
+    public static IEnumerable<T> Append<T>(IEnumerable<T> values, T newValue) =>
+        values.Concat(new[] { newValue });
+
+    /// <summary>
+    /// The function adds a new value to the beginning of an existing sequence and returns the updated
+    /// sequence.
+    /// </summary>
+    /// <param name="values">An IEnumerable of type T representing the collection of values to which a new
+    /// value will be prepended.</param>
+    /// <param name="T">T is a generic type parameter that can be replaced with any type at runtime. It
+    /// represents the type of elements in the input sequence and the type of the new value being added to
+    /// the beginning of the sequence.</param>
+    public static IEnumerable<T> Prepend<T>(IEnumerable<T> values, T newValue) =>
+        new[] { newValue }.Concat(values);
 }

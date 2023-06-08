@@ -17,7 +17,7 @@ using System.Xml.Schema;
 namespace System;
 using static System.BitConverter;
 using static System.Math;
-
+using static System.Convert;
 
 /// <summary>
 /// Extensions to the <see cref="Random"/> class

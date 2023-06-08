@@ -13,7 +13,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net7.0;net6.0;netstandard2.1;netstandard2.0;netstandard1.5;netstandard1.3</TargetFrameworks>
+        <TargetFrameworks>netstandard2.0;netstandard2.1;net6.0;net7.0</TargetFrameworks>
+        <!-- <TargetFrameworks>netstandard1.7;netstandard1.6;netstandard1.5;netstandard1.3</TargetFrameworks> -->
+        <!-- <TargetFrameworks>netstandard1.7;netstandard1.6;netstandard1.5;netstandard1.3</TargetFrameworks> -->
         <!-- <TargetFramework>net7.0</TargetFramework> -->
         <PackageId>Dgmjr.System.Extensions</PackageId>
         <RootNamespace>System.Extensions</RootNamespace>
@@ -23,35 +25,7 @@
         <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
         <Title>Dgmjr.System.Extensions</Title>
         <Description>Extensions and utility classes for the System namespace</Description>
-        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+        <!-- <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies> -->
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
-    <ItemGroup>
-        <PackageReference Include="System.Usings" />
-        <PackageReference Include="System.Text.Usings" IncludeAssets="Build" ExcludeAssets="Compile;Runtime;Native;Analyzers" />
-        <PackageReference Include="system.Xml.ReaderWriter" Condition="$(TargetFramework.StartsWith('net6')) Or $(TargetFramework.StartsWith('net7'))" />
-        <PackageReference Include="System.Xml.XDocument"  Aliases="XDoc" Condition="$(TargetFramework.StartsWith('netstandard1'))"/>
-        <PackageReference Include="System.Xml.XPath.XDocument"  Aliases="XPathDoc"  Condition="$(TargetFramework.StartsWith('netstandard1'))" />
-        <PackageReference Include="NETStandard.Library" Aliases="NetStd" Condition="$(TargetFramework.StartsWith('netstandard2'))" />
-    </ItemGroup>
-    <Target Name="PrePack" BeforeTargets="GetPackageContents" Condition="$(TargetFramework.StartsWith('netstandard1'))">
-        <ItemGroup>
-            <PackageFile Include="$(OutputPath)**/System.Xml.XDocument.dll" />
-            <PackageFile Remove="$(OutputPath)**/System.Runtime.Numerics.dll" />
-            <None Remove="$(OutputPath)**/System.Runtime.Numerics.dll" />
-            <Reference Remove="System.Runtime.Numerics" />
-        </ItemGroup>
-    </Target>
-    <ItemGroup Condition="$(TargetFramework.Contains('netstandard1'))">
-        <Compile Remove="./System.ComponentModel/**/*.cs" />
-    </ItemGroup>
-    <ItemGroup Condition="$(TargetFramework.Contains('netstandard')) Or '$(TargetFramework)' == 'net5.0'">
-        <Compile Remove="./System.Text.Json/*.cs" />
-    </ItemGroup>
-    <Target Name="RemoveXDocument" BeforeTargets="CoreCompile">
-        <!-- <ItemGroup>
-            <PackageReference Remove="System.Xml.XDocument" />
-            <Reference Include="System.Xml.XDocument" Condition="$(TargetFramework.Contains('netstandard1'))" Aliases="XDoc" />
-        </ItemGroup> -->
-    </Target>
 </Project>

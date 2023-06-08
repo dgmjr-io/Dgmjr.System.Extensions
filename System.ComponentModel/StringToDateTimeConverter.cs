@@ -10,10 +10,14 @@
  *      License: MIT (https://opensource.org/licenses/MIT)
  */
 using System.Globalization;
+
 /// <summary>
 /// Defines a value converter from <see cref="DateTime"/> to <see cref="string"/> with an optional format string.
 /// </summary>
-public partial class DateTimeToStringValueConverter : System.ComponentModel.TypeConverter
+public partial class DateTimeToStringValueConverter
+#if NETSTANDARD1
+    : System.ComponentModel.TypeConverter
+#endif
 {
     /// <summary>
     /// Converts the <paramref name="value">value</paramref> to the <see cref="string"/> type.
@@ -31,8 +35,8 @@ public partial class DateTimeToStringValueConverter : System.ComponentModel.Type
     {
         string? format = parameter?.ToString();
         return !IsNullOrWhiteSpace(format)
-                   ? value.ToString(format, CultureInfo.InvariantCulture)
-                   : value.ToString(CultureInfo.InvariantCulture);
+            ? value.ToString(format, CultureInfo.InvariantCulture)
+            : value.ToString(CultureInfo.InvariantCulture);
     }
 
     /// <summary>
