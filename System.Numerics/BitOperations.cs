@@ -57,7 +57,7 @@ namespace System.Numerics
         /// </summary>
         /// <param name="value">The value.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [CLSCompliant(false)]
+        // [CLSCompliant(false)]
         public static int LeadingZeroCount(uint value)
         {
             // if (Lzcnt.IsSupported)
@@ -86,7 +86,7 @@ namespace System.Numerics
         /// </summary>
         /// <param name="value">The value.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [CLSCompliant(false)]
+        // [CLSCompliant(false)]
         public static int LeadingZeroCount(ulong value)
         {
             // if (Lzcnt.X64.IsSupported)
@@ -116,7 +116,7 @@ namespace System.Numerics
         /// </summary>
         /// <param name="value">The value.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [CLSCompliant(false)]
+        // [CLSCompliant(false)]
         public static int Log2(uint value)
         {
             // Enforce conventional contract 0->0 (Log(0) is undefined)
@@ -153,7 +153,7 @@ namespace System.Numerics
         /// </summary>
         /// <param name="value">The value.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [CLSCompliant(false)]
+        // [CLSCompliant(false)]
         public static int Log2(ulong value)
         {
             // Enforce conventional contract 0->0 (Log(0) is undefined)
@@ -219,7 +219,7 @@ namespace System.Numerics
         /// </summary>
         /// <param name="value">The value.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [CLSCompliant(false)]
+        // [CLSCompliant(false)]
         public static int PopCount(uint value)
         {
             // if (Popcnt.IsSupported)
@@ -250,7 +250,7 @@ namespace System.Numerics
         /// </summary>
         /// <param name="value">The value.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [CLSCompliant(false)]
+        // [CLSCompliant(false)]
         public static int PopCount(ulong value)
         {
             // if (Popcnt.X64.IsSupported)
@@ -294,7 +294,7 @@ namespace System.Numerics
         /// Similar in behavior to the x86 instruction TZCNT.
         /// </summary>
         /// <param name="value">The value.</param>
-        [CLSCompliant(false)]
+        // [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int TrailingZeroCount(uint value)
         {
@@ -342,7 +342,7 @@ namespace System.Numerics
         /// </summary>
         /// <param name="value">The value.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [CLSCompliant(false)]
+        // [CLSCompliant(false)]
         public static int TrailingZeroCount(ulong value)
         {
             // if (Bmi1.X64.IsSupported)
@@ -374,7 +374,7 @@ namespace System.Numerics
         /// Any value outside the range [0..31] is treated as congruent mod 32.</param>
         /// <returns>The rotated value.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [CLSCompliant(false)]
+        // [CLSCompliant(false)]
         public static uint RotateLeft(uint value, int offset)
             => (value << offset) | (value >> (32 - offset));
 
@@ -387,7 +387,7 @@ namespace System.Numerics
         /// Any value outside the range [0..63] is treated as congruent mod 64.</param>
         /// <returns>The rotated value.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [CLSCompliant(false)]
+        // [CLSCompliant(false)]
         public static ulong RotateLeft(ulong value, int offset)
             => (value << offset) | (value >> (64 - offset));
 
@@ -400,7 +400,7 @@ namespace System.Numerics
         /// Any value outside the range [0..31] is treated as congruent mod 32.</param>
         /// <returns>The rotated value.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [CLSCompliant(false)]
+        // [CLSCompliant(false)]
         public static uint RotateRight(uint value, int offset)
             => (value >> offset) | (value << (32 - offset));
 
@@ -413,7 +413,7 @@ namespace System.Numerics
         /// Any value outside the range [0..63] is treated as congruent mod 64.</param>
         /// <returns>The rotated value.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [CLSCompliant(false)]
+        // [CLSCompliant(false)]
         public static ulong RotateRight(ulong value, int offset)
             => (value >> offset) | (value << (64 - offset));
     }
