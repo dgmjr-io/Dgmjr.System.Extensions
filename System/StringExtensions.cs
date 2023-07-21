@@ -1,4 +1,4 @@
-using System;
+
 /*
  * StringExtensions.cs
  *
@@ -10,7 +10,8 @@ using System;
  *   Copyright © 2022-2023 David G. Mooore, Jr., All Rights Reserved
  *      License: MIT (https://opensource.org/licenses/MIT)
  */
-
+using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace System;
@@ -75,10 +76,10 @@ public static class StringExtensions
     /// another string is present or not.</param>
     /// <param name="toCheck">The string that we want to check if it exists within the source
     /// string.</param>
-    /// <param name="comp">comp is an optional parameter of type <see cref="SStringComparison" /> <see langword="enum" />. It specifies the
+    /// <param name="comp">comp is an optional parameter of type <see cref="StringComparison" /> <see langword="enum" />. It specifies the
     /// type of comparison to use when comparing the source <see langword="string" /> and the <paramref name="toCheck" /> <see langword="string" />. If it is not
     /// provided, the default value is <see cref="StringComparison.OrdinalIgnoreCase" />, which performs a case-insensitive
-    /// comparison. Other possible values for <see cref="SStringComparison" /> include <see cref="SStringComparison.CurrentCulture" />
+    /// comparison. Other possible values for <see cref="StringComparison" /> include <see cref="StringComparison.CurrentCulture" />
     /// </param>
     public static bool Contains(
         this string source,
@@ -86,4 +87,6 @@ public static class StringExtensions
         StringComparison? comp = null
     ) => source?.IndexOf(toCheck, comp ?? StringComparison.OrdinalIgnoreCase) >= 0;
 #endif
+
+    public static string Join(string separator, IEnumerable values) => string.Join(separator, values.OfType<object>());
 }
