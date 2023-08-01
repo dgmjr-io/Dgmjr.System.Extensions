@@ -96,4 +96,6 @@ public static class TextEncodingExtensions
 #endif
     public static string GetUTF7String(byte[] bytes) => UTF7.GetString(bytes);
 #endif
+
+    public static string ToHexString(this byte[] bytes) => Join("", bytes.Select(b => b.ToString("X2")));
 }

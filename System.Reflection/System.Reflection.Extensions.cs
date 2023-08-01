@@ -11,23 +11,17 @@
  */
 
 namespace System.Reflection;
+using System.IO;
 
 public static class Extensions
 {
     public static string ReadAssemblyResourceAllText(this Assembly assembly, string resourceName)
-    {
-        using var stream = assembly.GetManifestResourceStream(resourceName);
-        using var reader = new StreamReader(stream);
-        return reader.ReadToEnd();
-    }
+        => assembly.GetManifestResourceStream(resourceName).ReadToEnd();
+
 
     public static Task<string> ReadAssemblyResourceAllTextAsync(
         this Assembly assembly,
         string resourceName
     )
-    {
-        using var stream = assembly.GetManifestResourceStream(resourceName);
-        using var reader = new StreamReader(stream);
-        return reader.ReadToEndAsync();
-    }
+    => assembly.GetManifestResourceStream(resourceName).ReadToEndAsync();
 }
