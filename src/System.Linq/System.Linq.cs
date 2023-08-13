@@ -78,19 +78,12 @@ public static class DmjrsLinqExtensions
         return collection;
     }
 
-    /// <summary>
-    /// Removes the specified elements from the <see cref="ICollection{T}"/>.
-    /// </summary>
-    /// <param name="collection">The collection from which to remove the
-    ///     elements</param>
-    /// <param name="removeRange">The elements to remove from the
-    ///     <see cref="ICollection{T}"/></param>
-    /// <typeparam name="T">The type of elements in the
-    ///     <see cref="ICollection{T}"/>.</typeparam>
-    /// <typeparam name="TCollection">The type of the
-    ///     <see cref="ICollection{T}"/>.</typeparam>
-    /// <returns>The <see cref="ICollection{T}"/> with the removed elements.
-    ///     </returns>
+    /// <summary>Removes the specified elements from the <see cref="ICollection{T}"/>.</summary>
+    /// <param name="collection">The collection from which to remove the elements</param>
+    /// <param name="removeRange">The elements to remove from the <see cref="ICollection{T}"/></param>
+    /// <typeparam name="T">The type of elements in the <see cref="ICollection{T}"/>.</typeparam>
+    /// <typeparam name="TCollection">The type of the <see cref="ICollection{T}"/>.</typeparam>
+    /// <returns>The <see cref="ICollection{T}"/> with the removed elements.</returns>
     public static TCollection RemoveRange<TCollection, T>(
         this TCollection collection,
         IEnumerable<T> removeRange
@@ -111,56 +104,39 @@ public static class DmjrsLinqExtensions
     }
 
     /// <summary>
-    /// Removes the elements from the collection that match the specified
-    /// predicate.
+    /// Removes the elements from the collection that match the specified predicate.
     /// **MUTATES** the collection!!
     /// </summary>
-    /// <param name="collection">The collection from which to remove the
-    ///     elements.</param>
-    /// <param name="predicate">The predicate to match the elements to remove.
-    ///     </param>
-    /// <typeparam name="T">The type of elements in the
-    ///     <see cref="ICollection{T}"/>.</typeparam>
-    /// <typeparam name="TCollection">The type of the
-    ///     <see cref="ICollection{T}"/>.</typeparam>
-    /// <returns>The <see cref="ICollection{T}"/> with the removed elements.
-    ///     </returns>
+    /// <param name="collection">The collection from which to remove the elements.</param>
+    /// <param name="predicate">The predicate to match the elements to remove. </param>
+    /// <typeparam name="T">The type of elements in the <see cref="ICollection{T}"/>.</typeparam>
+    /// <typeparam name="TCollection">The type of the <see cref="ICollection{T}"/>.</typeparam>
+    /// <returns>The <see cref="ICollection{T}"/> with the removed elements.</returns>
     public static TCollection Without<TCollection, T>(
         this TCollection collection,
         Func<T, bool> predicate
     ) where TCollection : ICollection<T>
     {
         var itemsToRemove = collection.Where(predicate);
-        if (collection is IList<T> list)
-        {
-            list.RemoveRange(itemsToRemove);
-        }
-        else
-        {
-            collection.RemoveRange(itemsToRemove);
-        }
+        collection.RemoveRange(itemsToRemove);
         return collection;
     }
 
     /// <summary>
-    /// Returns all elements from <paramref name="collection"/> that
-    /// <b>don't</b> match the specified predicate.
+    /// Returns all elements from <paramref name="collection"/> that <b>don't</b> match the specified predicate.
     /// </summary>
-    /// <param name="collection">The collection from which to select the
-    ///     elements.</param>
-    /// <param name="predicate">The predicate to match the elements to not
-    ///     select.</param>
-    /// <typeparam name="T">The type of elements in the
-    ///     <see cref="ICollection{T}"/>.</typeparam>
-    /// <typeparam name="TCollection">The type of the
-    ///     <see cref="ICollection{T}"/>.</typeparam>
-    /// <returns>The <see cref="ICollection{T}"/> without the matchings
-    ///     elements.</returns>
+    /// <param name="collection">The collection from which to select the elements.</param>
+    /// <param name="predicate">The predicate to match the elements to not select.</param>
+    /// <typeparam name="T">The type of elements in the <see cref="ICollection{T}"/>.</typeparam>
+    /// <typeparam name="TCollection">The type of the <see cref="ICollection{T}"/>.</typeparam>
+    /// <returns>The <see cref="ICollection{T}"/> without the matchings elements.</returns>
     public static TCollection
      Except<TCollection, T>(
         this TCollection collection,
         Func<T, bool> predicate
-    ) where TCollection : ICollection<T> => (TCollection)Activator.CreateInstance(typeof(TCollection), collection.Where(x => !predicate(x)).ToList());
+    ) where TCollection : ICollection<T>
+    =>
+    (TCollection)Activator.CreateInstance(typeof(TCollection), collection.Where(x => !predicate(x)).ToList());
 
     /// <summary>
     /// This function appends a new value to an existing IEnumerable collection and returns the updated

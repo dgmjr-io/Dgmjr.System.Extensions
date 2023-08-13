@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <Sdk Name="MetapackageSdk" />
+    <PropertyGroup>
+        <TargetFrameworks>net8.0</TargetFrameworks>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="./src/Dgmjr.System.Extensions.csproj" />
+        <ProjectReference Include="./Tests/Dgmjr.System.Extensions.Tests.csproj" />
+    </ItemGroup>
+</Project>
