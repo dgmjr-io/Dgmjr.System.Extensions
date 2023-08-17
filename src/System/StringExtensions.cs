@@ -66,6 +66,9 @@ public static class StringExtensions
     /// <returns>The <see langword="byte" /> array as a base64 encoded <see langword="string" /></returns>
     public static string ToBase64String(this byte[] b) => Convert.ToBase64String(b);
 
+    public static string FormatIfNotNullOrEmpty(this string? testString, string formatString = "{0}")
+        => !IsNullOrEmpty(testString) ? Format(formatString, testString) : string.Empty;
+
 #if NETSTANDARD
     /// <summary>
     /// **Polyfill for NETSTANDARD**
