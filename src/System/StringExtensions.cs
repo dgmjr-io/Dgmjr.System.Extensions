@@ -91,5 +91,11 @@ public static class StringExtensions
     ) => source?.IndexOf(toCheck, comp ?? StringComparison.OrdinalIgnoreCase) >= 0;
 #endif
 
+    /// <summary>
+    /// Concatentates many strings into one using a <paramref name="separator" />
+    /// </summary>
+    /// <param name="separator">The string to be used between the values in <paramref name="values" /></param>
+    /// <param name="values">The list of values to be converted to a concatenated string</param>
+    /// <returns>The concatenated string</returns>
     public static string Join(string separator, IEnumerable values) => string.Join(separator, values.OfType<object>());
 }

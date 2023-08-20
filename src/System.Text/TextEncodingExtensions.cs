@@ -97,5 +97,10 @@ public static class TextEncodingExtensions
     public static string GetUTF7String(byte[] bytes) => UTF7.GetString(bytes);
 #endif
 
+    /// <summary>
+    /// Returns <inheritdoc cref="ToHexString" path="/returns" />
+    /// </summary>
+    /// <param name="bytes"></param>
+    /// <returns>the <paramref name="bytes" /> as a hex string</returns>
     public static string ToHexString(this byte[] bytes) => Join("", bytes.Select(b => b.ToString("X2")));
 }
