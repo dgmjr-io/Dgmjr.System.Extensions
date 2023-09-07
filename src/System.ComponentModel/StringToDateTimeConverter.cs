@@ -9,6 +9,7 @@
  *   Copyright © 2022-2023 David G. Mooore, Jr., All Rights Reserved
  *      License: MIT (https://opensource.org/licenses/MIT)
  */
+namespace System.ComponentModel;
 using System.Globalization;
 
 /// <summary>
