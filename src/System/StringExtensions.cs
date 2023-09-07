@@ -1,5 +1,4 @@
-
-/*
+﻿/*
  * StringExtensions.cs
  *
  *   Created: 2022-11-11-06:06:01
@@ -66,8 +65,10 @@ public static class StringExtensions
     /// <returns>The <see langword="byte" /> array as a base64 encoded <see langword="string" /></returns>
     public static string ToBase64String(this byte[] b) => Convert.ToBase64String(b);
 
-    public static string FormatIfNotNullOrEmpty(this string? testString, string formatString = "{0}")
-        => !IsNullOrEmpty(testString) ? Format(formatString, testString) : string.Empty;
+    public static string FormatIfNotNullOrEmpty(
+        this string? testString,
+        string formatString = "{0}"
+    ) => !IsNullOrEmpty(testString) ? Format(formatString, testString) : string.Empty;
 
 #if NETSTANDARD
     /// <summary>
@@ -97,5 +98,6 @@ public static class StringExtensions
     /// <param name="separator">The string to be used between the values in <paramref name="values" /></param>
     /// <param name="values">The list of values to be converted to a concatenated string</param>
     /// <returns>The concatenated string</returns>
-    public static string Join(string separator, IEnumerable values) => string.Join(separator, values.OfType<object>());
+    public static string Join(string separator, IEnumerable values) =>
+        string.Join(separator, values.OfType<object>());
 }

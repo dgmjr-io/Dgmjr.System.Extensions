@@ -47,23 +47,23 @@ public static partial class SnakeCaseExtensions
     /// Converts the <paramref name="input" /> to snake_case
     /// </summary>
     /// <param name="input"></param>
-    public static string ToSnakeCase(this string input)
-        => input.ToCasing('_');
+    public static string ToSnakeCase(this string input) => input.ToCasing('_');
 
     /// <summary>
     /// Converts the <paramref name="input" /> to camelCase from snake_case
     /// </summary>
     /// <param name="input"></param>
-    public static string SnakeCaseToCamelCase(this string input)
-        => FromCasing(input, '_', false);
+    public static string SnakeCaseToCamelCase(this string input) => FromCasing(input, '_', false);
 
     /// <summary>
     /// Converts the <paramref name="input" /> to PascalCase from snake_case
     /// </summary>
     /// <param name="input"></param>
-    public static string SnakeCaseToPascalCase(this string input)
-        => FromCasing(input, '_', true);
+    public static string SnakeCaseToPascalCase(this string input) => FromCasing(input, '_', true);
 
-    private static string FromCasing(this string input, char separator, bool shouldCapitalizeFirstLetter = false)
-        => InternalCaseChangingExtensions.FromCasing(input, separator, shouldCapitalizeFirstLetter);
+    private static string FromCasing(
+        this string input,
+        char separator,
+        bool shouldCapitalizeFirstLetter = false
+    ) => InternalCaseChangingExtensions.FromCasing(input, separator, shouldCapitalizeFirstLetter);
 }

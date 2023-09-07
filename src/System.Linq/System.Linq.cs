@@ -1,4 +1,4 @@
-/*
+﻿/*
  * System.Linq.cs
  *
  *   Created: 2022-10-23-11:19:40
@@ -30,7 +30,8 @@ public static class DmjrsLinqExtensions
     ///     <see cref="IEnumerable{T}"/></typeparam>
     /// <returns><c>TRUE</c> if <paramref name="e"/> is <c>NULL</c> or empty,
     ///     <c>FALSE</c> otherwise.</returns>
-    public static bool IsNullOrEmpty<T>(this IEnumerable<T> e) => e is ICollection<T> collection ? collection.Count == 0 : !e?.Any() ?? true;
+    public static bool IsNullOrEmpty<T>(this IEnumerable<T> e) =>
+        e is ICollection<T> collection ? collection.Count == 0 : !e?.Any() ?? true;
 
     /// <summary>
     /// Performs the specified action on each element of the
@@ -72,7 +73,10 @@ public static class DmjrsLinqExtensions
             }
             else
             {
-                foreach (var item in thingsToAdd) { collection.Add(item); }
+                foreach (var item in thingsToAdd)
+                {
+                    collection.Add(item);
+                }
             }
         }
         return collection;
@@ -97,7 +101,10 @@ public static class DmjrsLinqExtensions
             }
             else
             {
-                foreach (var item in removeRange) { collection.Remove(item); }
+                foreach (var item in removeRange)
+                {
+                    collection.Remove(item);
+                }
             }
         }
         return collection;
@@ -130,13 +137,15 @@ public static class DmjrsLinqExtensions
     /// <typeparam name="T">The type of elements in the <see cref="ICollection{T}"/>.</typeparam>
     /// <typeparam name="TCollection">The type of the <see cref="ICollection{T}"/>.</typeparam>
     /// <returns>The <see cref="ICollection{T}"/> without the matchings elements.</returns>
-    public static TCollection
-     Except<TCollection, T>(
+    public static TCollection Except<TCollection, T>(
         this TCollection collection,
         Func<T, bool> predicate
-    ) where TCollection : ICollection<T>
-    =>
-    (TCollection)Activator.CreateInstance(typeof(TCollection), collection.Where(x => !predicate(x)).ToList())!;
+    ) where TCollection : ICollection<T> =>
+        (TCollection)
+            Activator.CreateInstance(
+                typeof(TCollection),
+                collection.Where(x => !predicate(x)).ToList()
+            )!;
 
     /// <summary>
     /// This function appends a new value to an existing IEnumerable collection and returns the updated

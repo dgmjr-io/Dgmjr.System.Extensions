@@ -1,4 +1,4 @@
-/*
+﻿/*
  * KebabCaseNamingPolicy.cs
  *
  *   Created: 2023-08-11-06:12:55
@@ -59,23 +59,23 @@ public static partial class KebabCaseExtensions
     /// Converts the <paramref name="input" /> to kebab-case
     /// </summary>
     /// <param name="input"></param>
-    public static string ToKebabCase(this string input)
-        => input.ToCasing('-');
+    public static string ToKebabCase(this string input) => input.ToCasing('-');
 
     /// <summary>
     /// Converts the <paramref name="input" /> to camelCase from kebab-case
     /// </summary>
     /// <param name="input"></param>
-    public static string KebabCaseToCamelCase(this string input)
-        => FromCasing(input, '-', false);
+    public static string KebabCaseToCamelCase(this string input) => FromCasing(input, '-', false);
 
     /// <summary>
     /// Converts the <paramref name="input" /> to PascalCaaw from kebab-case
     /// </summary>
     /// <param name="input"></param>
-    public static string KebabCaseToPascalCase(this string input)
-        => FromCasing(input, '-', true);
+    public static string KebabCaseToPascalCase(this string input) => FromCasing(input, '-', true);
 
-    private static string FromCasing(this string input, char separator, bool shouldCapitalizeFirstLetter = false)
-        => InternalCaseChangingExtensions.FromCasing(input, separator, shouldCapitalizeFirstLetter);
+    private static string FromCasing(
+        this string input,
+        char separator,
+        bool shouldCapitalizeFirstLetter = false
+    ) => InternalCaseChangingExtensions.FromCasing(input, separator, shouldCapitalizeFirstLetter);
 }

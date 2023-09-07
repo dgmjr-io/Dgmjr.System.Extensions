@@ -1,4 +1,4 @@
-/*
+﻿/*
  * ObservableCollection{TValue}.cs
  *
  *   Created: 2023-02-01-03:58:10
@@ -19,11 +19,14 @@ public class ObservableCollection<TValue> : ICollection<TValue>
     private readonly List<TValue> _list = new();
 
     public virtual void OnAdd(TValue value) => _onAdd?.Invoke(value);
+
     public virtual void OnRemove(TValue value) => _onRemove?.Invoke(value);
 
     public ObservableCollection() : this(Empty<TValue>(), v => { }, v => { }) { }
 
-    public ObservableCollection(Action<TValue>? onAdd = null, Action<TValue>? onRemove = null) : this(Empty<TValue>(), onAdd, onRemove) { }
+    public ObservableCollection(Action<TValue>? onAdd = null, Action<TValue>? onRemove = null)
+        : this(Empty<TValue>(), onAdd, onRemove) { }
+
     public virtual void Clear()
     {
         foreach (var item in _list)
@@ -65,7 +68,11 @@ public class ObservableCollection<TValue> : ICollection<TValue>
         OnAdd(item);
     }
 
-    public ObservableCollection(IEnumerable<TValue> collection, Action<TValue>? onAdd = null, Action<TValue>? onRemove = null)
+    public ObservableCollection(
+        IEnumerable<TValue> collection,
+        Action<TValue>? onAdd = null,
+        Action<TValue>? onRemove = null
+    )
     {
         _onAdd ??= onAdd;
         _onRemove ??= onRemove;

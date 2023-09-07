@@ -1,4 +1,4 @@
-/*
+﻿/*
  * StreamExtensions.cs
  *
  *   Created: 2023-07-28-02:33:24
@@ -22,10 +22,12 @@ public static class StreamExtensions
     /// <param name="s">the stream to read from</param>
     /// <returns> the contents of the <see cref="Stream" /> as a <see langword="string" /> to the end</returns>
     public static string ReadToEnd(this Stream s) => new StreamReader(s).ReadToEnd();
+
     /// <summary>
     /// Reads <inheritdoc cref="ReadToEnd" path="/returns" />, read asynchronously from the <see cref="Stream" />
     /// </summary>
     /// <param name="s">the stream to read from</param>
     /// <returns> the contents of the <see cref="Stream" /> as a <see langword="string" /> to the end</returns>
-    public static Task<string> ReadToEndAsync(this Stream s) => new StreamReader(s).ReadToEndAsync();
+    public static Task<string> ReadToEndAsync(this Stream s) =>
+        new StreamReader(s).ReadToEndAsync();
 }

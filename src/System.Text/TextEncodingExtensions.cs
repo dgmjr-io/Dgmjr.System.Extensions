@@ -19,14 +19,17 @@ public static class TextEncodingExtensions
     /// <param name="s">The string to encode</param>
     /// <returns>The UTF8 encoded byte array</returns>
     public static byte[] GetUTF8Bytes(string s) => UTF8.GetBytes(s);
+
     /// <inheritdoc cref="GetUTF8Bytes(string)"/>
     public static byte[] ToUTF8Bytes(this string s) => GetUTF8Bytes(s);
+
     /// <summary>
     /// Calls <see cref="Encoding.UTF8.GetString(byte[])"/>
     /// </summary>
     /// <param name="bytes">The byte array to decode</param>
     /// <returns>The UTF8 decoded string</returns>
     public static string GetUTF8String(byte[] bytes) => UTF8.GetString(bytes, 0, bytes.Length);
+
     /// <inheritdoc cref="GetUTF8String(byte[])"/>
     public static string ToUTF8String(this byte[] bytes) => GetUTF8String(bytes);
 
@@ -36,14 +39,18 @@ public static class TextEncodingExtensions
     /// <param name="s">The string to encode</param>
     /// <returns>The Unicode encoded byte string</returns>
     public static byte[] GetUnicodeBytes(string s) => Encoding.Unicode.GetBytes(s);
+
     /// <inheritdoc cref="GetUnicodeBytes(string)"/>
     public static byte[] ToUnicodeBytes(this string s) => GetUnicodeBytes(s);
+
     /// <summary>
     /// Calls <see cref="Encoding.Unicode.GetString(byte[])"/>
     /// </summary>
     /// <param name="bytes">The byte array to decode</param>
     /// <returns>The Unicode decoded string</returns>
-    public static string GetUnicodeString(byte[] bytes) => Encoding.Unicode.GetString(bytes, 0, bytes.Length);
+    public static string GetUnicodeString(byte[] bytes) =>
+        Encoding.Unicode.GetString(bytes, 0, bytes.Length);
+
     /// <inheritdoc cref="GetUnicodeString(byte[])"/>
     public static string ToUnicodeString(this byte[] bytes) => GetUnicodeString(bytes);
 
@@ -54,6 +61,7 @@ public static class TextEncodingExtensions
     /// <param name="s">The string to encode</param>
     /// <returns>The ASCII encoded byte string</returns>
     public static byte[] ToASCIIBytes(this string s) => GetASCIIBytes(s);
+
     /// <summary>
     /// Calls <see cref="Encoding.ASCII.GetString(byte[])"/>
     /// </summary>
@@ -67,6 +75,7 @@ public static class TextEncodingExtensions
     /// <param name="s">The string to encode</param>
     /// <returns>The ASCII encoded byte string</returns>
     public static byte[] GetASCIIBytes(string s) => Encoding.ASCII.GetBytes(s);
+
     /// <summary>
     /// Calls <see cref="Encoding.ASCII.GetString(byte[])"/>
     /// </summary>
@@ -82,9 +91,12 @@ public static class TextEncodingExtensions
 #if NET6_0_OR_GREATER
     [Obsolete("Encoding.UTF7' is obsolete: The UTF-7 encoding is insecure and should not be used. Consider using UTF-8 instead.", DiagnosticId = "SYSLIB0001", UrlFormat = "https://aka.ms/dotnet-warnings/{0}")]
 #else
-    [Obsolete("Encoding.UTF7' is obsolete: The UTF-7 encoding is insecure and should not be used. Consider using UTF-8 instead.")]
+    [Obsolete(
+        "Encoding.UTF7' is obsolete: The UTF-7 encoding is insecure and should not be used. Consider using UTF-8 instead."
+    )]
 #endif
     public static byte[] GetUTF7Bytes(string s) => UTF7.GetBytes(s);
+
     /// <summary>
     /// Calls <see cref="Encoding.UTF7.GetString(byte[])"/>
     /// </summary>
@@ -93,7 +105,9 @@ public static class TextEncodingExtensions
 #if NET6_0_OR_GREATER
     [Obsolete("Encoding.UTF7' is obsolete: The UTF-7 encoding is insecure and should not be used. Consider using UTF-8 instead.", DiagnosticId = "SYSLIB0001", UrlFormat = "https://aka.ms/dotnet-warnings/{0}")]
 #else
-    [Obsolete("Encoding.UTF7' is obsolete: The UTF-7 encoding is insecure and should not be used. Consider using UTF-8 instead.")]
+    [Obsolete(
+        "Encoding.UTF7' is obsolete: The UTF-7 encoding is insecure and should not be used. Consider using UTF-8 instead."
+    )]
 #endif
     public static string GetUTF7String(byte[] bytes) => UTF7.GetString(bytes);
 #endif
@@ -103,7 +117,8 @@ public static class TextEncodingExtensions
     /// </summary>
     /// <param name="bytes"></param>
     /// <returns>the <paramref name="bytes" /> as a hex string</returns>
-    public static string ToHexString(this byte[] bytes) => Join("", bytes.Select(b => b.ToString("X2")));
+    public static string ToHexString(this byte[] bytes) =>
+        Join("", bytes.Select(b => b.ToString("X2")));
 
     /// <summary>
     /// Returns <inheritdoc cref="FromHexString" path="/returns" />
