@@ -1,5 +1,6 @@
 namespace System.Text.Json;
 using System.Text.RegularExpressions;
+
 using static System.Text.RegularExpressions.RegexOptions;
 
 public class SnakeCaseNamingPolicy
@@ -42,12 +43,24 @@ public static partial class SnakeCaseExtensions
     //     public static Regex SnakeCaseToPascalCaseRegex() => _snakeCaseToPascalCaseRegex;
     // #endif
 
+    /// <summary>
+    /// Converts the <paramref name="input" /> to snake_case
+    /// </summary>
+    /// <param name="input"></param>
     public static string ToSnakeCase(this string input)
         => input.ToCasing('_');
 
+    /// <summary>
+    /// Converts the <paramref name="input" /> to camelCase from snake_case
+    /// </summary>
+    /// <param name="input"></param>
     public static string SnakeCaseToCamelCase(this string input)
         => FromCasing(input, '_', false);
 
+    /// <summary>
+    /// Converts the <paramref name="input" /> to PascalCase from snake_case
+    /// </summary>
+    /// <param name="input"></param>
     public static string SnakeCaseToPascalCase(this string input)
         => FromCasing(input, '_', true);
 

@@ -26,5 +26,12 @@
         <Description>Extensions and utility classes for the System namespace</Description>
         <!-- <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies> -->
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <NoWarn>$(NoWarn);MSB3243</NoWarn>
     </PropertyGroup>
+    <ItemGroup>
+        <NoWarn Include="MSB3243" />
+        <Compile Include="./System/MathF.cs" Condition="!$(DefineConstants.Contains('NETSTANDARD2_0_OR_GREATER'))" />
+        <Compile Remove="./System/MathF.cs" Condition="$(DefineConstants.Contains('NETSTANDARD2_0_OR_GREATER'))" />
+        <PackageTag Include="extensions" />
+    </ItemGroup>
 </Project>

@@ -74,6 +74,13 @@ public static class MathExtensions
     public static bool IsBetween(this float value, float min, float max) =>
         value >= min && value <= max;
 
+    /// <summary>
+    /// Determines whether or not am instance of an <see cref="IComparable" /> lies between two other <see cref="IComparable" /> instances
+    /// </summary>
+    /// <param name="value">The value to determine if it's between <paramref name="min"/> and <paramref name="max"/>.</param>
+    /// <param name="min">The minimum value of the range. If value is greater than min this method returns false.</param>
+    /// <param name="max">The maximum value of the range. If value is greater than max this method returns false.</param>
+    /// <returns>True if value is inclusively between min and max ; otherwise false.</returns>
     public static bool IsBetween(this IComparable value, IComparable min, IComparable max) =>
         value.CompareTo(min) >= 0 && value.CompareTo(max) <= 0;
 }

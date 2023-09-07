@@ -136,14 +136,14 @@ public static class DmjrsLinqExtensions
         Func<T, bool> predicate
     ) where TCollection : ICollection<T>
     =>
-    (TCollection)Activator.CreateInstance(typeof(TCollection), collection.Where(x => !predicate(x)).ToList());
+    (TCollection)Activator.CreateInstance(typeof(TCollection), collection.Where(x => !predicate(x)).ToList())!;
 
     /// <summary>
     /// This function appends a new value to an existing IEnumerable collection and returns the updated
     /// collection.
     /// </summary>
-    /// <param name="values">An IEnumerable of type T representing the collection of values to which a new
-    /// value will be appended.</param>
+    /// <param name="values">An IEnumerable of type T representing the collection of values to which <paramref name="newValue" />  value will be appended.</param>
+    /// <param name="newValue">A new value to append to the <paramref name="values" /></param>
     /// <typeparm name="T">T is a generic type parameter that can be replaced with any type at runtime. It is
     /// used to define the type of elements in the input IEnumerable and the type of the new value to be
     /// appended to it.</typeparm>
@@ -162,6 +162,7 @@ public static class DmjrsLinqExtensions
     /// </summary>
     /// <param name="values">An IEnumerable of type T representing the collection of values to which a new
     /// value will be prepended.</param>
+    /// <param name="newValue">A new value to prepend to the <paramref name="values" /></param>
     /// <typeparm name="T">T is a generic type parameter that can be replaced with any type at runtime. It
     /// represents the type of elements in the input sequence and the type of the new value being added to
     /// the beginning of the sequence.</typeparm>

@@ -16,8 +16,8 @@ using System.Xml.Schema;
 
 namespace System;
 using static System.BitConverter;
-using static System.Math;
 using static System.Convert;
+using static System.Math;
 
 /// <summary>
 /// Extensions to the <see cref="Random"/> class
@@ -25,22 +25,22 @@ using static System.Convert;
 public sealed class Randoms : Random
 {
     /// <summary>
-    /// Generates a new GUID (UUID)
+    /// Generates <inheritdoc cref="NextGuid" path="/returns" />
     /// </summary>
-    /// <returns>A new GUID</returns>
+    /// <returns>a new GUID (UUID)</returns>
     public static Guid NextGuid() => Guid.NewGuid();
 
     /// <summary>
-    /// Generates an array of 16 Next bytes
+    /// Generates <inheritdoc cref="Next16Bytes" path="/returns" />
     /// </summary>
-    /// <returns>An array of 16 Next bytes</returns>
+    /// <returns>an array of 16 Next bytes</returns>
 
     public static byte[] Next16Bytes() => NextGuid().ToByteArray();
 
     /// <summary>
-    /// Generates an array of <paramref name="n"/> bytes
+    /// Generates <inheritdoc cref="NextBytes" path="/returns" />
     /// </summary>
-    /// <returns>An array of <paramref name="n"/> new bytes</returns>
+    /// <returns>an array of <paramref name="n"/> new bytes</returns>
     /// <param name="n">The number of bytes to generate</param>
     public static byte[] NextBytes(int n) =>
         Enumerable.Range(0, n / 16)
@@ -199,10 +199,15 @@ public sealed class Randoms : Random
     long NextInt64(long from = long.MinValue, long to = long.MaxValue) => from + (NextInt64() % (to - from));
 
 
+    /// <summary>
+    /// Generates <inheritdoc cref="NextBoolean" path="/returns" />
+    /// </summary>
+    /// <param name="pTrue"></param>
+    /// <returns>a new Boolean value with the probability of being <see langword="true" /> = <paramref name="pTrue" /></returns>
     public static bool NextBoolean(double pTrue = 0.5) => NextInt32() % Convert.ToInt32(1 / pTrue) == 0;
 
 #if NET7_0_OR_GREATER
-    /// <summary>Generates <inheritdoc cref="NextInt128()" path="/returns" /> in the range [<paramref name="from"/>,<paramref name="to"/>]</summary>
+    /// <summary>Generates <inheritdoc cref="NextInt128(Int128?, Int128?)" path="/returns" /></summary>
     /// <returns><inheritdoc cref="NextInt128()" path="/returns"/> in the range [<paramref name="from"/>, <paramref name="to"/>]</returns>
     /// <param name="from">The lower bound of the range to generate the Next number</param>
     /// <param name="to">The upper bound of the range to generate the Next number</param>
@@ -213,7 +218,7 @@ public sealed class Randoms : Random
     public static vlong NextInt128() => new vlong(NextUInt64(), NextUInt64());
 
 
-    /// <summary>Generates <inheritdoc cref="NextUInt128()" path="/returns" /> in the range [<paramref name="from"/>,<paramref name="to"/>]</summary>
+    /// <summary>Generates <inheritdoc cref="NextUInt128(UInt128?,UInt128?)" path="/returns" /></summary>
     /// <returns><inheritdoc cref="NextUInt128()" path="/returns"/> in the range [<paramref name="from"/>, <paramref name="to"/>]</returns>
     /// <param name="from">The lower bound of the range to generate the Next number</param>
     /// <param name="to">The upper bound of the range to generate the Next number</param>
