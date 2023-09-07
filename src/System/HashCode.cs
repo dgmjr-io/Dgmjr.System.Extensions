@@ -63,7 +63,7 @@ namespace System
             _queue3;
         private uint _length;
 
-        private static unsafe uint GenerateGlobalSeed()
+        private static uint GenerateGlobalSeed()
         {
             uint result;
             result = (uint)Guid.NewGuid().GetHashCode();

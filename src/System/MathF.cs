@@ -94,7 +94,7 @@ namespace System
             return BitConverter.Int32BitsToSingle(bits);
         }
 
-        public static unsafe float CopySign(float x, float y)
+        public static float CopySign(float x, float y)
         {
             // This method is required to work for all inputs,
             // including NaN, so we operate on the raw bits.
@@ -334,7 +334,7 @@ namespace System
             return Round(x, 0, mode);
         }
 
-        public static unsafe float Round(float x, int digits, MidpointRounding mode)
+        public static float Round(float x, int digits, MidpointRounding mode)
         {
             if ((digits < 0) || (digits > maxRoundingDigits))
             {
@@ -363,48 +363,48 @@ namespace System
                     // Rounds to the nearest value; if the number falls midway,
                     // it is rounded to the nearest value with an even least significant digit
                     case MidpointRounding.ToEven:
-                    {
-                        x = Round(x);
-                        break;
-                    }
+                        {
+                            x = Round(x);
+                            break;
+                        }
                     // Rounds to the nearest value; if the number falls midway,
                     // it is rounded to the nearest value above (for positive numbers) or below (for negative numbers)
                     case MidpointRounding.AwayFromZero:
-                    {
-                        float fraction = ModF(x, &x);
-
-                        if (Abs(fraction) >= 0.5)
                         {
-                            x += Sign(fraction);
-                        }
+                            float fraction = ModF(x, &x);
 
-                        break;
-                    }
+                            if (Abs(fraction) >= 0.5)
+                            {
+                                x += Sign(fraction);
+                            }
+
+                            break;
+                        }
                     // Directed rounding: Round to the nearest value, toward to zero
                     case MidpointRounding.ToZero:
-                    {
-                        x = Truncate(x);
-                        break;
-                    }
+                        {
+                            x = Truncate(x);
+                            break;
+                        }
                     // Directed Rounding: Round down to the next value, toward negative infinity
                     case MidpointRounding.ToNegativeInfinity:
-                    {
-                        x = Floor(x);
-                        break;
-                    }
+                        {
+                            x = Floor(x);
+                            break;
+                        }
                     // Directed rounding: Round up to the next value, toward positive infinity
                     case MidpointRounding.ToPositiveInfinity:
-                    {
-                        x = Ceiling(x);
-                        break;
-                    }
+                        {
+                            x = Ceiling(x);
+                            break;
+                        }
                     default:
-                    {
-                        throw new ArgumentException(
-                            SR.Format(SR.Argument_InvalidEnumValue, mode, nameof(MidpointRounding)),
-                            nameof(mode)
-                        );
-                    }
+                        {
+                            throw new ArgumentException(
+                                SR.Format(SR.Argument_InvalidEnumValue, mode, nameof(MidpointRounding)),
+                                nameof(mode)
+                            );
+                        }
                 }
 
                 x /= power10;
@@ -419,7 +419,7 @@ namespace System
             return Math.Sign(x);
         }
 
-        public static unsafe float Truncate(float x)
+        public static float Truncate(float x)
         {
             ModF(x, &x);
             return x;
