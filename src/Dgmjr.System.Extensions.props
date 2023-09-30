@@ -11,77 +11,79 @@
 -->
 
 <Project>
-    <PropertyGroup>
-        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    </PropertyGroup>
-    <ItemGroup Condition="!$(TargetFramework.StartsWith('netstandard1'))">
-        <Using Include="System.Xml.Serialization.XmlAnyAttributeAttribute" Alias="XAnyAttr"/>
-        <Using Include="System.Xml.Serialization.XmlAnyElementAttribute" Alias="XAnyElem"/>
-        <Using Include="System.Xml.Serialization.XmlArrayAttribute" Alias="XArray"/>
-        <Using Include="System.Xml.Serialization.XmlArrayItemAttribute" Alias="XArrayItem"/>
-        <Using Include="System.Xml.Serialization.XmlAttributeAttribute" Alias="XAttr"/>
-        <Using Include="System.Xml.Serialization.XmlEnumAttribute" Alias="XEnum"/>
-        <Using Include="System.Xml.Serialization.XmlEnumAttribute" Alias="XEnumVal"/>
-        <Using Include="System.Xml.Serialization.XmlIgnoreAttribute" Alias="XIgnore"/>
-        <Using Include="System.Xml.Serialization.XmlIncludeAttribute" Alias="XInclude"/>
-        <Using Include="System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" Alias="XNs"/>
-        <Using Include="System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" Alias="XNsPfx"/>
-        <Using Include="System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" Alias="XNsUri"/>
-        <Using Include="System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" Alias="XNsDecl"/>
-        <Using Include="System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" Alias="XNsDeclPfx"/>
-        <Using Include="System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" Alias="XNsDeclUri"/>
-        <Using Include="System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" Alias="XNsDeclNs"/>
-        <Using Include="System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" Alias="XNsDeclNsPfx"/>
-        <Using Include="System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" Alias="XNsDeclNsUri"/>
-        <Using Include="System.Xml.Serialization.XmlRootAttribute" Alias="XRoot"/>
-        <Using Include="System.Xml.Serialization.XmlTextAttribute" Alias="Xtxt"/>
-        <Using Include="System.Xml.Serialization.XmlTypeAttribute" Alias="XType"/>
-        <Using Include="System.Xml.Serialization.XmlElementAttribute" Alias="XElem"/>
-        <Using Include="System.Xml.XPath" Alias="XPathDoc"/>
-        <Using Include="System.Xml.Linq.XAttribute" Alias="XA"/>
-        <Using Include="System.Xml.Linq.XComment" Alias="XC"/>
-        <Using Include="System.Xml.Linq.XDocument" Alias="XD"/>
-        <Using Include="System.Xml.Linq.XElement" Alias="XE"/>
-        <Using Include="System.Xml.Linq.XName" Alias="XN"/>
-        <Using Include="System.Xml.Linq.XNamespace" Alias="XNS"/>
-        <Using Include="System.Xml.Linq.XNode" Alias="XO"/>
-    </ItemGroup>
-    <ItemGroup Condition="!$(TargetFramework.StartsWith('netstandard'))">
-        <PackageReference Include="System.Collections.Immutable"/>
-    </ItemGroup>
-    <!-- <ItemGroup Condition="$(TargetFramework.Contains('netstandard2'))">
-      <PackageReference Include="System.Xml.XPath.XDocument"  Aliases="XPathDoc" />
+  <PropertyGroup>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup Condition="!$(TargetFramework.StartsWith('netstandard1'))">
+    <Using Include="System.Xml.Serialization.XmlAnyAttributeAttribute" Alias="XAnyAttr"/>
+    <Using Include="System.Xml.Serialization.XmlAnyElementAttribute" Alias="XAnyElem"/>
+    <Using Include="System.Xml.Serialization.XmlArrayAttribute" Alias="XArray"/>
+    <Using Include="System.Xml.Serialization.XmlArrayItemAttribute" Alias="XArrayItem"/>
+    <Using Include="System.Xml.Serialization.XmlAttributeAttribute" Alias="XAttr"/>
+    <Using Include="System.Xml.Serialization.XmlEnumAttribute" Alias="XEnum"/>
+    <Using Include="System.Xml.Serialization.XmlEnumAttribute" Alias="XEnumVal"/>
+    <Using Include="System.Xml.Serialization.XmlIgnoreAttribute" Alias="XIgnore"/>
+    <Using Include="System.Xml.Serialization.XmlIncludeAttribute" Alias="XInclude"/>
+    <Using Include="System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" Alias="XNs"/>
+    <Using Include="System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" Alias="XNsPfx"/>
+    <Using Include="System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" Alias="XNsUri"/>
+    <Using Include="System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" Alias="XNsDecl"/>
+    <Using Include="System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" Alias="XNsDeclPfx"/>
+    <Using Include="System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" Alias="XNsDeclUri"/>
+    <Using Include="System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" Alias="XNsDeclNs"/>
+    <Using Include="System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" Alias="XNsDeclNsPfx"/>
+    <Using Include="System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" Alias="XNsDeclNsUri"/>
+    <Using Include="System.Xml.Serialization.XmlRootAttribute" Alias="XRoot"/>
+    <Using Include="System.Xml.Serialization.XmlTextAttribute" Alias="Xtxt"/>
+    <Using Include="System.Xml.Serialization.XmlTypeAttribute" Alias="XType"/>
+    <Using Include="System.Xml.Serialization.XmlElementAttribute" Alias="XElem"/>
+    <Using Include="System.Xml.XPath" Alias="XPathDoc"/>
+    <Using Include="System.Xml.Linq.XAttribute" Alias="XA"/>
+    <Using Include="System.Xml.Linq.XComment" Alias="XC"/>
+    <Using Include="System.Xml.Linq.XDocument" Alias="XD"/>
+    <Using Include="System.Xml.Linq.XElement" Alias="XE"/>
+    <Using Include="System.Xml.Linq.XName" Alias="XN"/>
+    <Using Include="System.Xml.Linq.XNamespace" Alias="XNS"/>
+    <Using Include="System.Xml.Linq.XNode" Alias="XO"/>
+    <Using Include="System.Collections.Generic.CaseInsensitiveKeyDictionary%3cstring%3e" Alias="CaseInsensitiveStringDictionary" />
+  </ItemGroup>
+  <ItemGroup Condition="!$(TargetFramework.StartsWith('netstandard'))">
+    <PackageReference Include="System.Collections.Immutable"/>
+  </ItemGroup>
+  <!-- <ItemGroup Condition="$(TargetFramework.Contains('netstandard2'))">
+      <PackageReference Include="System.Xml.XPath.XDocument" Aliases="XPathDoc" />
     </ItemGroup> -->
+  <ItemGroup>
+    <SourceGenerator Include="Dgmjr.InterfaceGenerator" />
+    <PackageReference Include="System.Xml.XPath" Aliases="XPathDoc"/>
+    <!-- <PackageReference Include="System.Xml.XDocument" Aliases="XDoc" Condition="'$(TargetFramework)' == 'netstandard2.0'" /> -->
+    <PackageReference Include="System.Usings"/>
+    <PackageReference Include="System.Text.Usings" IncludeAssets="Build" ExcludeAssets="Compile;Runtime;Native;Analyzers"/>
+    <PackageReference Include="system.Xml.ReaderWriter" Condition="$(TargetFramework.StartsWith('net6')) Or $(TargetFramework.StartsWith('net7'))"/>
+    <!-- <PackageReference Include="System.Xml.XDocument" Aliases="XDoc" Condition="$(TargetFramework.StartsWith('netstandard1'))" />
+        <PackageReference Include="System.Xml.XPath.XDocument" Aliases="XPathDoc" Condition="$(TargetFramework.StartsWith('netstandard'))" /> -->
+    <!-- <PackageReference Include="NETStandard.Library" Aliases="NetStd" Condition="$(TargetFramework.StartsWith('netstandard2'))" /> -->
+    <!-- <Reference Include="NETStandard.Library" Aliases="NetStd" Condition="$(TargetFramework.StartsWith('netstandard2'))" /> -->
+    <!-- <Reference Include="netstandard" Aliases="NetStd" Condition="$(TargetFramework.StartsWith('netstandard'))" /> -->
+  </ItemGroup>
+  <Target Name="PrePack" BeforeTargets="GetPackageContents" Condition="$(TargetFramework.StartsWith('netstandard1'))">
     <ItemGroup>
-        <PackageReference Include="System.Xml.XPath" Aliases="XPathDoc"/>
-        <!-- <PackageReference Include="System.Xml.XDocument"  Aliases="XDoc" Condition="'$(TargetFramework)' == 'netstandard2.0'" /> -->
-        <PackageReference Include="System.Usings"/>
-        <PackageReference Include="System.Text.Usings" IncludeAssets="Build" ExcludeAssets="Compile;Runtime;Native;Analyzers"/>
-        <PackageReference Include="system.Xml.ReaderWriter" Condition="$(TargetFramework.StartsWith('net6')) Or $(TargetFramework.StartsWith('net7'))"/>
-        <!-- <PackageReference Include="System.Xml.XDocument"  Aliases="XDoc" Condition="$(TargetFramework.StartsWith('netstandard1'))" />
-        <PackageReference Include="System.Xml.XPath.XDocument"  Aliases="XPathDoc" Condition="$(TargetFramework.StartsWith('netstandard'))"  /> -->
-        <!-- <PackageReference Include="NETStandard.Library" Aliases="NetStd" Condition="$(TargetFramework.StartsWith('netstandard2'))" /> -->
-        <!-- <Reference Include="NETStandard.Library" Aliases="NetStd" Condition="$(TargetFramework.StartsWith('netstandard2'))" /> -->
-        <!-- <Reference Include="netstandard" Aliases="NetStd" Condition="$(TargetFramework.StartsWith('netstandard'))" /> -->
+      <!-- <PackageFile Include="$(OutputPath)**/System.Xml.XDocument.dll" /> -->
+      <PackageFile Remove="$(OutputPath)**/System.Runtime.Numerics.dll"/>
+      <None Remove="$(OutputPath)**/System.Runtime.Numerics.dll"/>
+      <Reference Remove="System.Runtime.Numerics"/>
     </ItemGroup>
-    <Target Name="PrePack" BeforeTargets="GetPackageContents" Condition="$(TargetFramework.StartsWith('netstandard1'))">
-        <ItemGroup>
-            <!-- <PackageFile Include="$(OutputPath)**/System.Xml.XDocument.dll" /> -->
-            <PackageFile Remove="$(OutputPath)**/System.Runtime.Numerics.dll"/>
-            <None Remove="$(OutputPath)**/System.Runtime.Numerics.dll"/>
-            <Reference Remove="System.Runtime.Numerics"/>
-        </ItemGroup>
-    </Target>
-    <ItemGroup Condition="$(TargetFramework.Contains('netstandard1'))">
-        <Compile Remove="./System.ComponentModel/**/*.cs"/>
-    </ItemGroup>
-    <ItemGroup Condition="$(TargetFramework.Contains('netstandard')) Or '$(TargetFramework)' == 'net5.0'">
-        <Compile Remove="./System.Text.Json/*.cs"/>
-    </ItemGroup>
-    <Target Name="RemoveXDocument" BeforeTargets="CoreCompile">
-        <!-- <ItemGroup>
+  </Target>
+  <ItemGroup Condition="$(TargetFramework.Contains('netstandard1'))">
+    <Compile Remove="./System.ComponentModel/**/*.cs"/>
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('netstandard')) Or '$(TargetFramework)' == 'net5.0'">
+    <Compile Remove="./System.Text.Json/*.cs"/>
+  </ItemGroup>
+  <Target Name="RemoveXDocument" BeforeTargets="CoreCompile">
+    <!-- <ItemGroup>
             <PackageReference Remove="System.Xml.XDocument" />
             <Reference Include="System.Xml.XDocument" Condition="$(TargetFramework.Contains('netstandard1'))" Aliases="XDoc" />
         </ItemGroup> -->
-    </Target>
+  </Target>
 </Project>

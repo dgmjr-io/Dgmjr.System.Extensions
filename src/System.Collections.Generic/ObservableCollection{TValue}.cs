@@ -14,8 +14,8 @@ namespace System.Collections.Generic;
 
 public class ObservableCollection<TValue> : ICollection<TValue>
 {
-    private Action<TValue> _onAdd = v => { };
-    private Action<TValue> _onRemove = v => { };
+    private readonly Action<TValue> _onAdd = v => { };
+    private readonly Action<TValue> _onRemove = v => { };
     private readonly List<TValue> _list = new();
 
     public virtual void OnAdd(TValue value) => _onAdd?.Invoke(value);

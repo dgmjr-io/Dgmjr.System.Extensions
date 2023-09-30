@@ -11,27 +11,26 @@
 -->
 
 <Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-        <TargetFrameworks>netstandard2.0;netstandard2.1;net6.0;net8.0</TargetFrameworks>
-        <!-- <TargetFrameworks>netstandard1.7;netstandard1.6;netstandard1.5;netstandard1.3</TargetFrameworks> -->
-        <!-- <TargetFrameworks>netstandard1.7;netstandard1.6;netstandard1.5;netstandard1.3</TargetFrameworks> -->
-        <!-- <TargetFramework>net7.0</TargetFramework> -->
-        <PackageId>Dgmjr.System.Extensions</PackageId>
-        <RootNamespace>System.Extensions</RootNamespace>
-        <AssemblyName>Dgmjr.System.Extensions</AssemblyName>
-        <SlnGenSolutionFolder>src</SlnGenSolutionFolder>
-        <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
-        <Title>Dgmjr.System.Extensions</Title>
-        <Description>Extensions and utility classes for the System namespace</Description>
-        <!-- <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies> -->
-        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <NoWarn>$(NoWarn);MSB3243</NoWarn>
-    </PropertyGroup>
-    <ItemGroup>
-        <NoWarn Include="MSB3243" />
-        <Compile Include="./System/MathF.cs" Condition="!$(DefineConstants.Contains('NETSTANDARD2_0_OR_GREATER'))" />
-        <Compile Remove="./System/MathF.cs" Condition="$(DefineConstants.Contains('NETSTANDARD2_0_OR_GREATER'))" />
-        <PackageTag Include="extensions" />
-    </ItemGroup>
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net6.0;net8.0</TargetFrameworks>
+    <!-- <TargetFrameworks>netstandard1.7;netstandard1.6;netstandard1.5;netstandard1.3</TargetFrameworks> -->
+    <!-- <TargetFrameworks>netstandard1.7;netstandard1.6;netstandard1.5;netstandard1.3</TargetFrameworks> -->
+    <!-- <TargetFramework>net7.0</TargetFramework> -->
+    <PackageId>Dgmjr.System.Extensions</PackageId>
+    <RootNamespace>System.Extensions</RootNamespace>
+    <AssemblyName>Dgmjr.System.Extensions</AssemblyName>
+    <SlnGenSolutionFolder>src</SlnGenSolutionFolder>
+    <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
+    <Title>Dgmjr.System.Extensions</Title>
+    <Description>Extensions and utility classes for the System namespace</Description>
+    <!-- <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies> -->
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoWarn>$(NoWarn);MSB3243</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <NoWarn Include="MSB3243" />
+    <Compile Include="./System/MathF.cs" Condition="!$(DefineConstants.Contains('NETSTANDARD2_1_OR_GREATER'))" />
+    <Compile Remove="./System/MathF.cs" Condition="$(DefineConstants.Contains('NETSTANDARD2_1_OR_GREATER'))" />
+    <PackageTag Include="extensions" />
+  </ItemGroup>
 </Project>

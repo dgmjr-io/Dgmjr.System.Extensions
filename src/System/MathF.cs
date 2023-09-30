@@ -243,7 +243,6 @@ namespace System
             return y;
         }
 
-        [Intrinsic]
         public static float Round(float x)
         {
             // ************************************************************************************
@@ -384,7 +383,7 @@ namespace System
                         }
                     default:
                         {
-                            throw new ArgumentException(SR.Format(SR.Argument_InvalidEnumValue, mode, nameof(MidpointRounding)), nameof(mode));
+                            throw new ArgumentException(Format("Invalid enum value: {0}", mode), nameof(MidpointRounding), nameof(mode));
                         }
                 }
 
