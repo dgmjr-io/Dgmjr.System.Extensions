@@ -42,7 +42,8 @@ namespace System.Collections.Generic;
 ///         int four = dictionary["four"]; // returns 0 (the default value)
 ///     </code>
 ///</example>
-public class DefaultableDictionary<TKey, TValue> : IDictionary<TKey, TValue> where TKey : notnull
+public class DefaultableDictionary<TKey, TValue> : IDictionary<TKey, TValue>
+    where TKey : notnull
 {
     /// <summary>
     /// The default <typeparamref name="TValue"/> to return when a key is not
@@ -57,7 +58,8 @@ public class DefaultableDictionary<TKey, TValue> : IDictionary<TKey, TValue> whe
     public TValue DefaultValue { get; init; }
     private readonly Dictionary<TKey, TValue> _dictionary = new();
 
-    public DefaultableDictionary() : this(default(TValue)) { }
+    public DefaultableDictionary()
+        : this(default(TValue)) { }
 
     public DefaultableDictionary(IDictionary<TKey, TValue> original)
         : this(default, original, EqualityComparer<TKey>.Default) { }
@@ -65,7 +67,8 @@ public class DefaultableDictionary<TKey, TValue> : IDictionary<TKey, TValue> whe
     public DefaultableDictionary(
         IDictionary<TKey, TValue> original,
         IEqualityComparer<TKey> keyComparer
-    ) : this(default, original, keyComparer) { }
+    )
+        : this(default, original, keyComparer) { }
 
     public DefaultableDictionary(TValue defaultValue)
         : this(defaultValue, EqualityComparer<TKey>.Default) { }

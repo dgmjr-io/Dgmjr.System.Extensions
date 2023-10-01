@@ -13,6 +13,7 @@
 using System.Diagnostics.CodeAnalysis;
 
 namespace System.Collections.Generic;
+
 using System;
 
 public sealed class LambdaEqualityComparer<T> : IEqualityComparer<T>

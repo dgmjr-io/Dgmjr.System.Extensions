@@ -19,8 +19,8 @@ public static class DgmjrsIEnumerableExtensions
 {
     /// <typeparam name="T">The type of elements in the collection</typeparam>
     /// <returns>A sequence that contains only elements that are not null in the source sequence or an empty sequence if no elements are null</returns>
-    public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> source) where T : class =>
-        (source?.Where(item => item != null) ?? Empty<T>())!;
+    public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> source)
+        where T : class => (source?.Where(item => item != null) ?? Empty<T>())!;
 
     /// <summary>
     /// Concatenates the elements of a sequence into a single string using the specified separator between each element.

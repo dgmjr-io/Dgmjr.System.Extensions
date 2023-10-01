@@ -17,7 +17,8 @@ namespace System;
 /// Clones the object
 /// </summary>
 /// <typeparam name="TSelf">The class' name</typeparam>
-public interface ICloneable<TSelf> where TSelf : ICloneable<TSelf>
+public interface ICloneable<TSelf>
+    where TSelf : ICloneable<TSelf>
 {
     /// <summary>
     /// Clones the object

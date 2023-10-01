@@ -14,5 +14,6 @@ namespace System.Collections.Generic;
 
 public class CaseInsensitiveKeyDictionary<TValue> : Dictionary<string, TValue>
 {
-    public CaseInsensitiveKeyDictionary() : base(StringComparer.OrdinalIgnoreCase) { }
+    public CaseInsensitiveKeyDictionary()
+        : base(StringComparer.OrdinalIgnoreCase) { }
 }

@@ -1,4 +1,5 @@
 namespace System.Text;
+
 using static System.Text.Encoding;
 #pragma warning disable CS1574
 
@@ -89,7 +90,11 @@ public static class TextEncodingExtensions
     /// <param name="s">The string to encode</param>
     /// <returns>The UTF7 encoded byte string</returns>
 #if NET6_0_OR_GREATER
-    [Obsolete("Encoding.UTF7' is obsolete: The UTF-7 encoding is insecure and should not be used. Consider using UTF-8 instead.", DiagnosticId = "SYSLIB0001", UrlFormat = "https://aka.ms/dotnet-warnings/{0}")]
+    [Obsolete(
+        "Encoding.UTF7' is obsolete: The UTF-7 encoding is insecure and should not be used. Consider using UTF-8 instead.",
+        DiagnosticId = "SYSLIB0001",
+        UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
+    )]
 #else
     [Obsolete(
         "Encoding.UTF7' is obsolete: The UTF-7 encoding is insecure and should not be used. Consider using UTF-8 instead."
@@ -103,7 +108,11 @@ public static class TextEncodingExtensions
     /// <param name="bytes">The byte array to decode</param>
     /// <returns>The UTF7 decoded string</returns>
 #if NET6_0_OR_GREATER
-    [Obsolete("Encoding.UTF7' is obsolete: The UTF-7 encoding is insecure and should not be used. Consider using UTF-8 instead.", DiagnosticId = "SYSLIB0001", UrlFormat = "https://aka.ms/dotnet-warnings/{0}")]
+    [Obsolete(
+        "Encoding.UTF7' is obsolete: The UTF-7 encoding is insecure and should not be used. Consider using UTF-8 instead.",
+        DiagnosticId = "SYSLIB0001",
+        UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
+    )]
 #else
     [Obsolete(
         "Encoding.UTF7' is obsolete: The UTF-7 encoding is insecure and should not be used. Consider using UTF-8 instead."

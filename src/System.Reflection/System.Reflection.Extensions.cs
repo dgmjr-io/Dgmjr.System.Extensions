@@ -11,6 +11,7 @@
  */
 
 namespace System.Reflection;
+
 using System.IO;
 
 public static class Extensions

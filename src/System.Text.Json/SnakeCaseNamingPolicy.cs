@@ -1,4 +1,5 @@
 namespace System.Text.Json;
+
 using System.Text.RegularExpressions;
 
 using static System.Text.RegularExpressions.RegexOptions;

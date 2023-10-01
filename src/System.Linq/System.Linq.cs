@@ -63,7 +63,8 @@ public static class DmjrsLinqExtensions
     public static TCollection AddRange<TCollection, T>(
         this TCollection collection,
         IEnumerable<T> thingsToAdd
-    ) where TCollection : ICollection<T>
+    )
+        where TCollection : ICollection<T>
     {
         if (thingsToAdd != null)
         {
@@ -91,7 +92,8 @@ public static class DmjrsLinqExtensions
     public static TCollection RemoveRange<TCollection, T>(
         this TCollection collection,
         IEnumerable<T> removeRange
-    ) where TCollection : ICollection<T>
+    )
+        where TCollection : ICollection<T>
     {
         if (removeRange != null)
         {
@@ -122,7 +124,8 @@ public static class DmjrsLinqExtensions
     public static TCollection Without<TCollection, T>(
         this TCollection collection,
         Func<T, bool> predicate
-    ) where TCollection : ICollection<T>
+    )
+        where TCollection : ICollection<T>
     {
         var itemsToRemove = collection.Where(predicate);
         collection.RemoveRange(itemsToRemove);
@@ -140,7 +143,8 @@ public static class DmjrsLinqExtensions
     public static TCollection Except<TCollection, T>(
         this TCollection collection,
         Func<T, bool> predicate
-    ) where TCollection : ICollection<T> =>
+    )
+        where TCollection : ICollection<T> =>
         (TCollection)
             Activator.CreateInstance(
                 typeof(TCollection),

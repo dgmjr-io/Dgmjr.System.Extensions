@@ -22,7 +22,8 @@ public class ObservableCollection<TValue> : ICollection<TValue>
 
     public virtual void OnRemove(TValue value) => _onRemove?.Invoke(value);
 
-    public ObservableCollection() : this(Empty<TValue>(), v => { }, v => { }) { }
+    public ObservableCollection()
+        : this(Empty<TValue>(), v => { }, v => { }) { }
 
     public ObservableCollection(Action<TValue>? onAdd = null, Action<TValue>? onRemove = null)
         : this(Empty<TValue>(), onAdd, onRemove) { }

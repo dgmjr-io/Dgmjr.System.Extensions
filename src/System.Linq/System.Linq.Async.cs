@@ -11,6 +11,7 @@
  */
 #if !NETSTANDARD
 namespace System.Linq;
+
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 

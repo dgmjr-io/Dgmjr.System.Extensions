@@ -13,6 +13,7 @@
  */
 
 namespace System;
+
 using static System.Math;
 
 public static class MathExtensions

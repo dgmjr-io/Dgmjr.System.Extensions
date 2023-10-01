@@ -15,6 +15,7 @@ using System.Linq;
 using System.Xml.Schema;
 
 namespace System;
+
 using static System.BitConverter;
 using static System.Convert;
 using static System.Math;
