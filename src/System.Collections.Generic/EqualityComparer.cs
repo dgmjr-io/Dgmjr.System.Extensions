@@ -1,14 +1,14 @@
-﻿//
-// EqualityComparer.cs
-//
-//   Created: 2022-10-23-08:36:04
-//   Modified: 2022-10-30-08:56:53
-//
-//   Author: David G. Mooore, Jr. <david@dgmjr.io>
-//
-//   Copyright © 2022-2023 David G. Mooore, Jr., All Rights Reserved
-//      License: MIT (https://opensource.org/licenses/MIT)
-//
+﻿/*
+ * EqualityComparer.cs
+ *
+ *   Created: 2022-10-23-08:36:04
+ *   Modified: 2023-10-02-04:43:23
+ *
+ *   Author: David G. Moore, Jr. <david@dgmjr.io>
+ *
+ *   Copyright © 2022 - 2023 David G. Moore, Jr., All Rights Reserved
+ *      License: MIT (https://opensource.org/licenses/MIT)
+ */
 
 using System.Diagnostics.CodeAnalysis;
 

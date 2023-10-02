@@ -1,5 +1,5 @@
 ﻿/*
- * NonCaseSensitiveKeyDictionary{TValue}.cs
+ * CaseInsensitiveKeyDictionary{TValue}.cs
  *
  *   Created: 2023-03-31-04:47:28
  *   Modified: 2023-03-31-04:47:28
