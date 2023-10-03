@@ -38,6 +38,7 @@
     <Using Include="System.Xml.Linq.XNamespace" Alias="XNS"/>
     <Using Include="System.Xml.Linq.XNode" Alias="XO"/>
     <Using Include="System.Collections.Generic.CaseInsensitiveKeyDictionary%3cstring%3e" Alias="CaseInsensitiveStringDictionary" />
+    <Using Include="System.Collections.Generic.CaseInsensitiveKeyDictionary%3cstring%3e" Alias="CaseInsensitiveStringKeyDictionary" />
   </ItemGroup>
   <ItemGroup Condition="!$(TargetFramework.StartsWith('netstandard'))">
     <PackageReference Include="System.Collections.Immutable"/>
