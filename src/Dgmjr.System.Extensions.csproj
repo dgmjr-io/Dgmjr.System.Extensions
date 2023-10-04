@@ -28,6 +28,7 @@
     <NoWarn>$(NoWarn);MSB3243;CP0002;CP0001;CP0004</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <!-- <PackageReference  Include="Dgmjr.InterfaceGenerator" ExcludeAssets="ContentFiles" PrivateAssets="Analyzers" /> -->
     <NoWarn Include="MSB3243" />
     <Compile Remove="./System/MathF.cs" Condition="$(DefineConstants.Contains('NETSTANDARD2_1_OR_GREATER'))" />
     <Compile Remove="./System/HashCode.cs" Condition="$(DefineConstants.Contains('NETSTANDARD2_1_OR_GREATER'))" />

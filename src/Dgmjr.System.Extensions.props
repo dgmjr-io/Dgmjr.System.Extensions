@@ -44,7 +44,6 @@
     <PackageReference Include="System.Collections.Immutable"/>
   </ItemGroup>
   <ItemGroup>
-    <SourceGenerator Include="Dgmjr.InterfaceGenerator" />
     <PackageReference Include="System.Xml.XPath" Aliases="XPathDoc"/>
     <PackageReference Include="System.Usings"/>
     <PackageReference Include="System.Text.Usings" IncludeAssets="Build" ExcludeAssets="Compile;Runtime;Native;Analyzers"/>
