@@ -25,7 +25,7 @@ public static class TextEncodingExtensions
     public static byte[] ToUTF8Bytes(this string s) => GetUTF8Bytes(s);
 
     /// <summary>
-    /// Calls <see cref="Encoding.UTF8.GetString(byte[])"/>
+    /// Calls <see cref="Encoding.UTF8" />.GetString(<paramref name="bytes" />)
     /// </summary>
     /// <param name="bytes">The byte array to decode</param>
     /// <returns>The UTF8 decoded string</returns>
@@ -35,7 +35,7 @@ public static class TextEncodingExtensions
     public static string ToUTF8String(this byte[] bytes) => GetUTF8String(bytes);
 
     /// <summary>
-    /// Calls <see cref="Encoding.Unicode.GetBytes(s)"/>
+    /// Calls <see cref="Encoding.Unicode" />.GetBytes(<paramref name="s" />)
     /// </summary>
     /// <param name="s">The string to encode</param>
     /// <returns>The Unicode encoded byte string</returns>
@@ -45,7 +45,7 @@ public static class TextEncodingExtensions
     public static byte[] ToUnicodeBytes(this string s) => GetUnicodeBytes(s);
 
     /// <summary>
-    /// Calls <see cref="Encoding.Unicode.GetString(byte[])"/>
+    /// Calls <see cref="Encoding.Unicode" />.GetString(<paramref name="bytes" />)
     /// </summary>
     /// <param name="bytes">The byte array to decode</param>
     /// <returns>The Unicode decoded string</returns>
@@ -57,38 +57,38 @@ public static class TextEncodingExtensions
 
 #if NETSTANDARD2_0_OR_GREATER
     /// <summary>
-    /// Calls <see cref="Encoding.ASCII.GetBytes(s)"/>
+    /// Calls <see cref="Encoding.ASCII" />.GetBytes(<paramref name="s" />)
     /// </summary>
     /// <param name="s">The string to encode</param>
     /// <returns>The ASCII encoded byte string</returns>
     public static byte[] ToASCIIBytes(this string s) => GetASCIIBytes(s);
 
     /// <summary>
-    /// Calls <see cref="Encoding.ASCII.GetString(byte[])"/>
+    /// Calls <see cref="Encoding.ASCII" />.GetString(<paramref name="bytes" />)
     /// </summary>
     /// <param name="bytes">The byte array to decode</param>
     /// <returns>The ASCII decoded string</returns>
     public static string ToASCIIString(this byte[] bytes) => GetASCIIString(bytes);
 
     /// <summary>
-    /// Calls <see cref="Encoding.ASCII.GetBytes(s)"/>
+    /// Calls <see cref="Encoding.ASCII" />.GetBytes(<paramref name="s" />)
     /// </summary>
     /// <param name="s">The string to encode</param>
     /// <returns>The ASCII encoded byte string</returns>
     public static byte[] GetASCIIBytes(string s) => Encoding.ASCII.GetBytes(s);
 
     /// <summary>
-    /// Calls <see cref="Encoding.ASCII.GetString(byte[])"/>
+    /// Calls <see cref="Encoding.ASCII" />.GetString(<paramref name="bytes" />)
     /// </summary>
     /// <param name="bytes">The byte array to decode</param>
     /// <returns>The ASCII decoded string</returns>
     public static string GetASCIIString(byte[] bytes) => ASCII.GetString(bytes);
 
     /// <summary>
-    /// Calls <see cref="Encoding.UTF7.GetBytes(s)"/>
+    /// Calls <see cref="Encoding.UTF7" />.GetBytes(<paramref name="s" />)
     /// </summary>
     /// <param name="s">The string to encode</param>
-    /// <returns>The UTF7 encoded byte string</returns>
+    /// <returns>The UTF7 encoded byte array</returns>
 #if NET6_0_OR_GREATER
     [Obsolete(
         "Encoding.UTF7' is obsolete: The UTF-7 encoding is insecure and should not be used. Consider using UTF-8 instead.",
