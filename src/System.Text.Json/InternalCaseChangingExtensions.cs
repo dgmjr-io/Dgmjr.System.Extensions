@@ -6,7 +6,7 @@ internal static class InternalCaseChangingExtensions
 {
     public static string ToCasing(this string input, char separator)
     {
-        if (string.IsNullOrEmpty(input))
+        if (IsNullOrEmpty(input))
             return input;
 
         var result = new StringBuilder();
@@ -26,7 +26,7 @@ internal static class InternalCaseChangingExtensions
 
     public static string FromCasing(this string input, char separator, bool capitalizeFirstLetter)
     {
-        if (string.IsNullOrEmpty(input))
+        if (IsNullOrEmpty(input))
         {
             return input;
         }
@@ -36,7 +36,7 @@ internal static class InternalCaseChangingExtensions
 
         foreach (var word in words)
         {
-            if (!string.IsNullOrEmpty(word))
+            if (!IsNullOrEmpty(word))
             {
                 result.Append(char.ToUpper(word[0]));
                 result.Append(word.Substring(1).ToLower());

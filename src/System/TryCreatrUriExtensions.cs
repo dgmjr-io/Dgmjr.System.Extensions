@@ -22,7 +22,7 @@
 
 //     public static Uri? CreateUri(this string uriString, bool throwOnInvalidUri = true)
 //     {
-//         if (string.IsNullOrEmpty(uriString))
+//         if (IsNullOrEmpty(uriString))
 //             throw new ArgumentException("The provided URI string is null or empty.", nameof(uriString));
 //         if (Uri.TryCreate(uriString, UriKind.Absolute, out var uri))
 //             return uri;
@@ -33,9 +33,9 @@
 
 //     public static Uri CreateUri(this string uriString, string defaultFallbackUri)
 //     {
-//         if (string.IsNullOrEmpty(defaultFallbackUri))
+//         if (IsNullOrEmpty(defaultFallbackUri))
 //             throw new ArgumentException("The provided default fallback URI is null or empty.", nameof(defaultFallbackUri));
-//         if (string.IsNullOrEmpty(uriString))
+//         if (IsNullOrEmpty(uriString))
 //             throw new ArgumentException("The provided URI string is null or empty.", nameof(uriString));
 
 //         if (System.Uri.TryCreate(uriString, UriKind.Absolute, out var uri))

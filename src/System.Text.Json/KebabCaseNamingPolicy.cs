@@ -40,20 +40,20 @@ public static partial class KebabCaseExtensions
 
     // #if NET7_0_OR_GREATER
     //     [GeneratedRegex(ToKebabCaseRegexString, RegexOptions)]
-    //     public static partial REx ToKebabCaseRegex();
+    //     public static partial Regex ToKebabCaseRegex();
 
     //     [GeneratedRegex(KebabCaseToCamelCaseRegexString, RegexOptions)]
-    //     public static partial REx KebabCaseToCamelCaseRegex();
+    //     public static partial Regex KebabCaseToCamelCaseRegex();
 
     //     [GeneratedRegex(KebabCaseToPascalCaseRegexString, RegexOptions)]
-    //     public static partial REx KebabCaseToPascalCaseRegex();
+    //     public static partial Regex KebabCaseToPascalCaseRegex();
     // #else
-    //     private static REx _toKebabCaseRegex = new(ToKebabCaseRegexString, RegexOptions);
-    //     public static REx ToKebabCaseRegex() => _toKebabCaseRegex;
-    //     private static REx _snakeCaseToCamelCaseRegex = new(KebabCaseToCamelCaseRegexString, RegexOptions);
-    //     public static REx KebabCaseToCamelCaseRegex() => _snakeCaseToCamelCaseRegex;
-    //     private static REx _snakeCaseToPascalCaseRegex = new(KebabCaseToPascalCaseRegexString, RegexOptions);
-    //     public static REx KebabCaseToPascalCaseRegex() => _snakeCaseToPascalCaseRegex;
+    //     private static Regex _toKebabCaseRegex = new(ToKebabCaseRegexString, RegexOptions);
+    //     public static Regex ToKebabCaseRegex() => _toKebabCaseRegex;
+    //     private static Regex _snakeCaseToCamelCaseRegex = new(KebabCaseToCamelCaseRegexString, RegexOptions);
+    //     public static Regex KebabCaseToCamelCaseRegex() => _snakeCaseToCamelCaseRegex;
+    //     private static Regex _snakeCaseToPascalCaseRegex = new(KebabCaseToPascalCaseRegexString, RegexOptions);
+    //     public static Regex KebabCaseToPascalCaseRegex() => _snakeCaseToPascalCaseRegex;
     // #endif
 
     /// <summary>

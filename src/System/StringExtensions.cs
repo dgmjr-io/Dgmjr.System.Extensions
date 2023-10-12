@@ -48,7 +48,7 @@ public static class StringExtensions
     /// <param name="str">The string to see whether it's null or empty</param>
     /// <returns>A <see langword="bool"/> value indicating whether the string
     ///     was null or empty</returns>
-    public static bool IsNullOrEmpty(this string? str) => string.IsNullOrEmpty(str);
+    public static bool IsNullOrEmpty(this string? str) => IsNullOrEmpty(str);
 
     /// <summary>
     /// This is a C# extension method that converts a Base64-encoded string to a byte array.
