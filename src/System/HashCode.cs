@@ -462,5 +462,5 @@ namespace System
     }
 }
 #else
-// [assembly: TypeForwardedTo(typeof(System.HashCode))]
+[assembly: TypeForwardedTo(typeof(System.HashCode))]
 #endif
