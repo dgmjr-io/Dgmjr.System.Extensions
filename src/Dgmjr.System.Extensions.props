@@ -41,6 +41,8 @@
     <Using Include="System.Xml.Linq.XNode" Alias="XO"/>
     <Using Include="System.Collections.Generic.CaseInsensitiveKeyDictionary%3cstring%3e" Alias="CaseInsensitiveStringDictionary" />
     <Using Include="System.Collections.Generic.CaseInsensitiveKeyDictionary%3cstring%3e" Alias="CaseInsensitiveStringKeyDictionary" />
+    <Using Include="System.Int128" Alias="vlong /* very long */" Condition="$(DefineConstants.Contains('NET7_0_OR_GREATER'))" />
+    <Using Include="System.UInt128" Alias="uvlong /* unsigned very long */"  Condition="$(DefineConstants.Contains('NET7_0_OR_GREATER'))" />
   </ItemGroup>
   <ItemGroup Condition="!$(TargetFramework.StartsWith('netstandard'))">
     <PackageReference Include="System.Collections.Immutable"/>

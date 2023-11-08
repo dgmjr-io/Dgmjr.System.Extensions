@@ -35,4 +35,7 @@
     <Compile Remove="./System.Linq/System.Linq.Async.cs" Condition="$(DefineConstants.Contains('NETSTANDARD'))" />
     <PackageTag Include="extensions" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Memory" />
+  </ItemGroup>
 </Project>
