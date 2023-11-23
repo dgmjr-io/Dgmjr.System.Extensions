@@ -187,4 +187,26 @@ public static class DmjrsLinqExtensions
             yield return value;
         }
     }
+
+    public static int GreatestPowerOfTwo(this IEnumerable<int> values)
+    {
+        var n = values.Max();
+        var k = 1;
+        while (k < n)
+        {
+            k = k << 1;
+        }
+        return k;
+    }
+
+    public static int GreatestPowerOfTwo<T>(this IEnumerable<T> values, Func<T, int> selector)
+    {
+        var n = values.Max(selector);
+        var k = 1;
+        while (k < n)
+        {
+            k = k << 1;
+        }
+        return k;
+    }
 }
