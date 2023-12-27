@@ -43,6 +43,13 @@
     <Using Include="System.Collections.Generic.CaseInsensitiveKeyDictionary%3cstring%3e" Alias="CaseInsensitiveStringKeyDictionary" />
     <Using Include="System.Int128" Alias="vlong /* very long */" Condition="$(DefineConstants.Contains('NET7_0_OR_GREATER'))" />
     <Using Include="System.UInt128" Alias="uvlong /* unsigned very long */"  Condition="$(DefineConstants.Contains('NET7_0_OR_GREATER'))" />
+    <Using Include="System.Text.Json.JsonTokenType" Alias="JTokenType"  />
+    <Using Include="System.Text.Json.Serialization.JsonConverterAttribute" Alias="JConverterAttribute"  />
+    <Using Include="System.Text.Json.Serialization.JsonConverter" Alias="JConverter"  />
+    <Using Include="System.Text.Json.JsonSerializerOptions" Alias="Jso"  />
+    <Using Include="System.Text.Json.Serialization"  />
+    <Using Include="System.Text.Json"   />
+    <Using Include="System.Diagnostics.CodeAnalysis.StringSyntaxAttribute" Alias="StringSyntax"  Condition="$(DefineConstants.Contains('NET7_0_OR_GREATER'))" />
   </ItemGroup>
   <ItemGroup Condition="!$(TargetFramework.StartsWith('netstandard'))">
     <PackageReference Include="System.Collections.Immutable"/>

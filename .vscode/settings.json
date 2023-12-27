@@ -1,3 +1,7 @@
 {
-    "dotnet-test-explorer.testProjectPath": "**/*Tests.@(csproj|vbproj|fsproj)"
+    "dotnet-test-explorer.testProjectPath": "**/*Tests.@(csproj|vbproj|fsproj)",
+    "sonarlint.connectedMode.project": {
+        "connectionId": "dgmjr-io",
+        "projectKey": "dgmjr-io_Dgmjr.System.Extensions"
+    }
 }

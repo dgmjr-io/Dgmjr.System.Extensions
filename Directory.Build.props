@@ -1,0 +1,21 @@
+<!--
+ * Directory.Build.props
+ *
+ *   Created: 2023-01-11-05:08:45
+ *   Modified: 2023-01-11-11:48:02
+ *
+ *   Author: David G. Moore, Jr. <david@dgmjr.io>
+ *
+ *   Copyright © 2022-2023 David G. Moore, Jr., All Rights Reserved
+ *      License: MIT (https://opensource.org/licenses/MIT)
+-->
+
+<Project>
+  <Import Project="Sdk.props" Sdk="DgmjrSdk" Condition="'$(DgmjrSdkProps)' == '' And '$(IsInnerBuild)' != 'true'"  />
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net6.0;net8.0</TargetFrameworks>
+    <DgmjrSdkProps>$(MSBuildThisFileDirectory)Sdk.props</DgmjrSdkProps>
+		<!--<InheritedDirectoryBuildProps>$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))</InheritedDirectoryBuildProps>-->
+	</PropertyGroup>
+	<!--<Import Project="$(InheritedDirectoryBuildProps)" Condition="Exists('$(InheritedDirectoryBuildProps)')" />-->
+</Project>

@@ -10,9 +10,9 @@
  *      License: MIT (https://opensource.org/licenses/MIT)
  */
 
-using System.Threading.Tasks;
-
 namespace System.IO;
+
+using System.Threading.Tasks;
 
 public static class StreamExtensions
 {
@@ -30,4 +30,24 @@ public static class StreamExtensions
     /// <returns> the contents of the <see cref="Stream" /> as a <see langword="string" /> to the end</returns>
     public static Task<string> ReadToEndAsync(this Stream s) =>
         new StreamReader(s).ReadToEndAsync();
+
+    /// <summary>
+    /// Reads <inheritdoc cref="ReadAllBytes" path="/returns" />
+    /// </summary>
+    /// <param name="stream">The stream to read from</param>
+    /// <returns>all <see langword="byte" />s from the <paramref name="stream" /></returns>
+    public static byte[] ReadAllBytes(this Stream stream)
+    {
+        using var memoryStream = new MemoryStream();
+        stream.CopyTo(memoryStream);
+        return memoryStream.ToArray();
+    }
+
+    /// <summary>
+    /// Reads <inheritdoc cref="ReadAllBytesAsync" path="/returns" />
+    /// </summary>
+    /// <param name="stream">The stream to read from</param>
+    /// <returns>all <see langword="byte" />s from the <paramref name="stream" /></returns>
+    public static async Task<byte[]> ReadAllBytesAsync(this Stream stream) =>
+        await Task.Run(() => stream.ReadAllBytes());
 }
