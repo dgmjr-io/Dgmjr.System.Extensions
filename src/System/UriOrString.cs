@@ -2,13 +2,10 @@ namespace System;
 
 using OneOf;
 
-public class UriOrString : OneOfBase<Uri, string>
+public class UriOrString(string str) : OneOfBase<Uri, string>(str)
 {
     public UriOrString(Uri uri)
-        : base(uri) { }
-
-    public UriOrString(string str)
-        : base(str) { }
+        : this(uri.ToString()) { }
 
     public static implicit operator UriOrString(Uri uri) => new(uri);
 

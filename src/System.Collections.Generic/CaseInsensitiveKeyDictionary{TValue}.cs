@@ -10,10 +10,14 @@
  *      License: MIT (https://opensource.org/licenses/MIT)
  */
 
+using System.Linq;
+
 namespace System.Collections.Generic;
 
-public class CaseInsensitiveKeyDictionary<TValue> : Dictionary<string, TValue>
+public class CaseInsensitiveKeyDictionary<TValue>(
+    IEnumerable<KeyValuePair<string, TValue>> original
+) : Dictionary<string, TValue>(original.ToDictionary(kvp => kvp.Key, kvp => kvp.Value), StringComparer.OrdinalIgnoreCase)
 {
     public CaseInsensitiveKeyDictionary()
-        : base(StringComparer.OrdinalIgnoreCase) { }
+        : this(Empty<KeyValuePair<string, TValue>>()) { }
 }

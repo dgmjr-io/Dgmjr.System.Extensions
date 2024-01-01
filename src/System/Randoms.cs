@@ -32,9 +32,9 @@ public sealed class Randoms : Random
     public static Guid NextGuid() => Guid.NewGuid();
 
     /// <summary>
-    /// Generates <inheritdoc cref="Next16Bytes" path="/returns" />
+    /// Generates <inheritdoc cref="Next16Bytes" path="/returns//text()" />
     /// </summary>
-    /// <returns>an array of 16 Next bytes</returns>
+    /// <returns>an array of 16 new bytes</returns>
 
     public static byte[] Next16Bytes() => NextGuid().ToByteArray();
 
