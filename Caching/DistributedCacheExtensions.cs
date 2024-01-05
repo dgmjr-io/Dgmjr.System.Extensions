@@ -3,8 +3,8 @@ namespace Microsoft.Extensions.Caching.Distributed;
 using System.Collections;
 using System.Reflection;
 
-public delegate void CacheHitCallback(object key, object value);
-public delegate void CacheMissCallback(object key);
+using CacheHitCallback = System.Action<object, object>;
+using CacheMissCallback = System.Action<object>;
 
 public static class DistributedCacheExtensions
 {
