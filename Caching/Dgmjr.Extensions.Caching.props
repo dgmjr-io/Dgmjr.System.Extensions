@@ -1,0 +1,7 @@
+<Project>
+  <ItemGroup>
+    <Using Include="Microsoft.Extensions.Caching.Distributed" />
+    <Using Include="Dgmjr.Extensions.Caching" />
+    <Using Include="Microsoft.Extensions.Logging" />
+  </ItemGroup>
+</Project>

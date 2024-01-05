@@ -6,12 +6,12 @@ license: MIT
 slug: Dgmjr.Redis.Extensions-readme
 version:
 authors:
-  - dgmjr;
+- dgmjr
 description: Dgmjr.Redis.Extensions Readme #TODO: write description for Dgmjr.Redis.Extensions Readme
 keywords:
 - Dgmjr.Redis.Extensions
-  - dgmjr
-  - dgmjr-io
+- dgmjr
+- dgmjr-io
 type: readme
 ---
 # Dgmjr.Redis.Extensions Readme

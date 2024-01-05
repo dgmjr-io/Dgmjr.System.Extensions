@@ -25,18 +25,18 @@ internal static class JsoGetter
             .GetRuntimeProperty(AllName)
             .GetValue(null) as ConditionalWeakTable<Jso, object>)!;
 
-    static object ToContainer(this ConditionalWeakTable<Jso, object> all)
+    static object? ToContainer(this ConditionalWeakTable<Jso, object> all)
         => typeof(ConditionalWeakTable<Jso,object>).GetRuntimeFields().First(f => f.FieldType.Name == ContainerName).GetValue(all);
 
     static IEnumerable ToEntries(this object container)
         => (container.GetType().GetRuntimeFields().First(f => f.Name.Contains(entriesName)).GetValue(container) as IEnumerable)!;
 
-    static object ToDependentHandle(this object entry)
-        => entry.GetType().GetRuntimeFields().First(f => f.FieldType.Name == DependentHandleName).GetValue(entry);
+    static object? ToDependentHandle(this object? entry)
+        => entry?.GetType().GetRuntimeFields().First(f => f.FieldType.Name == DependentHandleName).GetValue(entry);
 
-    static ITuple? ToTargetAndDependent(this object dependentHandle)
+    static ITuple? ToTargetAndDependent(this object? dependentHandle)
     {
-        try { return dependentHandle.GetType().GetRuntimeProperty(TargetAndDependentName).GetValue(dependentHandle) as ITuple; }
+        try { return dependentHandle?.GetType().GetRuntimeProperty(TargetAndDependentName).GetValue(dependentHandle) as ITuple; }
         catch { return null; }
     }
 
