@@ -7,11 +7,13 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Dgmjr.AspNetCore.Mvc.Polyfills" Condition="$(TargetFramework.StartsWith('netstandard'))" />
+    <PackageReference Include="Dgmjr.Abstractions" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" />
     <PackageReference Include="Microsoft.AspNetCore.ResponseCaching" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" />
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" />
     <PackageReference Include="StackExchange.Redis" />
     <PackageReference Include="System.Net.Sockets" VersionOverride="[4.3.0,)" />
     <PackageReference Include="System.Text.Json.Usings" />
