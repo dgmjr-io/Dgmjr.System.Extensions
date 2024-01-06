@@ -61,12 +61,12 @@ public static partial class LoggingWebApplicationBuilderExtensions
                 );
             });
 
-        #if NET5_0_OR_GREATER
+#if NET5_0_OR_GREATER
         services.AddHttpLogging(
             options =>
                 configuration.GetRequiredSection(HttpLogging).Bind(options)
         );
-        #endif
+#endif
         services.AddApplicationInsightsTelemetry(
             configuration.GetSection(ApplicationInsights)
         );
