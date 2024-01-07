@@ -33,13 +33,11 @@ public static partial class RedisWebApplicationBuilderExtensions
     }
 #endif
 
-
     public static IServiceCollection AddRedisCertificateLoader(this IServiceCollection services)
     {
         services.AddSingleton<IPostConfigureOptions<RedisCacheOptions>, RedisCertificateLoaderAndValidator>();
         return services;
     }
-
 
     public static IServiceCollection AddRedisCaching(this IServiceCollection services, IConfiguration configuration, string redisConfigurationSectionName = Redis, string responseCachingConfigurationSectionName = ResponseCaching)
     {
@@ -55,14 +53,13 @@ public static partial class RedisWebApplicationBuilderExtensions
         services.AddStackExchangeRedisCache(
             options => options.Configuration = configuration.GetConnectionString(redisConnectionStringSectionName)
         );
-        services.AddResponseCaching(options => configuration.Bind(responseCachingConfigurationSectionName, options));
+        // services.AddResponseCaching(options => configuration.Bind(responseCachingConfigurationSectionName, options));
         return services;
     }
 
     public static IApplicationBuilder UseRedisCaching(this IApplicationBuilder app)
     {
-        app.UseResponseCaching();
+        // app.UseResponseCaching();
         return app;
     }
-
 }

@@ -11,8 +11,9 @@ using global::Dgmjr.Abstractions;
 
 public class RedisCertificateLoaderAndValidator(IConfiguration configuration, ILogger<RedisCertificateLoaderAndValidator> logger) : IPostConfigureOptions<RedisCacheOptions>, ILog
 {
-    private const string RedisCertificatePath = "Redis:ClientCertificatePath";
-    private const string RedisClientCertificatePassword = "Redis:ClientCertificatePassword";
+    private const string Redis = nameof(Redis);
+    private const string RedisCertificatePath = $"{Redis}:{nameof(ClientCertificatePath)}";
+    private const string RedisClientCertificatePassword = $"{Redis}:{nameof(RedisClientCertificatePassword)}";
 
     private readonly IConfiguration _configuration = configuration;
 
@@ -29,19 +30,19 @@ public class RedisCertificateLoaderAndValidator(IConfiguration configuration, IL
 
         if (sslPolicyErrors == SslPolicyErrors.None)
         {
-            Logger.LogValidatingRedisServerCertificateCertificate(subject, issuer, chainInfo);
+            Logger.ValidatingRedisServerCertificateCertificate(subject, issuer, chainInfo);
             return true;
         }
         else
         {
-            Logger.LogFailedValidatingRedisServerCertificateCertificate(subject, issuer, chainInfo, sslPolicyErrors);
+            Logger.FailedValidatingRedisServerCertificateCertificate(subject, issuer, chainInfo, sslPolicyErrors);
             return true;
         }
     }
 
     private X509Certificate2 GetClientCertificate(object sender, string targetHost, X509CertificateCollection localCertificates, X509Certificate? remoteCertificate, string[] acceptableIssuers)
     {
-        Logger.LogLoadingRedisClientCertificate(ClientCertificatePath);
+        Logger.LoadingRedisClientCertificate(ClientCertificatePath);
         var certificate = new X509Certificate2(ClientCertificatePath, ClientCertificatePassword);
         return certificate;
     }

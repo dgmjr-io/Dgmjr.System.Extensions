@@ -4,5 +4,10 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" />
+    <PackageReference Include="Microsoft.Identity.Web" />
+  </ItemGroup>
+  <ItemGroup>
+    <Using Include="Dgmjr.OpenIdConnect.Constants" Static="true" />
   </ItemGroup>
 </Project>

@@ -10,19 +10,19 @@ public static partial class LoggerExtensions
     "Loading Redis client certificate from {Path} with password *******",
     EventName = "LoadingRedisClientCertificate"
     )]
-    public static partial void LogLoadingRedisClientCertificate(this ILogger logger, string path);
+    internal static partial void LoadingRedisClientCertificate(this ILogger logger, string path);
 
     [LoggerMessage(
         Trace,
         "Validating Redis server certificate: ✅ SUCCESS! ✅ \n\tSubject: {Subject}\n\tIssuer: {Issuer}\n\tChain: {ChainInfo}",
         EventName = "ValidatingRedisServerCertificateCertificate"
     )]
-    public static partial void LogValidatingRedisServerCertificateCertificate(this ILogger logger, string subject, string issuer, string chainInfo);
+    internal static partial void ValidatingRedisServerCertificateCertificate(this ILogger logger, string subject, string issuer, string chainInfo);
 
     [LoggerMessage(
         Trace,
         "Validating Redis server certificate: 🚫 !!FAILED!! 🚫: \n\tSubject: {Subject}\n\tIssuer: {Issuer}\n\tChain: {ChainInfo}\r\n\tSslPolicyErrors: {SslPolicyErrors}",
         EventName = "ValidatingRedisServerCertificateCertificate"
     )]
-    public static partial void LogFailedValidatingRedisServerCertificateCertificate(this ILogger logger, string subject, string issuer, string chainInfo, SslPolicyErrors sslPolicyErrors);
+    internal static partial void FailedValidatingRedisServerCertificateCertificate(this ILogger logger, string subject, string issuer, string chainInfo, SslPolicyErrors sslPolicyErrors);
 }
