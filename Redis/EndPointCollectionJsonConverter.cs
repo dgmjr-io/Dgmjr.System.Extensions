@@ -315,21 +315,21 @@ public class EndPointCollectionJsonConverter : JsonConverter<EndPointCollection>
     {
         protected override Jso GeneratedSerializerOptions => Options;
 
-        public override JsonTypeInfo? GetTypeInfo(type type)
-        {
-            return type switch
-            {
-                { Name: nameof(EndPoint) } => CreateJsonTypeInfo(Options),
-                _ => throw new NotImplementedException()
-            };
-        }
-    }
-
-    protected static JsonTypeInfo CreateJsonTypeInfo(Jso jso)
+    public override JsonTypeInfo? GetTypeInfo(type type)
     {
-        var typeInfo = JsonTypeInfo.CreateJsonTypeInfo<EndPoint>(jso);
-        typeInfo.PolymorphismOptions.DerivedTypes.Add(new JsonDerivedType(typeof(DnsEndPoint)));
-        typeInfo.PolymorphismOptions.DerivedTypes.Add(new JsonDerivedType(typeof(IPEndPoint)));
-        return typeInfo;
+        return type switch
+        {
+            { Name: nameof(EndPoint) } => CreateJsonTypeInfo(Options),
+            _ => throw new NotImplementedException()
+        };
     }
+}
+
+protected static JsonTypeInfo CreateJsonTypeInfo(Jso jso)
+{
+    var typeInfo = JsonTypeInfo.CreateJsonTypeInfo<EndPoint>(jso);
+    typeInfo.PolymorphismOptions.DerivedTypes.Add(new JsonDerivedType(typeof(DnsEndPoint)));
+    typeInfo.PolymorphismOptions.DerivedTypes.Add(new JsonDerivedType(typeof(IPEndPoint)));
+    return typeInfo;
+}
 }
