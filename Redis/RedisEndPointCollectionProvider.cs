@@ -25,7 +25,7 @@ public class RedisEndpointCollectionProvider(IConfiguration configuration) : ICo
             throw new ArgumentNullException(nameof(options));
         }
 
-        options.ConfigurationOptions ??= new ConfigurationOptions();
+        options.ConfigurationOptions ??= new ConfigurationOptions { EndPoints = { } };
 
         // Retrieve the configuration values from appsettings.json or any other configuration source
         var endpointConfig = _configuration.GetSection(EndPointsSectionName);
@@ -35,17 +35,13 @@ public class RedisEndpointCollectionProvider(IConfiguration configuration) : ICo
             var host = endpointSection.GetValue<string?>(nameof(DnsEndPoint.Host));
             var port = endpointSection.GetValue<int?>(nameof(DnsEndPoint.Port));
             var ipAddress = endpointSection.GetValue<string?>(nameof(IPEndPoint.Address));
-            if(!IsNullOrEmpty(ipAddress))
+            if(!IsNullOrEmpty(ipAddress) && (!options.ConfigurationOptions.EndPoints.Any(e => e is IPEndPoint ip && ip.Address.Equals(IPAddress.Parse(ipAddress)))))
             {
                 options.ConfigurationOptions?.EndPoints?.Add(new IPEndPoint(IPAddress.Parse(ipAddress), port ?? DefaultPort));
             }
-            else if(!IsNullOrEmpty(host))
+            else if(!IsNullOrEmpty(host) && (!options.ConfigurationOptions.EndPoints.Any(e => e is DnsEndPoint dns && dns.Host.Equals(host, OrdinalIgnoreCase))))
             {
                 options.ConfigurationOptions?.EndPoints?.Add(new DnsEndPoint(host, port ?? DefaultPort));
-            }
-            else
-            {
-                throw new InvalidOperationException($"Invalid endpoint configuration: {endpointSection.Key}");
             }
         }
     }
