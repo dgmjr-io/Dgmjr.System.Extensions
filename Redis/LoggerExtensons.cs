@@ -6,23 +6,23 @@ using System.Net.Security;
 public static partial class LoggerExtensions
 {
     [LoggerMessage(
-    Trace,
-    "Loading Redis client certificate from {Path} with password *******",
-    EventName = "LoadingRedisClientCertificate"
+        Trace,
+        "Loading Redis client certificate from {Path} with password *******",
+        EventName = nameof(LoadingRedisClientCertificate)
     )]
     internal static partial void LoadingRedisClientCertificate(this ILogger logger, string path);
 
     [LoggerMessage(
         Trace,
         "Validating Redis server certificate: ✅ SUCCESS! ✅ \n\tSubject: {Subject}\n\tIssuer: {Issuer}\n\tChain: {ChainInfo}",
-        EventName = "ValidatingRedisServerCertificateCertificate"
+        EventName = nameof(ValidatingRedisServerCertificateCertificate)
     )]
     internal static partial void ValidatingRedisServerCertificateCertificate(this ILogger logger, string subject, string issuer, string chainInfo);
 
     [LoggerMessage(
         Trace,
         "Validating Redis server certificate: 🚫 !!FAILED!! 🚫: \n\tSubject: {Subject}\n\tIssuer: {Issuer}\n\tChain: {ChainInfo}\r\n\tSslPolicyErrors: {SslPolicyErrors}",
-        EventName = "ValidatingRedisServerCertificateCertificate"
+        EventName = nameof(FailedValidatingRedisServerCertificateCertificate)
     )]
     internal static partial void FailedValidatingRedisServerCertificateCertificate(this ILogger logger, string subject, string issuer, string chainInfo, SslPolicyErrors sslPolicyErrors);
 }

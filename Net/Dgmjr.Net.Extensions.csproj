@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Content Include="LICENSE.md" Pack="true" PackagePath="LICENSE.md" />
+  </ItemGroup>
+</Project>

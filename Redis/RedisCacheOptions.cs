@@ -6,6 +6,8 @@ public class RedisCacheOptions : Microsoft.Extensions.Caching.StackExchangeRedis
 {
     public const string Redis = nameof(Redis);
 
+    public bool UseRedis { get; set; } = false;
+
     /// <summary>Gets or sets a connection string for the redis cache</summary>
     public string? ConnectionString
     {
