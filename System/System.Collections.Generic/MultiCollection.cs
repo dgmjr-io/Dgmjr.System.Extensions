@@ -7,46 +7,46 @@ public class MultiCollection<T>(params ICollection<T>[] collections) : ICollecti
 {
     private readonly ICollection<T>[] _collections = collections;
 
-    public int Count => _collections[0].Count;
+public int Count => _collections[0].Count;
 
-    public bool IsReadOnly => false;
+public bool IsReadOnly => false;
 
-    public void Add(T item)
+public void Add(T item)
+{
+    foreach (var collection in _collections)
     {
-        foreach(var collection in _collections)
-        {
-            collection.Add(item);
-        }
+        collection.Add(item);
     }
+}
 
-    public void Clear()
+public void Clear()
+{
+    foreach (var collection in _collections)
     {
-        foreach(var collection in _collections)
-        {
-            collection.Clear();
-        }
+        collection.Clear();
     }
+}
 
-    public bool Contains(T item)
+public bool Contains(T item)
+{
+    return _collections[0].Contains(item);
+}
+
+public void CopyTo(T[] array, int arrayIndex)
+{
+    _collections[0].CopyTo(array, arrayIndex);
+}
+
+public IEnumerator<T> GetEnumerator() => _collections[0].GetEnumerator();
+
+public bool Remove(T item)
+{
+    foreach (var collection in _collections)
     {
-        return _collections[0].Contains(item);
+        collection.Remove(item);
     }
+    return true;
+}
 
-    public void CopyTo(T[] array, int arrayIndex)
-    {
-        _collections[0].CopyTo(array, arrayIndex);
-    }
-
-    public IEnumerator<T> GetEnumerator() => _collections[0].GetEnumerator();
-
-    public bool Remove(T item)
-    {
-        foreach(var collection in _collections)
-        {
-            collection.Remove(item);
-        }
-        return true;
-    }
-
-    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }
