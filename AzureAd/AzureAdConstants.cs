@@ -1,6 +1,3 @@
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.Identity.Abstractions;
-
 namespace Dgmjr.AzureAd;
 
 public static class Constants

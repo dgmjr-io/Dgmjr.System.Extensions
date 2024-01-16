@@ -7,4 +7,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
     <PackageReference Include="System.Text.Json.Usings" IncludeAssets="Build;BuildTransitive;BuildMultitargeting;Runtime;Compile" ExcludeAssets="ContentFiles;Native;Analyzers" PrivateAssets="None" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageFile Include="LICENSE.md" Pack="true" PackagePath="LICENSE.md" />
+  </ItemGroup>
 </Project>

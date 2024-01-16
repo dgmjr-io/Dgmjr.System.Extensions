@@ -4,17 +4,39 @@
     <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Dgmjr.Configuration.Extensions" />
+    <PackageReference Include="Dgmjr.Http.Headers" />
+    <PackageReference Include="Dgmjr.Mime" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" />
     <PackageReference Include="Microsoft.Extensions.Hosting" />
     <PackageReference Include="Microsoft.Identity.Abstractions" />
     <PackageReference Include="Microsoft.Identity.Web.DownstreamApi" />
     <PackageReference Include="Microsoft.Identity.Web.MicrosoftGraph" />
     <PackageReference Include="Microsoft.Identity.Web" />
+    <PackageReference Include="Microsoft.Identity.Web.UI" />
   </ItemGroup>
   <ItemGroup>
     <Using Include="Dgmjr.AzureAd.Constants" Static="true" />
+    <Using Include="Dgmjr.Configuration.Extensions" />
+    <Using Include="Dgmjr.Mime" />
+    <Using Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <Using Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" />
+    <Using Include="Microsoft.AspNetCore.Authentication" />
+    <Using Include="Microsoft.AspNetCore.Builder" />
+    <Using Include="Microsoft.AspNetCore.Mvc" />
+    <Using Include="Microsoft.Extensions.Configuration" />
+    <Using Include="Microsoft.Extensions.Hosting" />
+    <Using Include="Microsoft.Extensions.Options" />
+    <Using Include="Microsoft.Identity.Abstractions" />
+    <Using Include="Microsoft.Identity.Web.UI" />
+    <Using Include="Microsoft.Identity.Web" />
+    <Using Include="Microsoft.IdentityModel.Logging" />
+    <Using Include="System.Diagnostics.Tracing" />
+    <Using Include="System.IdentityModel.Tokens.Jwt" />
+    <Using Include="System.Net.Http" />
+    <Using Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
-    <PackageFile Include="LICENSE.md" Pack="true" PackagePath="LIENSE.md" />
+    <Content Include="LICENSE.md" Pack="true" PackagePath="LICENSE.md" />
   </ItemGroup>
 </Project>

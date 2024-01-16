@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
       <FrameworkReference Include="Microsoft.AspNetCore.App" />
@@ -14,6 +13,10 @@
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" />
     <PackageReference Include="Dgmjr.AspNetCore.Formatters" ExcludeAssets="ContentFiles" />
     <PackageReference Include="Dgmjr.System.Extensions" ExcludeAssets="ContentFiles" />
+    <PackageReference Include="Dgmjr.Configuration.Extensions" ExcludeAssets="ContentFiles" />
     <PackageReference Include="Azure.Identity" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LICENSE.md" Pack="true" PackagePath="LICENSE.md" />
   </ItemGroup>
 </Project>

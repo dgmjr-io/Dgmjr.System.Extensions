@@ -1,20 +1,20 @@
 ﻿namespace Microsoft.Extensions.DependencyInjection;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.Extensibility;
+using Microsoft.ApplicationInsights.WindowsServer;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Logging.Configuration;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
-using Microsoft.Extensions.Configuration;
-
-using Azure.Identity;
-using Azure.Monitor.OpenTelemetry.AspNetCore;
+using Microsoft.Extensions.Logging.Configuration;
 
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
-using Microsoft.ApplicationInsights.WindowsServer;
-using Microsoft.Extensions.Hosting;
+
+using global::Azure.Monitor.OpenTelemetry.AspNetCore;
+using global::Azure.Identity;
 
 public static partial class LoggingWebApplicationBuilderExtensions
 {
