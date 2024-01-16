@@ -13,7 +13,7 @@ public class RedisAutoConfigurator : IConfigureIHostApplicationBuilder, IConfigu
     public void Configure(IHostApplicationBuilder builder)
     {
         var redisOptions = builder.Configuration.GetSection(Redis).Get<RedisCacheOptions>();
-        if(redisOptions?.UseRedis == true)
+        if (redisOptions?.UseRedis == true)
         {
             builder.AddRedisCaching();
         }
@@ -22,7 +22,7 @@ public class RedisAutoConfigurator : IConfigureIHostApplicationBuilder, IConfigu
     public void Configure(IApplicationBuilder builder)
     {
         var redisOptions = builder.ApplicationServices.GetRequiredService<IConfiguration>().GetSection(Redis).Get<RedisCacheOptions>();
-        if(redisOptions?.UseRedis == true)
+        if (redisOptions?.UseRedis == true)
         {
             builder.UseRedisCaching();
         }

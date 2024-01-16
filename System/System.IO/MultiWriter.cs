@@ -10,12 +10,12 @@ public class MultiWriter : System.IO.TextWriter
 
     public MultiWriter(params System.IO.TextWriter[] writers)
     {
-        if(writers == null)
+        if (writers == null)
         {
             throw new ArgumentNullException(nameof(writers));
         }
 
-        if(writers.Length == 0)
+        if (writers.Length == 0)
         {
             throw new ArgumentException("Must have at least one writer", nameof(writers));
         }
@@ -25,17 +25,17 @@ public class MultiWriter : System.IO.TextWriter
 
     public override void Write(char[] buffer, int index, int count)
     {
-        if(buffer == null)
+        if (buffer == null)
         {
             throw new ArgumentNullException(nameof(buffer));
         }
 
-        if(index < 0 || index >= buffer.Length)
+        if (index < 0 || index >= buffer.Length)
         {
             throw new ArgumentOutOfRangeException(nameof(index));
         }
 
-        if(count < 0 || count > buffer.Length - index)
+        if (count < 0 || count > buffer.Length - index)
         {
             throw new ArgumentOutOfRangeException(nameof(count));
         }
