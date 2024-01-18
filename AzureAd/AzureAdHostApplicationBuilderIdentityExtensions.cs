@@ -7,6 +7,7 @@ using Dgmjr.Identity.Web;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server;
 using Microsoft.Extensions.Logging;
+using Microsoft.Identity.Web.Resource;
 using Microsoft.Identity.Web.UI;
 using MicrosoftIdentityOptions = Dgmjr.Identity.Web.MicrosoftIdentityOptions;
 
@@ -51,6 +52,12 @@ public static class AzureAdHostApplicationBuilderIdentityExtensions
             );
         }
 
+        authenticationBuilder.AddJwtBearer(
+            JwtBearerSchemeName,
+            JwtBearerSchemeDisplayName,
+            options => configurationSection.Bind(options)
+        );
+
         callsWebApiAuthenticationBuilder
             .AddMicrosoftGraph(
                 builder.Configuration.GetSection(DownstreamApis_MsGraphConfigurationKey)
@@ -73,18 +80,22 @@ public static class AzureAdHostApplicationBuilderIdentityExtensions
             .AddMicrosoftIdentityConsentHandler()
             .AddTransient<Microsoft.Identity.Web.UI.Areas.MicrosoftIdentity.Controllers.AccountController>();
         builder.Services
-            .ConfigureAll<DownstreamApiOptions>(downstreamApiOptions =>
-                downstreamApiOptions.Serializer = requestObject =>
-                    new StringContent(
-                        Serialize(
-                            requestObject,
-                            builder.Services
-                                .BuildServiceProvider()
-                                .CreateScope()
-                                .ServiceProvider.GetRequiredService<IOptionsMonitor<JsonOptions>>()
-                                .CurrentValue.JsonSerializerOptions
+            .ConfigureAll<DownstreamApiOptions>(
+                downstreamApiOptions =>
+                    downstreamApiOptions.Serializer = requestObject =>
+                        new StringContent(
+                            Serialize(
+                                requestObject,
+                                builder.Services
+                                    .BuildServiceProvider()
+                                    .CreateScope()
+                                    .ServiceProvider.GetRequiredService<
+                                        IOptionsMonitor<JsonOptions>
+                                    >()
+                                    .CurrentValue.JsonSerializerOptions
+                            )
                         )
-                    ))
+            )
             .Configure<MicrosoftIdentityApplicationOptions>(
                 builder.Configuration.GetSection(AzureAdB2C)
             )

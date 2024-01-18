@@ -55,7 +55,7 @@ public partial class DateTimeToStringValueConverter
     /// </returns>
     public DateTime ConvertBack(string value, object? parameter = default)
     {
-        if (string.IsNullOrWhiteSpace(value))
+        if (IsNullOrWhiteSpace(value))
         {
             return DateTime.MinValue;
         }

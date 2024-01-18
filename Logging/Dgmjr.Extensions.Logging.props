@@ -1,0 +1,17 @@
+<!--
+ * Dgmjr.Extensions.Logging.props
+ *
+ *   Created: 2024-45-16T05:45:10-05:00
+ *   Modified: 2024-45-16T05:45:10-05:00
+ *
+ *   Author: David G. Moore, Jr. <david@dgmjr.io>
+ *
+ *   Copyright © 2024 David G. Moore, Jr., All Rights Reserved
+ *      License: MIT (https://opensource.org/licenses/MIT)
+-->
+
+<Project>
+  <ItemGroup>
+    <Using Include="Microsoft.Extensions.Logging" />
+  </ItemGroup>
+</Project>

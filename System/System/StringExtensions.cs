@@ -40,7 +40,7 @@ public static class StringExtensions
     ///     </param>
     /// <returns>A <see langword="bool"/> value indicating whether the string
     ///     was null or whitespace</returns>
-    public static bool IsNullOrWhitespace(this string? str) => string.IsNullOrWhiteSpace(str);
+    public static bool IsNullOrWhitespace(this string? str) => IsNullOrWhiteSpace(str);
 
     /// <summary>
     /// Determines if a string is null or empty

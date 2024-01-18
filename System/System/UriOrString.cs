@@ -12,7 +12,7 @@ public class UriOrString(string str) : OneOfBase<Uri, string>(str)
     public static implicit operator UriOrString(string str) => new(str);
 
     public static implicit operator Uri(UriOrString uriOrString) =>
-        uriOrString.IsT0 ? uriOrString.AsT0 : new(uriOrString.AsT1);
+        uriOrIsT0 ? uriOrString.AsT0 : new(uriOrString.AsT1);
 
     public override string ToString()
     {
@@ -20,5 +20,5 @@ public class UriOrString(string str) : OneOfBase<Uri, string>(str)
     }
 
     public static explicit operator string(UriOrString uriOrString) =>
-        uriOrString.IsT1 ? uriOrString.AsT1 : uriOrString.AsT0.ToString();
+        uriOrIsT1 ? uriOrString.AsT1 : uriOrString.AsT0.ToString();
 }
