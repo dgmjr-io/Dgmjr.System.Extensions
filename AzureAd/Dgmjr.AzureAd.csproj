@@ -4,6 +4,7 @@
     <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Dgmjr.AspNetCore.Mvc" />
     <PackageReference Include="Dgmjr.Configuration.Extensions" />
     <PackageReference Include="Dgmjr.Http.Headers" />
     <PackageReference Include="Dgmjr.Mime" />
@@ -35,8 +36,5 @@
     <Using Include="System.IdentityModel.Tokens.Jwt" />
     <Using Include="System.Net.Http" />
     <Using Include="System.Net" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="LICENSE.md" Pack="true" PackagePath="LICENSE.md" />
   </ItemGroup>
 </Project>

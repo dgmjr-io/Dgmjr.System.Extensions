@@ -1,4 +1,5 @@
 ﻿namespace Microsoft.Extensions.DependencyInjection;
+
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.ApplicationInsights.WindowsServer;
@@ -23,10 +24,13 @@ public static partial class LoggingWebApplicationBuilderExtensions
     private const string ApplicationInsights = nameof(ApplicationInsights);
     private const string HttpLogging = nameof(HttpLogging);
     private const string ConnectionString = nameof(ConnectionString);
-    private const string ApplicationInsightsConnectionString = $"{ApplicationInsights}:{ConnectionString}";
+    private const string ApplicationInsightsConnectionString =
+        $"{ApplicationInsights}:{ConnectionString}";
 
 #if NET5_0_OR_GREATER
-    public static IHostApplicationBuilder AddLoggingAndApplicationInsightsTelemetry(this IHostApplicationBuilder builder)
+    public static IHostApplicationBuilder AddLoggingAndApplicationInsightsTelemetry(
+        this IHostApplicationBuilder builder
+    )
     {
         builder.Services.AddLoggingAndApplicationInsightsTelemetry(builder.Configuration);
         builder.Logging.AddApplicationInsights(
@@ -34,42 +38,41 @@ public static partial class LoggingWebApplicationBuilderExtensions
                 config.ConnectionString = builder.Configuration.GetConnectionString(
                     ApplicationInsights
                 ),
-            configureApplicationInsightsLoggerOptions: _ => {  }
+            configureApplicationInsightsLoggerOptions: _ => { }
         );
 
         builder.Logging
 #if DEBUG
-                    .AddConsole()
-                    .AddDebug()
+            .AddConsole()
+            .AddDebug()
 #endif
-                    .AddConfiguration(builder.Configuration.GetSection(Logging));
+        .AddConfiguration(builder.Configuration.GetSection(Logging));
 
         return builder;
     }
 #endif
-    public static IServiceCollection AddLoggingAndApplicationInsightsTelemetry(this IServiceCollection services, IConfiguration configuration)
+
+    public static IServiceCollection AddLoggingAndApplicationInsightsTelemetry(
+        this IServiceCollection services,
+        IConfiguration configuration
+    )
     {
-        TelemetryConfiguration.Active.ConnectionString = configuration
-            .GetValue<string>(ApplicationInsightsConnectionString);
+        var appInsightsConnectionString = configuration.GetConnectionString(ApplicationInsights);
+        TelemetryConfiguration.Active.ConnectionString = appInsightsConnectionString;
         services
             .AddOpenTelemetry()
             .UseAzureMonitor(options =>
             {
                 options.Credential = new DefaultAzureCredential();
-                options.ConnectionString = configuration.GetConnectionString(
-                    ApplicationInsights
-                );
+                options.ConnectionString = appInsightsConnectionString;
             });
 
-        #if NET5_0_OR_GREATER
+#if NET5_0_OR_GREATER
         services.AddHttpLogging(
-            options =>
-                configuration.GetRequiredSection(HttpLogging).Bind(options)
+            options => configuration.GetRequiredSection(HttpLogging).Bind(options)
         );
-        #endif
-        services.AddApplicationInsightsTelemetry(
-            configuration.GetSection(ApplicationInsights)
-        );
+#endif
+        services.AddApplicationInsightsTelemetry(configuration.GetSection(ApplicationInsights));
 
         services.ConfigureOpenTelemetryTracerProvider(
             (sp, builder2) =>

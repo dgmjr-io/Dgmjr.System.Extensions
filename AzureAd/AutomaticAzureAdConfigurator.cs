@@ -1,8 +1,10 @@
 namespace Microsoft.Extensions.DependencyInjection;
 
-public class AutomaticAzureAdConfigurator : IConfigureIHostApplicationBuilder, IConfigureIApplicationBuilder
+public class AutomaticAzureAdConfigurator
+    : IConfigureIHostApplicationBuilder,
+        IConfigureIApplicationBuilder
 {
-    public ConfigurationOrder Order => ConfigurationOrder.AnyTime;
+    public ConfigurationOrder Order => ConfigurationOrder.VeryEarly;
 
     public void Configure(IHostApplicationBuilder builder)
     {

@@ -17,6 +17,15 @@ public static class AzureAdHostApplicationBuilderIdentityExtensions
         this IHostApplicationBuilder builder
     )
     {
+        if (
+            builder.Services.Any(
+                sd => sd.ServiceType == typeof(MicrosoftIdentityIssuerValidatorFactory)
+            )
+        )
+        {
+            return builder; // we've already added the services
+        }
+
         JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
         IdentityModelEventSource.ShowPII = true;
         IdentityModelEventSource.Logger.LogLevel = EventLevel.Verbose;
@@ -97,6 +106,9 @@ public static class AzureAdHostApplicationBuilderIdentityExtensions
                         )
             )
             .Configure<MicrosoftIdentityApplicationOptions>(
+                builder.Configuration.GetSection(AzureAdB2C)
+            )
+            .Configure<Dgmjr.Identity.Web.MicrosoftIdentityOptions>(
                 builder.Configuration.GetSection(AzureAdB2C)
             )
             .Configure<MicrosoftGraphOptions>(
