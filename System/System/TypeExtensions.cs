@@ -1,4 +1,5 @@
 namespace System;
+
 using System.Text.RegularExpressions;
 
 public static class TypeExtensions
@@ -7,6 +8,7 @@ public static class TypeExtensions
     {
         return Regex.Replace(type.GetDisplayNameInternal(), @"[`\-$]", "_");
     }
+
     internal static string GetDisplayNameInternal(this Type type)
     {
         try
@@ -17,7 +19,7 @@ public static class TypeExtensions
         }
         catch
         {
-            return type.FullName;
+            return type.FullName!;
         }
     }
 }

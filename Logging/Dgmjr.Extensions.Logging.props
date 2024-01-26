@@ -13,5 +13,6 @@
 <Project>
   <ItemGroup>
     <Using Include="Microsoft.Extensions.Logging" />
+    <Using Include=" Microsoft.AspNetCore.Http.HttpMethods" Static="true" />
   </ItemGroup>
 </Project>

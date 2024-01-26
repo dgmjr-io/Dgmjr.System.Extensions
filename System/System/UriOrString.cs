@@ -2,23 +2,34 @@ namespace System;
 
 using OneOf;
 
-public class UriOrString(string str) : OneOfBase<Uri, string>(str)
+public readonly record struct UriOrString
 {
+    public UriOrString(string str)
+    {
+        Value = str;
+    }
+
     public UriOrString(Uri uri)
-        : this(uri.ToString()) { }
+    {
+        Value = uri;
+    }
+
+    private object Value { get; }
+
+    private Uri? Uri => Value as Uri;
+    private string? String => Value as string;
+
+    public bool IsUri => Uri != null;
+    public bool IsString => String != null;
 
     public static implicit operator UriOrString(Uri uri) => new(uri);
 
     public static implicit operator UriOrString(string str) => new(str);
 
     public static implicit operator Uri(UriOrString uriOrString) =>
-        uriOrIsT0 ? uriOrString.AsT0 : new(uriOrString.AsT1);
+        uriOrString.IsUri ? uriOrString.Uri! : new(uriOrString.String);
 
-    public override string ToString()
-    {
-        return ((Uri)this).ToString();
-    }
+    public static explicit operator string(UriOrString uriOrString) => uriOrString.ToString();
 
-    public static explicit operator string(UriOrString uriOrString) =>
-        uriOrIsT1 ? uriOrString.AsT1 : uriOrString.AsT0.ToString();
+    public override string ToString() => IsString ? String! : Uri!.ToString();
 }

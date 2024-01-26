@@ -14,8 +14,8 @@ public static class AzureAdApplicationBuilderIdentityExtensions
         app.UseAuthorization();
         app.UseEndpoints(endpoints =>
         {
-            if (mvcOptions?.AddControllers == true)
-                endpoints.MapControllers();
+            // if (mvcOptions?.AddControllers == true)
+            //     endpoints.MapControllers();
             if (mvcOptions?.AddRazorPages == true)
                 endpoints.MapRazorPages();
         });

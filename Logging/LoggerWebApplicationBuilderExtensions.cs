@@ -48,6 +48,12 @@ public static partial class LoggingWebApplicationBuilderExtensions
 #endif
         .AddConfiguration(builder.Configuration.GetSection(Logging));
 
+        builder.Services.AddTransient<ILogger>(sp =>
+        {
+            var logger = sp.GetRequiredService<ILogger<object>>();
+            return logger;
+        });
+
         return builder;
     }
 #endif
