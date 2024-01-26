@@ -1,9 +1,13 @@
 namespace Microsoft.Extensions.DependencyInjection;
+
 using Dgmjr.Configuration.Extensions;
 
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Hosting;
 
-public class AutomaticLoggingConfigurator : IConfigureIHostApplicationBuilder
+public class AutomaticLoggingConfigurator
+    : IConfigureIHostApplicationBuilder,
+        IConfigureIApplicationBuilder
 {
     public ConfigurationOrder Order => ConfigurationOrder.VeryEarly;
 
@@ -11,4 +15,6 @@ public class AutomaticLoggingConfigurator : IConfigureIHostApplicationBuilder
     {
         builder.AddLoggingAndApplicationInsightsTelemetry();
     }
+
+    public void Configure(IApplicationBuilder app) { }
 }

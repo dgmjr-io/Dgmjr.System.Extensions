@@ -2,7 +2,7 @@
 
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.Extensibility;
-using Microsoft.ApplicationInsights.WindowsServer;
+// using Microsoft.ApplicationInsights.WindowsServer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging.Configuration;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
+using OpenTelemetry.Instrumentation.Http;
 
 using global::Azure.Monitor.OpenTelemetry.AspNetCore;
 using global::Azure.Identity;
@@ -64,32 +65,40 @@ public static partial class LoggingWebApplicationBuilderExtensions
     )
     {
         var appInsightsConnectionString = configuration.GetConnectionString(ApplicationInsights);
-        TelemetryConfiguration.Active.ConnectionString = appInsightsConnectionString;
+        // TelemetryConfiguration.Active.ConnectionString = appInsightsConnectionString;
         services
             .AddOpenTelemetry()
             .UseAzureMonitor(options =>
             {
                 options.Credential = new DefaultAzureCredential();
                 options.ConnectionString = appInsightsConnectionString;
-            });
+            })
+            .ConfigureResource(
+                resourceBuilder =>
+                    resourceBuilder.AddAttributes(
+                        configuration
+                            .GetSection(OpenTelemetryResourceAttributes)
+                            .Get<Dictionary<string, object>>()!
+                    )
+            );
 
-#if NET5_0_OR_GREATER
         services.AddHttpLogging(
             options => configuration.GetRequiredSection(HttpLogging).Bind(options)
         );
-#endif
-        services.AddApplicationInsightsTelemetry(configuration.GetSection(ApplicationInsights));
+        // services.AddApplicationInsightsTelemetry(configuration.GetSection(ApplicationInsights));
 
         services.ConfigureOpenTelemetryTracerProvider(
-            (sp, builder2) =>
-                builder2.ConfigureResource(
+            (_, traceBuilder) =>
+            {
+                traceBuilder.ConfigureResource(
                     resourceBuilder =>
                         resourceBuilder.AddAttributes(
                             configuration
                                 .GetSection(OpenTelemetryResourceAttributes)
                                 .Get<Dictionary<string, object>>()!
                         )
-                )
+                );
+            }
         );
         return services;
     }
