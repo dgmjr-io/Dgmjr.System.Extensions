@@ -1,8 +1,7 @@
-using Dgmjr.Identity.Web;
+namespace Dgmjr.AzureAd;
 
 using Microsoft.Extensions.Logging;
-
-namespace Dgmjr.AzureAd;
+using Dgmjr.AzureAd.Web;
 
 public static partial class LoggerExtensions
 {
@@ -12,18 +11,13 @@ public static partial class LoggerExtensions
         Message = "Registering Microsoft Identity Web UI.",
         EventName = nameof(RegisteringIdentityWebUi)
     )]
+    public static partial void RegisteringIdentityWebUi(this ILogger logger);
 
-    public static partial void RegisteringIdentityWebUi(
-        this ILogger logger
-    );
     [LoggerMessage(
         EventId = 2,
         Level = LogLevel.Trace,
         Message = "Registering app of type {AppType}",
         EventName = nameof(RegisteringAppWithType)
     )]
-    public static partial void RegisteringAppWithType(
-        this ILogger logger,
-        AppType appType
-    );
+    public static partial void RegisteringAppWithType(this ILogger logger, AppType appType);
 }

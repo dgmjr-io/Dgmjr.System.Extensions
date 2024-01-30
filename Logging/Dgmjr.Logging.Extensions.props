@@ -11,8 +11,14 @@
 -->
 
 <Project>
+  <PropertyGroup>
+    <OTEL_DOTNET_AUTO_LOGS_CONSOLE_EXPORTER_ENABLED>true</OTEL_DOTNET_AUTO_LOGS_CONSOLE_EXPORTER_ENABLED>
+    <OTEL_DOTNET_AUTO_METRICS_CONSOLE_EXPORTER_ENABLED>true</OTEL_DOTNET_AUTO_METRICS_CONSOLE_EXPORTER_ENABLED>
+    <OTEL_DOTNET_AUTO_TRACES_CONSOLE_EXPORTER_ENABLED>true</OTEL_DOTNET_AUTO_TRACES_CONSOLE_EXPORTER_ENABLED>
+  </PropertyGroup>
   <ItemGroup>
     <Using Include="Microsoft.Extensions.Logging" />
     <Using Include=" Microsoft.AspNetCore.Http.HttpMethods" Static="true" />
+    <Using Include=" Microsoft.Extensions.Logging.ILogger" Alias="ILogger" />
   </ItemGroup>
 </Project>

@@ -1,4 +1,5 @@
-namespace Dgmjr.Extensions.Caching;
+namespace Dgmjr.Caching.Extensions;
+
 using static Microsoft.Extensions.Logging.LogLevel;
 
 public static partial class LoggerExtensions

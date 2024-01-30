@@ -2,20 +2,18 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 using System.Net.Http;
 
-using Dgmjr.Identity.Web;
+using Dgmjr.AzureAd.Web;
 
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server;
 using Microsoft.Extensions.Logging;
 using Microsoft.Identity.Web.Resource;
 using Microsoft.Identity.Web.UI;
-using MicrosoftIdentityOptions = Dgmjr.Identity.Web.MicrosoftIdentityOptions;
+using MicrosoftIdentityOptions = Dgmjr.AzureAd.Web.MicrosoftIdentityOptions;
 
 public static class AzureAdHostApplicationBuilderIdentityExtensions
 {
-    public static IHostApplicationBuilder AddAzureAdB2CIdentity(
-        this IHostApplicationBuilder builder
-    )
+    public static WebApplicationBuilder AddAzureAdB2CIdentity(this WebApplicationBuilder builder)
     {
         if (
             builder.Services.Any(
@@ -73,6 +71,8 @@ public static class AzureAdHostApplicationBuilderIdentityExtensions
             )
             .AddDistributedTokenCaches();
 
+        callsWebApiAuthenticationBuilder.AddSessionTokenCaches();
+
         foreach (
             var downstreamApiConfig in builder.Configuration
                 .GetSection(DownstreamApis)
@@ -81,17 +81,10 @@ public static class AzureAdHostApplicationBuilderIdentityExtensions
         {
             callsWebApiAuthenticationBuilder.AddDownstreamApi(
                 downstreamApiConfig.Key,
-                downstreamApiConfig
-            );
-        }
-
-        builder.Services
-            .AddMicrosoftIdentityConsentHandler()
-            .AddTransient<Microsoft.Identity.Web.UI.Areas.MicrosoftIdentity.Controllers.AccountController>();
-        builder.Services
-            .ConfigureAll<DownstreamApiOptions>(
-                downstreamApiOptions =>
-                    downstreamApiOptions.Serializer = requestObject =>
+                options =>
+                {
+                    downstreamApiConfig.Bind(options);
+                    options.Serializer = requestObject =>
                         new StringContent(
                             Serialize(
                                 requestObject,
@@ -103,12 +96,35 @@ public static class AzureAdHostApplicationBuilderIdentityExtensions
                                     >()
                                     .CurrentValue.JsonSerializerOptions
                             )
-                        )
-            )
+                        );
+                }
+            );
+        }
+
+        builder.Services
+            .AddMicrosoftIdentityConsentHandler()
+            .AddTransient<Microsoft.Identity.Web.UI.Areas.MicrosoftIdentity.Controllers.AccountController>();
+        builder.Services
+            // .ConfigureAll<DownstreamApiOptions>(
+            //     downstreamApiOptions =>
+            //         downstreamApiOptions.Serializer = requestObject =>
+            //             new StringContent(
+            //                 Serialize(
+            //                     requestObject,
+            //                     builder.Services
+            //                         .BuildServiceProvider()
+            //                         .CreateScope()
+            //                         .ServiceProvider.GetRequiredService<
+            //                             IOptionsMonitor<JsonOptions>
+            //                         >()
+            //                         .CurrentValue.JsonSerializerOptions
+            //                 )
+            //             )
+            // )
             .Configure<MicrosoftIdentityApplicationOptions>(
                 builder.Configuration.GetSection(AzureAdB2C)
             )
-            .Configure<Dgmjr.Identity.Web.MicrosoftIdentityOptions>(
+            .Configure<Dgmjr.AzureAd.Web.MicrosoftIdentityOptions>(
                 builder.Configuration.GetSection(AzureAdB2C)
             )
             .Configure<MicrosoftGraphOptions>(

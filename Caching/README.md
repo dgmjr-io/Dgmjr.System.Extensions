@@ -3,13 +3,13 @@ title: DGMJR Caching Extensions
 lastmod: 2023-56-27T13:56:34.5772-05:00Z
 date: 2023-56-27T13:56:34.5773-05:00Z
 license: MIT
-slug: Dgmjr.Extensions.Caching-readme
+slug: Dgmjr.Caching.Extensions-readme
 version:
 authors:
 - dgmjr
 description: Contains extension methods and classes for working with caches
 keywords:
-- Dgmjr.Extensions.Caching
+- Dgmjr.Caching.Extensions
 - dgmjr
 - dgmjr-io
 type: readme

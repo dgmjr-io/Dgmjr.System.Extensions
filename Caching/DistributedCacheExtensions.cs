@@ -163,37 +163,103 @@ public static class DistributedCacheExtensions
         return result;
     }
 
-    public static Task SetAsync(this IDistributedCache cache, object key, object value, DateTimeOffset? absoluteExpiration = default, TimeSpan? absoluteExpirationRelativeToNow = default, TimeSpan? slidingExpiration = default, CancellationToken cancellationToken = default)
+    public static Task SetAsync(
+        this IDistributedCache cache,
+        object key,
+        object value,
+        DateTimeOffset? absoluteExpiration = default,
+        TimeSpan? absoluteExpirationRelativeToNow = default,
+        TimeSpan? slidingExpiration = default,
+        CancellationToken cancellationToken = default
+    )
     {
-        return cache.SetAsync(Serialize(key, Jso), value, absoluteExpiration, absoluteExpirationRelativeToNow, slidingExpiration, cancellationToken);
+        return cache.SetAsync(
+            Serialize(key, Jso),
+            value,
+            absoluteExpiration,
+            absoluteExpirationRelativeToNow,
+            slidingExpiration,
+            cancellationToken
+        );
     }
 
-    public static async Task SetAsync(this IDistributedCache cache, string key, object value, DateTimeOffset? absoluteExpiration = default, TimeSpan? absoluteExpirationRelativeToNow = default, TimeSpan? slidingExpiration = default, CancellationToken cancellationToken = default)
+    public static async Task SetAsync(
+        this IDistributedCache cache,
+        string key,
+        object value,
+        DateTimeOffset? absoluteExpiration = default,
+        TimeSpan? absoluteExpirationRelativeToNow = default,
+        TimeSpan? slidingExpiration = default,
+        CancellationToken cancellationToken = default
+    )
     {
-        await cache.SetStringAsync(key, Serialize(value, Jso), absoluteExpiration, absoluteExpirationRelativeToNow, slidingExpiration, cancellationToken);
+        await cache.SetStringAsync(
+            key,
+            Serialize(value, Jso),
+            absoluteExpiration,
+            absoluteExpirationRelativeToNow,
+            slidingExpiration,
+            cancellationToken
+        );
     }
 
-    public static Task SetStringAsync(this IDistributedCache cache, object key, string value, DateTimeOffset? absoluteExpiration = default, TimeSpan? absoluteExpirationRelativeToNow = default, TimeSpan? slidingExpiration = default, CancellationToken cancellationToken = default)
+    public static Task SetStringAsync(
+        this IDistributedCache cache,
+        object key,
+        string value,
+        DateTimeOffset? absoluteExpiration = default,
+        TimeSpan? absoluteExpirationRelativeToNow = default,
+        TimeSpan? slidingExpiration = default,
+        CancellationToken cancellationToken = default
+    )
     {
-        return cache.SetStringAsync(Serialize(key, Jso), value, absoluteExpiration, absoluteExpirationRelativeToNow, slidingExpiration, cancellationToken);
+        return cache.SetStringAsync(
+            Serialize(key, Jso),
+            value,
+            absoluteExpiration,
+            absoluteExpirationRelativeToNow,
+            slidingExpiration,
+            cancellationToken
+        );
     }
 
-    public static Task SetStringAsync(this IDistributedCache cache, string key, string value, DateTimeOffset? absoluteExpiration = default, TimeSpan? absoluteExpirationRelativeToNow = default, TimeSpan? slidingExpiration = default, CancellationToken cancellationToken = default)
+    public static Task SetStringAsync(
+        this IDistributedCache cache,
+        string key,
+        string value,
+        DateTimeOffset? absoluteExpiration = default,
+        TimeSpan? absoluteExpirationRelativeToNow = default,
+        TimeSpan? slidingExpiration = default,
+        CancellationToken cancellationToken = default
+    )
     {
-        return cache.SetStringAsync(key, value, new DistributedCacheEntryOptions
-        {
-            AbsoluteExpiration = absoluteExpiration,
-            AbsoluteExpirationRelativeToNow = absoluteExpirationRelativeToNow,
-            SlidingExpiration = slidingExpiration
-        }, cancellationToken);
+        return cache.SetStringAsync(
+            key,
+            value,
+            new DistributedCacheEntryOptions
+            {
+                AbsoluteExpiration = absoluteExpiration,
+                AbsoluteExpirationRelativeToNow = absoluteExpirationRelativeToNow,
+                SlidingExpiration = slidingExpiration
+            },
+            cancellationToken
+        );
     }
 
-    public static async Task<TValue> GetAsync<TValue>(this IDistributedCache cache, object key, CancellationToken cancellationToken = default)
+    public static async Task<TValue?> GetAsync<TValue>(
+        this IDistributedCache cache,
+        object key,
+        CancellationToken cancellationToken = default
+    )
     {
         return await cache.GetAsync<TValue>(Serialize(key, Jso), cancellationToken);
     }
 
-    public static async Task<TValue> GetAsync<TValue>(this IDistributedCache cache, string key, CancellationToken cancellationToken = default)
+    public static async Task<TValue?> GetAsync<TValue>(
+        this IDistributedCache cache,
+        string key,
+        CancellationToken cancellationToken = default
+    )
     {
         return Deserialize<TValue>(await cache.GetAsync(key, cancellationToken), Jso);
     }

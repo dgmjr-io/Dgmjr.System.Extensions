@@ -6,7 +6,7 @@ public class AutomaticAzureAdConfigurator
 {
     public ConfigurationOrder Order => ConfigurationOrder.VeryEarly;
 
-    public void Configure(IHostApplicationBuilder builder)
+    public void Configure(WebApplicationBuilder builder)
     {
         builder.AddAzureAdB2CIdentity();
     }

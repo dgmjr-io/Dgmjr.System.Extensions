@@ -1,9 +1,10 @@
-namespace Dgmjr.Identity.Web;
+namespace Dgmjr.AzureAd.Web;
 
 [Flags]
 public enum AppType
 {
     Web = 1,
+
     // Api = 2,
     WebApi = 4,
     RazorPages = 8,
@@ -21,7 +22,17 @@ public enum AppType
 
     WebBased = Web | RazorPages | Mvc | WebApi | AzureFunction | AzureWebJob,
 
-    All = Web | RazorPages | Mvc | WebApi | AzureFunction | AzureWebJob | Console | Worker | Service | Function,
+    All =
+        Web
+        | RazorPages
+        | Mvc
+        | WebApi
+        | AzureFunction
+        | AzureWebJob
+        | Console
+        | Worker
+        | Service
+        | Function,
 
     DesktopBased = Console | Worker | Service
 }

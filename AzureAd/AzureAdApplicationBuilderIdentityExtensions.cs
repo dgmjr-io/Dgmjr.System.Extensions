@@ -1,6 +1,6 @@
 namespace Microsoft.Extensions.DependencyInjection;
 
-using Dgmjr.Identity.Web;
+using Dgmjr.AzureAd.Web;
 
 public static class AzureAdApplicationBuilderIdentityExtensions
 {
