@@ -69,7 +69,7 @@ public static class AzureAdHostApplicationBuilderIdentityExtensions
             options => configurationSection.Bind(options)
         );
 
-        if(msGraphOptions.AppOnly)
+        if (msGraphOptions.AppOnly)
         {
             callsWebApiAuthenticationBuilder
                 .AddMicrosoftGraphAppOnly(authProvider => new GraphServiceClient(authProvider))
