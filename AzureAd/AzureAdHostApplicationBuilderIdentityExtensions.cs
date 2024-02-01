@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Identity.Web.Resource;
 using Microsoft.Identity.Web.UI;
 using MicrosoftIdentityOptions = Dgmjr.AzureAd.Web.MicrosoftIdentityOptions;
+using MsidCallsWebApiAuthBuilder = MicrosoftIdentityAppCallsWebApiAuthenticationBuilder;
 
 public static class AzureAdHostApplicationBuilderIdentityExtensions
 {
@@ -36,21 +37,21 @@ public static class AzureAdHostApplicationBuilderIdentityExtensions
 
         var authenticationBuilder = builder.Services.AddAuthentication(OpenIdConnect);
 
-        MicrosoftIdentityAppCallsWebApiAuthenticationBuilder callsWebApiAuthenticationBuilder;
-        if ((options.AppType & AppType.WebBased) == options.AppType)
+        MsidCallsWebApiAuthBuilder callsWebApiAuthenticationBuilder;
+        if (AppType.WebUiBased.HasFlag(options.AppType))
         {
             Console.WriteLine("Registering Microsoft Identity Web UI.");
             callsWebApiAuthenticationBuilder = authenticationBuilder
-                .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection(AzureAdB2C))
-                .EnableTokenAcquisitionToCallDownstreamApi(options.Scope);
+                .AddMicrosoftIdentityWebApp(configurationSection)
+                .EnableTokenAcquisitionToCallDownstreamApi(opts => configurationSection.Bind(opts), options.Scope);
             builder.Services.AddMvc().AddMicrosoftIdentityUI();
         }
-        else if ((options.AppType & AppType.ApiBased) == options.AppType)
+        else if (AppType.ApiBased.HasFlag(options.AppType))
         {
             Console.WriteLine("Registering app with type {0}", options.AppType);
             callsWebApiAuthenticationBuilder = authenticationBuilder
-                .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection(AzureAdB2C))
-                .EnableTokenAcquisitionToCallDownstreamApi();
+                .AddMicrosoftIdentityWebApi(configurationSection)
+                .EnableTokenAcquisitionToCallDownstreamApi(opts => configurationSection.Bind(opts));
         }
         else
         {
@@ -59,23 +60,33 @@ public static class AzureAdHostApplicationBuilderIdentityExtensions
             );
         }
 
+        var msGraphOptionsConfigSection = builder.Configuration.GetSection(DownstreamApis_MsGraphConfigurationKey);
+        var msGraphOptions = msGraphOptionsConfigSection.Get<AzureAdB2CGraphOptions>();
+
         authenticationBuilder.AddJwtBearer(
             JwtBearerSchemeName,
             JwtBearerSchemeDisplayName,
             options => configurationSection.Bind(options)
         );
 
-        callsWebApiAuthenticationBuilder
-            .AddMicrosoftGraph(
-                builder.Configuration.GetSection(DownstreamApis_MsGraphConfigurationKey)
-            )
-            .AddDistributedTokenCaches();
+        if(msGraphOptions.AppOnly)
+        {
+            callsWebApiAuthenticationBuilder
+                .AddMicrosoftGraphAppOnly(authProvider => new GraphServiceClient(authProvider))
+                .AddDistributedTokenCaches();
+        }
+        else
+        {
+            callsWebApiAuthenticationBuilder
+                .AddMicrosoftGraph(msGraphOptionsConfigSection)
+                .AddDistributedTokenCaches();
+        }
 
-        callsWebApiAuthenticationBuilder.AddSessionTokenCaches();
+        // callsWebApiAuthenticationBuilder.AddSessionTokenCaches();
 
         foreach (
             var downstreamApiConfig in builder.Configuration
-                .GetSection(DownstreamApis)
+                .GetSection(Dgmjr.AzureAd.Constants.DownstreamApis)
                 .GetChildren()
         )
         {

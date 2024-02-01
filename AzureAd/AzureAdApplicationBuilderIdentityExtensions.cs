@@ -9,13 +9,14 @@ public static class AzureAdApplicationBuilderIdentityExtensions
         var mvcOptions = app.ApplicationServices
             .GetService<IOptions<Dgmjr.AspNetCore.Mvc.MvcOptions>>()
             ?.Value;
+        app.UseSession();
         app.UseAuthentication();
         app.UseRouting();
         app.UseAuthorization();
         app.UseEndpoints(endpoints =>
         {
-            // if (mvcOptions?.AddControllers == true)
-            //     endpoints.MapControllers();
+            if (mvcOptions?.AddControllers == true)
+                endpoints.MapControllers();
             if (mvcOptions?.AddRazorPages == true)
                 endpoints.MapRazorPages();
         });

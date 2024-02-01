@@ -1,5 +1,6 @@
 namespace Dgmjr.AzureAd;
 using System.Net.Http;
+using Application = Dgmjr.Mime.Application;
 
 public class DownstreamApiOptionsConfigurator(IOptionsMonitor<JsonOptions> jsonOptions) : IConfigureOptions<DownstreamApiOptions>
 {

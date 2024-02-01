@@ -11,7 +11,7 @@ public class AutomaticLoggingConfigurator
     : IConfigureIHostApplicationBuilder,
         IConfigureIApplicationBuilder
 {
-    public ConfigurationOrder Order => ConfigurationOrder.VeryEarly;
+    public ConfigurationOrder Order => ConfigurationOrder.First;
 
     public void Configure(WebApplicationBuilder builder)
     {

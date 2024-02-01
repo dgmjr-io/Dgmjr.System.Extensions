@@ -8,6 +8,7 @@
     <PackageReference Include="Dgmjr.Configuration.Extensions" />
     <PackageReference Include="Dgmjr.Http.Headers" />
     <PackageReference Include="Dgmjr.Mime" />
+    <PackageReference Include="Dgmjr.Graph" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" />
     <PackageReference Include="Microsoft.Extensions.Hosting" />
     <PackageReference Include="Microsoft.Identity.Abstractions" />

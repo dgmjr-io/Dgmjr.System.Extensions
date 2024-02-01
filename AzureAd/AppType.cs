@@ -20,7 +20,7 @@ public enum AppType
 
     WebUiBased = Web | RazorPages | Mvc,
 
-    WebBased = Web | RazorPages | Mvc | WebApi | AzureFunction | AzureWebJob,
+    WebBased = ApiBased | WebUiBased,
 
     All =
         Web
