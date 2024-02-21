@@ -9,22 +9,22 @@ public static class JsonExtensions
     /// <summary>
     /// Parses binary data as JSON.
     /// </summary>
-    public static JsonElement Parse(byte[] json, JsonDocumentOptions options = default)
+    public static JElem Parse(byte[] json, JDocOpts options = default)
     {
-        using var document = JsonDocument.Parse(json, options);
+        using var document = JDoc.Parse(json, options);
         return document.RootElement.Clone();
     }
 
     /// <summary>
     /// Parses string as JSON.
     /// </summary>
-    public static JsonElement Parse(string json, JsonDocumentOptions options = default) =>
+    public static JElem Parse(string json, JDocOpts options = default) =>
         Parse(UTF8.GetBytes(json), options);
 
     /// <summary>
     /// Tries to parse binary data as JSON or returns null if the input is malformed.
     /// </summary>
-    public static JsonElement? TryParse(byte[] json, JsonDocumentOptions options = default)
+    public static JElem? TryParse(byte[] json, JDocOpts options = default)
     {
         try
         {
@@ -39,6 +39,6 @@ public static class JsonExtensions
     /// <summary>
     /// Tries to parse string as JSON or returns null if the input is malformed.
     /// </summary>
-    public static JsonElement? TryParse(string json, JsonDocumentOptions options = default) =>
+    public static JElem? TryParse(string json, JDocOpts options = default) =>
         TryParse(UTF8.GetBytes(json), options);
 }

@@ -4,7 +4,7 @@ using System.Collections;
 using System.Text.Encodings.Web;
 using System.Text.Json.Serialization.Metadata;
 
-public class JsonSerializerOptionsBuilder : IJsonSerializerOptions
+public partial class JsonSerializerOptionsBuilder : IJsonSerializerOptions
 {
     public IJsonTypeInfoResolver? TypeInfoResolver { get; set; }
     public IList<IJsonTypeInfoResolver> TypeInfoResolverChain { get; } =

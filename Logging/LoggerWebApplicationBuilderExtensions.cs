@@ -33,7 +33,6 @@ public static partial class LoggingWebApplicationBuilderExtensions
     private const string ApplicationInsightsConnectionString =
         $"{ApplicationInsights}:{ConnectionString}";
 
-#if NET5_0_OR_GREATER
     public static WebApplicationBuilder AddLoggingAndApplicationInsightsTelemetry(
         this WebApplicationBuilder builder
     )
@@ -59,7 +58,9 @@ public static partial class LoggingWebApplicationBuilderExtensions
 #endif
             .AddOpenTelemetry()
             .AddSerilog()
-            .AddAzureWebAppDiagnostics();
+            .AddAzureWebAppDiagnostics()
+            // .AddEventLog()
+            .AddEventSourceLogger();
 
         builder.Services.AddTransient<ILogger>(sp =>
         {
@@ -69,7 +70,6 @@ public static partial class LoggingWebApplicationBuilderExtensions
 
         return builder;
     }
-#endif
 
     public static IServiceCollection AddLoggingAndApplicationInsightsTelemetry(
         this IServiceCollection services,

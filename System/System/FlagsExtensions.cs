@@ -43,7 +43,7 @@ static class FlagExtensions
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
     public static bool HasFlag<T>(this T enumValue, T flag)
-        where T : struct
+        where T : Enum
     {
         if (!IsEnum<T>())
         {
@@ -68,6 +68,7 @@ static class FlagExtensions
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
     public static bool HasFlags<T>(this T value, T flag1, T flag2, params T[] moreFlags)
+        where T : Enum
     {
         if (!ConvertToInt(value, out var intValue))
         {
@@ -141,7 +142,7 @@ static class FlagExtensions
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
     public static T WithFlag<T>(this T enumValue, T flag)
-        where T : struct
+        where T : Enum
     {
         if (!IsEnum<T>())
         {
@@ -178,7 +179,7 @@ static class FlagExtensions
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
     public static T WithoutFlag<T>(this T enumValue, T flag)
-        where T : struct
+        where T : Enum
     {
         if (!IsEnum<T>())
         {
@@ -204,6 +205,7 @@ static class FlagExtensions
     }
 
     private static bool ConvertToInt<T>(T value, out int result)
+        where T : Enum
     {
         try
         {
@@ -241,6 +243,7 @@ static class FlagExtensions
     }
 
     private static bool IsEnum<T>()
+        where T : Enum
     {
         return typeof(T).IsEnum;
     }

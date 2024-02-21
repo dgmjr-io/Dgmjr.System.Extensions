@@ -43,8 +43,11 @@ public static class DmjrsLinqExtensions
     ///     <see cref="IEnumerable{T}"/>.</param>
     public static void ForEach<T>(this IEnumerable<T> e, Action<T> @foreach)
     {
-        foreach (var item in e)
+        _ = e.Aggregate(0, (i, item) =>
+        {
             @foreach(item);
+            return i + 1;
+        });
     }
 
     /// <summary>
@@ -54,9 +57,9 @@ public static class DmjrsLinqExtensions
     ///     elements to.</param>
     /// <param name="thingsToAdd">The elements to add to the
     ///     <see cref="ICollection{T}"/>.</param>
-    /// <typeparam name="T">The type of elements in the
-    ///     <see cref="ICollection{T}"/>.</typeparam>
     /// <typeparam name="TCollection">The type of the
+    ///     <see cref="ICollection{T}"/>.</typeparam>
+    /// <typeparam name="T">The type of elements in the
     ///     <see cref="ICollection{T}"/>.</typeparam>
     /// <returns>The <see cref="ICollection{T}"/> with the added elements.
     ///     </returns>
@@ -74,10 +77,7 @@ public static class DmjrsLinqExtensions
             }
             else
             {
-                foreach (var item in thingsToAdd)
-                {
-                    collection.Add(item);
-                }
+                thingsToAdd.ForEach(item => collection.Add(item));
             }
         }
         return collection;
@@ -86,8 +86,8 @@ public static class DmjrsLinqExtensions
     /// <summary>Removes the specified elements from the <see cref="ICollection{T}"/>.</summary>
     /// <param name="collection">The collection from which to remove the elements</param>
     /// <param name="removeRange">The elements to remove from the <see cref="ICollection{T}"/></param>
-    /// <typeparam name="T">The type of elements in the <see cref="ICollection{T}"/>.</typeparam>
     /// <typeparam name="TCollection">The type of the <see cref="ICollection{T}"/>.</typeparam>
+    /// <typeparam name="T">The type of elements in the <see cref="ICollection{T}"/>.</typeparam>
     /// <returns>The <see cref="ICollection{T}"/> with the removed elements.</returns>
     public static TCollection RemoveRange<TCollection, T>(
         this TCollection collection,
@@ -103,10 +103,7 @@ public static class DmjrsLinqExtensions
             }
             else
             {
-                foreach (var item in removeRange)
-                {
-                    collection.Remove(item);
-                }
+                removeRange.ForEach(item => collection.Remove(item));
             }
         }
         return collection;
@@ -118,8 +115,8 @@ public static class DmjrsLinqExtensions
     /// </summary>
     /// <param name="collection">The collection from which to remove the elements.</param>
     /// <param name="predicate">The predicate to match the elements to remove. </param>
-    /// <typeparam name="T">The type of elements in the <see cref="ICollection{T}"/>.</typeparam>
     /// <typeparam name="TCollection">The type of the <see cref="ICollection{T}"/>.</typeparam>
+    /// <typeparam name="T">The type of elements in the <see cref="ICollection{T}"/>.</typeparam>
     /// <returns>The <see cref="ICollection{T}"/> with the removed elements.</returns>
     public static TCollection Without<TCollection, T>(
         this TCollection collection,
@@ -137,8 +134,8 @@ public static class DmjrsLinqExtensions
     /// </summary>
     /// <param name="collection">The collection from which to select the elements.</param>
     /// <param name="predicate">The predicate to match the elements to not select.</param>
-    /// <typeparam name="T">The type of elements in the <see cref="ICollection{T}"/>.</typeparam>
     /// <typeparam name="TCollection">The type of the <see cref="ICollection{T}"/>.</typeparam>
+    /// <typeparam name="T">The type of elements in the <see cref="ICollection{T}"/>.</typeparam>
     /// <returns>The <see cref="ICollection{T}"/> without the matchings elements.</returns>
     public static TCollection Except<TCollection, T>(
         this TCollection collection,
@@ -157,9 +154,9 @@ public static class DmjrsLinqExtensions
     /// </summary>
     /// <param name="values">An IEnumerable of type T representing the collection of values to which <paramref name="newValue" />  value will be appended.</param>
     /// <param name="newValue">A new value to append to the <paramref name="values" /></param>
-    /// <typeparm name="T">T is a generic type parameter that can be replaced with any type at runtime. It is
+    /// <typeparam name="T">T is a generic type parameter that can be replaced with any type at runtime. It is
     /// used to define the type of elements in the input IEnumerable and the type of the new value to be
-    /// appended to it.</typeparm>
+    /// appended to it.</typeparam>
     public static IEnumerable<T> Append<T>(IEnumerable<T> values, T newValue)
     {
         foreach (var value in values)
@@ -176,9 +173,9 @@ public static class DmjrsLinqExtensions
     /// <param name="values">An IEnumerable of type T representing the collection of values to which a new
     /// value will be prepended.</param>
     /// <param name="newValue">A new value to prepend to the <paramref name="values" /></param>
-    /// <typeparm name="T">T is a generic type parameter that can be replaced with any type at runtime. It
+    /// <typeparam name="T">T is a generic type parameter that can be replaced with any type at runtime. It
     /// represents the type of elements in the input sequence and the type of the new value being added to
-    /// the beginning of the sequence.</typeparm>
+    /// the beginning of the sequence.</typeparam>
     public static IEnumerable<T> Prepend<T>(IEnumerable<T> values, T newValue)
     {
         yield return newValue;
@@ -188,24 +185,36 @@ public static class DmjrsLinqExtensions
         }
     }
 
+    /// <summary>
+    /// Returns the greatest power of two that is less than or equal to the maximum value in the collection of integers.
+    /// </summary>
+    /// <param name="values">The collection of integers.</param>
+    /// <returns>The greatest power of two.</returns>
     public static int GreatestPowerOfTwo(this IEnumerable<int> values)
     {
         var n = values.Max();
         var k = 1;
         while (k < n)
         {
-            k = k << 1;
+            k <<= 1;
         }
         return k;
     }
 
+    /// <summary>
+    /// Returns the greatest power of two that is less than or equal to the maximum value obtained by applying a selector function to each element in the collection.
+    /// </summary>
+    /// <typeparam name="T">The type of elements in the collection.</typeparam>
+    /// <param name="values">The collection of elements.</param>
+    /// <param name="selector">A function to extract an integer value from each element.</param>
+    /// <returns>The greatest power of two.</returns>
     public static int GreatestPowerOfTwo<T>(this IEnumerable<T> values, Func<T, int> selector)
     {
         var n = values.Max(selector);
         var k = 1;
         while (k < n)
         {
-            k = k << 1;
+            k <<= 1;
         }
         return k;
     }

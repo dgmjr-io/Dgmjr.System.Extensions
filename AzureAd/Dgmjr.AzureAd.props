@@ -1,5 +1,0 @@
-<Project>
-  <ItemGroup>
-    <Using Include="Microsoft.AspNetCore.Authentication.OpenIdConnect.Extensions" />
-  </ItemGroup>
-</Project>

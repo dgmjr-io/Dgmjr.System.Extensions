@@ -38,9 +38,9 @@ public static class StreamExtensions
     /// <returns>all <see langword="byte" />s from the <paramref name="stream" /></returns>
     public static byte[] ReadAllBytes(this Stream stream)
     {
-        using var memoryStream = new MemoryStream();
-        stream.CopyTo(memoryStream);
-        return memoryStream.ToArray();
+        var buff = new byte[stream.Length];
+        stream.Read(buff, 0, buff.Length);
+        return buff;
     }
 
     /// <summary>
@@ -48,6 +48,10 @@ public static class StreamExtensions
     /// </summary>
     /// <param name="stream">The stream to read from</param>
     /// <returns>all <see langword="byte" />s from the <paramref name="stream" /></returns>
-    public static async Task<byte[]> ReadAllBytesAsync(this Stream stream) =>
-        await Task.Run(() => stream.ReadAllBytes());
+    public static async Task<byte[]> ReadAllBytesAsync(this Stream stream)
+    {
+        var buff = new byte[stream.Length];
+        await stream.ReadAsync(buff, 0, buff.Length);
+        return buff;
+    }
 }

@@ -19,8 +19,8 @@ public partial interface IComplex : IComparable
     double Magnitude { get; }
     double Phase { get; }
     double Real { get; }
-    bool Equals(global::System.Numerics.Complex value);
-    string ToString(global::System.IFormatProvider provider);
+    bool Equals(Complex value);
+    string ToString(IFormatProvider provider);
     string ToString(string format);
-    string ToString(string format, global::System.IFormatProvider provider);
+    string ToString(string format, IFormatProvider provider);
 }

@@ -35,6 +35,15 @@
     <Compile Remove="./System.Linq/System.Linq.Async.cs" Condition="$(DefineConstants.Contains('NETSTANDARD'))" />
     <PackageTag Include="extensions" />
   </ItemGroup>
+  <ItemGroup Condition="!$(TargetFramework.StartsWith('netstandard'))">
+    <PackageReference Include="System.Collections.Immutable"/>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Xml.XPath" Aliases="XPathDoc"/>
+    <PackageReference Include="System.Usings" IncludeAssets="Build" ExcludeAssets="Compile;Runtime;Native;Analyzers" />
+    <PackageReference Include="System.Text.Usings" IncludeAssets="Build" ExcludeAssets="Compile;Runtime;Native;Analyzers"/>
+    <PackageReference Include="system.Xml.ReaderWriter" Condition="$(TargetFramework.StartsWith('net6')) Or $(TargetFramework.StartsWith('net7'))"/>
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Memory" />
     <PackageReference Include="System.Text.Json.Usings" />

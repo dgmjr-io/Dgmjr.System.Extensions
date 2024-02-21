@@ -51,15 +51,6 @@
     <Using Include="System.Text.Json"   />
     <Using Include="System.Diagnostics.CodeAnalysis.StringSyntaxAttribute" Alias="StringSyntax"  Condition="$(DefineConstants.Contains('NET7_0_OR_GREATER'))" />
   </ItemGroup>
-  <ItemGroup Condition="!$(TargetFramework.StartsWith('netstandard'))">
-    <PackageReference Include="System.Collections.Immutable"/>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="System.Xml.XPath" Aliases="XPathDoc"/>
-    <PackageReference Include="System.Usings"/>
-    <PackageReference Include="System.Text.Usings" IncludeAssets="Build" ExcludeAssets="Compile;Runtime;Native;Analyzers"/>
-    <PackageReference Include="system.Xml.ReaderWriter" Condition="$(TargetFramework.StartsWith('net6')) Or $(TargetFramework.StartsWith('net7'))"/>
-  </ItemGroup>
   <Target Name="PrePack" BeforeTargets="GetPackageContents" Condition="$(TargetFramework.StartsWith('netstandard1'))">
     <ItemGroup>
       <PackageFile Remove="$(OutputPath)**/System.Runtime.Numerics.dll"/>

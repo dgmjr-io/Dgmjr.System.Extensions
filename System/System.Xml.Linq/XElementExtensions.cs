@@ -1,25 +1,4 @@
-﻿// // // #if !NETSTANDARD1_0
-// #if NETSTANDARD2_0 || NETSTANDARD2_1// && !N`ET6_0_OR_GREATER
-// extern alias XDoc;
-// extern alias XPathDoc;
-// using XPathDoc::System.Xml.XPath;
-// using XA = XDoc::System.Xml.Linq.XAttribute;
-// using XC = XDoc::System.Xml.Linq.XComment;
-// using XD = XDoc::System.Xml.Linq.XDocument;
-// using XE = XDoc::System.Xml.Linq.XElement;
-// using XN = XDoc::System.Xml.Linq.XName;
-// using XNS = XDoc::System.Xml.Linq.XNamespace;
-// using XO = XDoc::System.Xml.Linq.XNode;
-// #else
-// using XA = System.Xml.Linq.XAttribute;
-// using XC = System.Xml.Linq.XComment;
-// using XD = System.Xml.Linq.XDocument;
-// using XE = System.Xml.Linq.XElement;
-// using XN = System.Xml.Linq.XName;
-// using XNS = System.Xml.Linq.XNamespace;
-// using XO = System.Xml.Linq.XNode;
-// #endif
-using System;
+﻿using System;
 
 namespace System.Xml.Linq;
 
@@ -35,13 +14,19 @@ public static class XElementExtensions
     /// </summary>
     /// <param name="element">The element.</param>
     /// <param name="attributeName">The attribute name.</param>
-    /// <returns>A string? .</returns>
+    /// <returns>A <see langword="string" />? .</returns>
     public static string? GetAttributeValue(this XE element, string attributeName)
     {
         var attribute = element.Attribute(attributeName);
         return attribute?.Value;
     }
 
+    /// <summary>
+    /// Extension method to convert a string to an XElement object.
+    /// </summary>
+    /// <param name="xml">The input XML string to be converted to XElement.</param>
+    /// <param name="throwOnInvalidXml">A boolean flag indicating whether to throw an exception on invalid XML. True by default.</param>
+    /// <returns>An XElement object representing the XML string, or a default XElement with name "InvalidXml" if conversion fails and throwOnInvalidXml is false.</returns>
     public static XE ToXElement(this string xml, bool throwOnInvalidXml = true)
     {
         try
@@ -79,7 +64,7 @@ public static class XElementExtensions
     /// </summary>
     /// <param name="element">The element.</param>
     /// <param name="xpath">The xpath.</param>
-    /// <returns>A string of the value at xpath <paramref name="xpath"/>.</returns>
+    /// <returns>A string of the value at <paramref name="xpath"/>.</returns>
     public static string? SelectXpathValue(this XE element, string xpath)
     {
 #if !NETSTANDARD2_0_OR_GREATER

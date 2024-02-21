@@ -55,20 +55,32 @@ public class DefaultableDictionary<TKey, TValue> : IDictionary<TKey, TValue>
     /// This value is set in the constructor and cannot be changed after the
     /// object is created.
     /// </remarks>
-    public TValue DefaultValue { get; init; }
+    public TValue DefaultValue => DefaultValueFactory(default);
+
+    /// <summary>
+    /// The default factory that will be used tp create an instance of a(s) <typeparamref name="TValue"/> to return when a key is not
+    /// found in the dictionary.
+    /// </summary>
+    /// <value>The factory that will be used tp create an instance of a(s)  <typeparamref name="TValue"/> to return when a key is
+    ///     not found in the dictionary.</value>
+    /// <remarks>
+    /// This value is set in the constructor and cannot be changed after the
+    /// object is created.
+    /// </remarks>
+    public Func<TKey, TValue> DefaultValueFactory { get; init; }
     private readonly Dictionary<TKey, TValue> _dictionary = new();
 
     public DefaultableDictionary()
         : this(default(TValue)) { }
 
     public DefaultableDictionary(IDictionary<TKey, TValue> original)
-        : this(default, original, EqualityComparer<TKey>.Default) { }
+        : this(default(TValue), original, EqualityComparer<TKey>.Default) { }
 
     public DefaultableDictionary(
         IDictionary<TKey, TValue> original,
         IEqualityComparer<TKey> keyComparer
     )
-        : this(default, original, keyComparer) { }
+        : this(default(TValue), original, keyComparer) { }
 
     public DefaultableDictionary(TValue defaultValue)
         : this(defaultValue, EqualityComparer<TKey>.Default) { }
@@ -80,10 +92,16 @@ public class DefaultableDictionary<TKey, TValue> : IDictionary<TKey, TValue>
         TValue defaultValue,
         IDictionary<TKey, TValue> original,
         IEqualityComparer<TKey> keyComparer
+    ) : this(_ => defaultValue, original, keyComparer) { }
+
+    public DefaultableDictionary(
+        Func<TKey, TValue> defaultValueFactory,
+        IDictionary<TKey, TValue> original = null,
+        IEqualityComparer<TKey> keyComparer = null
     )
     {
-        this.DefaultValue = defaultValue;
-        this._dictionary = new Dictionary<TKey, TValue>(original, keyComparer);
+        DefaultValueFactory = defaultValueFactory;
+        _dictionary = new(original ?? new Dictionary<TKey, TValue>(), keyComparer ?? EqualityComparer<TKey>.Default);
     }
 
     public virtual ICollection<TKey> Keys => ((IDictionary<TKey, TValue>)this._dictionary).Keys;
@@ -103,7 +121,7 @@ public class DefaultableDictionary<TKey, TValue> : IDictionary<TKey, TValue>
     }
 
     public virtual void Add(TKey key, TValue value) =>
-        ((IDictionary<TKey, TValue>)this._dictionary).Add(key, value);
+        ((IDictionary<TKey, TValue>)this._dictionary)[key] = value;
 
     public virtual bool ContainsKey(TKey key) =>
         ((IDictionary<TKey, TValue>)this._dictionary).ContainsKey(key);

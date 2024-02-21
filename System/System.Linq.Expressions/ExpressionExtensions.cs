@@ -40,10 +40,10 @@ public static class ExpressionExtensions
     }
 
     /// <summary>
-    /// Returns the <see cref="PropertyInfo" /> that describes the property that
+    /// Returns the <see cref="FieldInfo" /> that describes the fiels that
     /// is being returned in an expression in the form:
     /// <code>
-    ///   x => x.SomeProperty
+    ///   x => x.SomeField
     /// </code>
     /// </summary>
     public static FieldInfo AsField(this LambdaExpression fieldAccessor)

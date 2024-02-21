@@ -2,7 +2,7 @@ namespace System;
 
 using OneOf;
 
-public readonly record struct UriOrString
+public class UriOrString
 {
     public UriOrString(string str)
     {
