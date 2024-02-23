@@ -95,7 +95,7 @@ public static class StringExtensions
 #endif
 
     /// <summary>
-    /// Concatentates many strings into one using a <paramref name="separator" />
+    /// Concatenates many strings into one using a <paramref name="separator" />
     /// </summary>
     /// <param name="separator">The string to be used between the values in <paramref name="values" /></param>
     /// <param name="values">The list of values to be converted to a concatenated string</param>
