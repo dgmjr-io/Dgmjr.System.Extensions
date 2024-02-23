@@ -1,4 +1,5 @@
 ---
+
 title: DGMJR Caching Extensions
 lastmod: 2023-56-27T13:56:34.5772-05:00Z
 date: 2023-56-27T13:56:34.5773-05:00Z
@@ -13,9 +14,10 @@ keywords:
 - dgmjr
 - dgmjr-io
 type: readme
----
+------------
 
 # DGMJR Caching Extensions
+
 Tis package contains extension methods and classes for working with caches
 
 ## Contents
@@ -29,3 +31,4 @@ Extends the functionality of [`IDistributedCache`](https://docs.microsoft.com/en
 - TItem? GetOrCreate<TItem>(this IDistributedCache cache, object key, Func<DistributedCacheEntryOptions, TItem> factory)
 - TItem? GetOrCreate<TItem>(this IDistributedCache cache, object key, Func<TItem> factory, DistributedCacheEntryOptions? createOptions)
 - TItem? GetOrCreate<TItem>(this IDistributedCache cache, object key, Func<TItem> factory)
+
