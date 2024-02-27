@@ -43,6 +43,7 @@
     <PackageReference Include="System.Usings" IncludeAssets="Build" ExcludeAssets="Compile;Runtime;Native;Analyzers" />
     <PackageReference Include="System.Text.Usings" IncludeAssets="Build" ExcludeAssets="Compile;Runtime;Native;Analyzers"/>
     <PackageReference Include="system.Xml.ReaderWriter" Condition="$(TargetFramework.StartsWith('net6')) Or $(TargetFramework.StartsWith('net7'))"/>
+    <PackageReference Include="system.ComponentModel.Annotations" Condition="$(TargetFramework.StartsWith('netstandard'))"/>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Memory" />
