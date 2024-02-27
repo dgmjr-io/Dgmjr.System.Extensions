@@ -50,7 +50,7 @@ public static partial class LoggingWebApplicationBuilderExtensions
                     config.ConnectionString = builder.Configuration.GetConnectionString(
                         ApplicationInsights
                     ),
-                configureApplicationInsightsLoggerOptions: _ => {  }
+                configureApplicationInsightsLoggerOptions: _ => { }
             )
 #if DEBUG
             .AddConsole()

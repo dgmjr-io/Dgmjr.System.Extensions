@@ -61,7 +61,7 @@ public static class EnumExtensions
     public static int GetOrder<T>(this T e)
         where T : Enum
     {
-        var attribute = e.GetCustomAttribute< DisplayAttribute>();
+        var attribute = e.GetCustomAttribute<DisplayAttribute>();
         return attribute?.GetOrder() ?? 0;
     }
 }
