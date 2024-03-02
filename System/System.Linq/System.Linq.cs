@@ -103,7 +103,7 @@ public static class DmjrsLinqExtensions
             // }
             // else
             // {
-                removeRange.ForEach(item => collection.Remove(item));
+            removeRange.ForEach(item => collection.Remove(item));
             // }
         }
         return collection;
