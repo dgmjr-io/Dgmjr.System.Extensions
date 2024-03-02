@@ -97,14 +97,14 @@ public static class DmjrsLinqExtensions
     {
         if (removeRange != null)
         {
-            if (collection is IList<T> list)
-            {
-                list.RemoveRange(removeRange);
-            }
-            else
-            {
+            // if (collection is List<T> list)
+            // {
+            //     list.RemoveRange(removeRange);
+            // }
+            // else
+            // {
                 removeRange.ForEach(item => collection.Remove(item));
-            }
+            // }
         }
         return collection;
     }
