@@ -102,7 +102,7 @@ public static class DmjrsLinqExtensions
             // }
             // else
             // {
-                removeRange.ForEach(item => collection.Remove(item));
+            removeRange.ForEach(item => collection.Remove(item));
             // }
         }
         return collection;
@@ -230,19 +230,19 @@ public static class DmjrsLinqExtensions
 
     public static IEnumerable<T> TakeRandom<T>(this IEnumerable<T> enumerable, int count = 1, bool allowDuplicates = false)
     {
-        #if !NET5_0_OR_GREATER
+#if !NET5_0_OR_GREATER
         var random = new Random();
-        #endif
+#endif
         var list = enumerable.ToList();
         for (var i = 0; i < count; i++)
         {
-            #if NET5_0_OR_GREATER
+#if NET5_0_OR_GREATER
             var index = Random.Shared.Next(0, list.Count);
-            #else
+#else
             var index = random.Next(0, list.Count);
-            #endif
+#endif
             yield return list[index];
-            if(!allowDuplicates)
+            if (!allowDuplicates)
             {
                 list.RemoveAt(index);
             }
