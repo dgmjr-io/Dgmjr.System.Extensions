@@ -247,4 +247,26 @@ static class FlagExtensions
     {
         return typeof(T).IsEnum;
     }
+
+    public static T[] GetFlags<T>(this T flags)
+        where T : Enum
+    {
+        var individualFlags = new List<T>();
+        foreach (var value in Enum.GetValues(typeof(T)))
+        {
+            var flag = Convert.ToInt64(value);
+            if (flag != 0 && (Convert.ToInt64(flags) & flag) == flag)
+            {
+                individualFlags.Add((T)value);
+            }
+        }
+
+        // Case to handle the 'None' scenario, typically represented by a value of 0.
+        if (individualFlags.Count == 0 && Enum.IsDefined(typeof(T), 0))
+        {
+            individualFlags.Add((T)Enum.ToObject(typeof(T), 0));
+        }
+
+        return [.. individualFlags];
+    }
 }

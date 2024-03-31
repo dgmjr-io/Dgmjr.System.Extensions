@@ -64,4 +64,46 @@ public static class EnumExtensions
         var attribute = e.GetCustomAttribute< DisplayAttribute>();
         return attribute?.GetOrder() ?? 0;
     }
+
+    public static string GetDescription<T>(this T e)
+        where T : Enum
+    {
+        var attribute = e.GetCustomAttribute<DisplayAttribute>();
+        return attribute?.Description?.IsPresent() == true ? attribute.GetDescription() : e.ToString();
+    }
+
+    public static string GetCategory<T>(this T e)
+        where T : Enum
+    {
+        var attribute = e.GetCustomAttribute<DisplayAttribute>();
+        return attribute?.GetGroupName()?.IsPresent() == true ? attribute.GetGroupName() : e.ToString();
+    }
+
+    public static string[] GetSynonyms<T>(this T e)
+        where T : Enum
+    {
+        var attribute = e.GetCustomAttribute<SynonymsAttribute>();
+        return attribute?.Value ?? Empty<string>();
+    }
+
+    public static string GetName<T>(this T e)
+        where T : Enum
+    {
+        var attribute = e.GetCustomAttribute<DisplayAttribute>();
+        return attribute?.GetName() ?? e.ToString();
+    }
+
+    public static guid? GetGuid<T>(this T e)
+        where T : Enum
+    {
+        var attribute = e.GetCustomAttribute<GuidAttribute>();
+        return attribute?.Value;
+    }
+
+    public static Uri? GetUri<T>(this T e)
+        where T : Enum
+    {
+        var attribute = e.GetCustomAttribute<UriAttribute>();
+        return attribute?.Value;
+    }
 }

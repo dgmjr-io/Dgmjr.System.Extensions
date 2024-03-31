@@ -19,7 +19,6 @@ namespace System.Linq;
 // #if DEFINE_INTERNAL
 public static class DmjrsLinqExtensions
 // #else
-// public static class JustinsLinqExtensions
 // #endif
 {
     /// <summary>
@@ -217,5 +216,41 @@ public static class DmjrsLinqExtensions
             k <<= 1;
         }
         return k;
+    }
+
+    public static async Task<IEnumerable<T>> ToEnumerableAsync<T>(this IAsyncEnumerable<T> asyncEnumerable)
+    {
+        var list = new List<T>();
+        await foreach (var item in asyncEnumerable)
+        {
+            list.Add(item);
+        }
+        return list;
+    }
+
+    public static IEnumerable<T> TakeRandom<T>(this IEnumerable<T> enumerable, int count = 1, bool allowDuplicates = false)
+    {
+        #if !NET5_0_OR_GREATER
+        var random = new Random();
+        #endif
+        var list = enumerable.ToList();
+        for (var i = 0; i < count; i++)
+        {
+            #if NET5_0_OR_GREATER
+            var index = Random.Shared.Next(0, list.Count);
+            #else
+            var index = random.Next(0, list.Count);
+            #endif
+            yield return list[index];
+            if(!allowDuplicates)
+            {
+                list.RemoveAt(index);
+            }
+        }
+    }
+
+    public static T TakeRandom<T>(this IEnumerable<T> enumerable)
+    {
+        return enumerable.TakeRandom(1).First();
     }
 }

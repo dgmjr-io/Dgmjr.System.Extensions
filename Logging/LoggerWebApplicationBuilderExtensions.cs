@@ -22,6 +22,7 @@ using global::Azure.Monitor.OpenTelemetry.AspNetCore;
 using global::Azure.Identity;
 using global::Azure.Monitor.OpenTelemetry.Exporter;
 using OpenTelemetry.Logs;
+using Microsoft.AspNetCore.Hosting;
 
 public static partial class LoggingWebApplicationBuilderExtensions
 {
@@ -37,17 +38,30 @@ public static partial class LoggingWebApplicationBuilderExtensions
         this WebApplicationBuilder builder
     )
     {
+        builder.Services.AddLoggingAndApplicationInsightsTelemetry(
+            builder.Host, builder.Logging, builder.Configuration
+        );
+        return builder;
+    }
+
+    public static IServiceCollection AddLoggingAndApplicationInsightsTelemetry(
+        this IServiceCollection services,
+        IHostBuilder host,
+        ILoggingBuilder logging,
+        IConfiguration configuration
+    )
+    {
         Log.Logger = new LoggerConfiguration().ReadFrom
-            .Configuration(builder.Configuration)
+            .Configuration(configuration)
             .CreateBootstrapLogger();
 
-        builder.Host.UseSerilog(Log.Logger, true);
+        host.UseSerilog(Log.Logger, true);
 
-        builder.Services.AddLoggingAndApplicationInsightsTelemetry(builder.Configuration);
-        builder.Logging
+        services.AddLoggingAndApplicationInsightsTelemetry(configuration);
+        logging
             .AddApplicationInsights(
                 configureTelemetryConfiguration: config =>
-                    config.ConnectionString = builder.Configuration.GetConnectionString(
+                    config.ConnectionString = configuration.GetConnectionString(
                         ApplicationInsights
                     ),
                 configureApplicationInsightsLoggerOptions: _ => {  }
@@ -62,13 +76,13 @@ public static partial class LoggingWebApplicationBuilderExtensions
             // .AddEventLog()
             .AddEventSourceLogger();
 
-        builder.Services.AddTransient<ILogger>(sp =>
+        services.AddTransient<ILogger>(sp =>
         {
             var logger = sp.GetRequiredService<ILogger<object>>();
             return logger;
         });
 
-        return builder;
+        return services;
     }
 
     public static IServiceCollection AddLoggingAndApplicationInsightsTelemetry(
