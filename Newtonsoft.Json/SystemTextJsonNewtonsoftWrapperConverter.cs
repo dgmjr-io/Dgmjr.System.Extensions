@@ -12,20 +12,20 @@ public class SystemTextJsonNewtonsoftJsonWrapperConverter<T, TNewtonsoftConverte
     public SystemTextJsonNewtonsoftJsonWrapperConverter()
         : this(new TNewtonsoftConverter()) { }
 
-    protected virtual TNewtonsoftConverter NewtonsoftConverter => newtonsoftConverter;
+protected virtual TNewtonsoftConverter NewtonsoftConverter => newtonsoftConverter;
 
-    public override T? Read(ref Utf8JsonReader reader, type typeToConvert, Jso options)
-    {
-        var json = reader.GetString();
-        var newtonsoftObject = JsonConvert.DeserializeObject<T>(json, NewtonsoftConverter);
-        return newtonsoftObject;
-    }
+public override T? Read(ref Utf8JsonReader reader, type typeToConvert, Jso options)
+{
+    var json = reader.GetString();
+    var newtonsoftObject = JsonConvert.DeserializeObject<T>(json, NewtonsoftConverter);
+    return newtonsoftObject;
+}
 
-    public override void Write(Utf8JsonWriter writer, T value, Jso options)
-    {
-        var json = JsonConvert.SerializeObject(value, NewtonsoftConverter);
-        writer.WriteStringValue(json);
-    }
+public override void Write(Utf8JsonWriter writer, T value, Jso options)
+{
+    var json = JsonConvert.SerializeObject(value, NewtonsoftConverter);
+    writer.WriteStringValue(json);
+}
 }
 
 public class SystemTextJsonNewtonsoftJsonWrapperConverterAttribute<T, TNewtonsoftConverter>
