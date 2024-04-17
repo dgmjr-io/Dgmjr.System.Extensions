@@ -1,6 +1,7 @@
 namespace System;
 
 public class Box<T>
+    where T : notnull
 {
     public T Value { get; set; }
 
