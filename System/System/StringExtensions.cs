@@ -345,7 +345,7 @@ public static class StringExtensions
         var last4Chars = "****";
         if (value.IsPresent() && value.Length > 4)
         {
-            last4Chars = value.Substring(0, value.Length - 4);
+            last4Chars = value[..4]; //.Substring(0, value.Length - 4);
         }
 
         return "****" + last4Chars;
@@ -359,5 +359,10 @@ public static class StringExtensions
     public static bool IsUri(this string value)
     {
         return Uri.TryCreate(value, Absolute, out _);
+    }
+
+    public static string ValueOrDefault(this string? value, string defaultValue)
+    {
+        return value.IsPresent() ? value : defaultValue;
     }
 }

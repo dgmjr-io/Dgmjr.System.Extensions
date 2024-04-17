@@ -137,7 +137,7 @@ public static class StaticMethodExtensions
                             return default;
                         }
 
-                        if (parameterTypes != null)
+                        if (parameterTypes is not null)
                         {
                             for (var i = 0; i < parameterTypes.Length; i++)
                             {
@@ -202,11 +202,11 @@ public static class StaticMethodExtensions
             methodName,
             parameters.Select(p => p.GetType()).ToArray()
         );
-        if (method == null)
-            throw new EntryPointNotFoundException(
+        return method == null
+            ? throw new EntryPointNotFoundException(
                 $"Method {methodName} not found on {ownerType.Name}"
-            );
-        return (TResult)method.Invoke(null, parameters);
+            )
+            : (TResult)method.Invoke(null, parameters);
     }
 
     public static TResult InvokeGenericMethod<TOwner, TResult>(
@@ -216,13 +216,13 @@ public static class StaticMethodExtensions
         params object[] parameters
     )
     {
-        var method = typeof(TOwner).GetGenericMethod(
-            t,
-            methodName,
-            parameters.Select(p => p.GetType()).ToArray()
-        );
-        if (method == null)
-            throw new EntryPointNotFoundException(
+        var method =
+            typeof(TOwner).GetGenericMethod(
+                t,
+                methodName,
+                parameters.Select(p => p.GetType()).ToArray()
+            )
+            ?? throw new EntryPointNotFoundException(
                 $"Method {methodName} not found on {typeof(TOwner).Name}"
             );
         return (TResult)method.Invoke(null, parameters);
@@ -240,11 +240,11 @@ public static class StaticMethodExtensions
             methodName,
             parameters.Select(p => p.GetType()).ToArray()
         );
-        if (method == null)
-            throw new EntryPointNotFoundException(
+        return method == null
+            ? throw new EntryPointNotFoundException(
                 $"Method {methodName} not found on {ownerType.Name}"
-            );
-        return method.Invoke(null, parameters);
+            )
+            : method.Invoke(null, parameters);
     }
 
     public static object InvokeGenericMethod<TOwner>(
@@ -259,10 +259,10 @@ public static class StaticMethodExtensions
             methodName,
             parameters.Select(p => p.GetType()).ToArray()
         );
-        if (method == null)
-            throw new EntryPointNotFoundException(
+        return method == null
+            ? throw new EntryPointNotFoundException(
                 $"Method {methodName} not found on {typeof(TOwner).Name}"
-            );
-        return method.Invoke(null, parameters);
+            )
+            : method.Invoke(null, parameters);
     }
 }

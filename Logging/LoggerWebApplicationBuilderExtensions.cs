@@ -1,28 +1,29 @@
-﻿namespace Microsoft.Extensions.DependencyInjection;
+﻿#if NET6_0_OR_GREATER
+namespace Microsoft.Extensions.DependencyInjection;
+
+using global::Azure.Identity;
+using global::Azure.Monitor.OpenTelemetry.AspNetCore;
+using global::Azure.Monitor.OpenTelemetry.Exporter;
 
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Logging.Configuration;
 
+using OpenTelemetry.Instrumentation.Http;
+using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
-using OpenTelemetry.Instrumentation.Http;
-
-using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 using Serilog;
 
-using global::Azure.Monitor.OpenTelemetry.AspNetCore;
-using global::Azure.Identity;
-using global::Azure.Monitor.OpenTelemetry.Exporter;
-using OpenTelemetry.Logs;
-using Microsoft.AspNetCore.Hosting;
+using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 public static partial class LoggingWebApplicationBuilderExtensions
 {
@@ -39,7 +40,9 @@ public static partial class LoggingWebApplicationBuilderExtensions
     )
     {
         builder.Services.AddLoggingAndApplicationInsightsTelemetry(
-            builder.Host, builder.Logging, builder.Configuration
+            builder.Host,
+            builder.Logging,
+            builder.Configuration
         );
         return builder;
     }
@@ -64,7 +67,7 @@ public static partial class LoggingWebApplicationBuilderExtensions
                     config.ConnectionString = configuration.GetConnectionString(
                         ApplicationInsights
                     ),
-                configureApplicationInsightsLoggerOptions: _ => {  }
+                configureApplicationInsightsLoggerOptions: _ => { }
             )
 #if DEBUG
             .AddConsole()
@@ -168,4 +171,16 @@ public static partial class LoggingWebApplicationBuilderExtensions
         );
         return services;
     }
+
+    public static WebApplicationBuilder UseLogging(
+        this WebApplicationBuilder builder,
+        Serilog.ILogger? logger = null,
+        bool dispose = false
+    )
+    {
+        Log.Logger ??= logger ?? StaticLogger.NewSerilogger();
+        builder.Host.UseSerilog(logger, dispose);
+        return builder;
+    }
 }
+#endif

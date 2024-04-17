@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net6.0;net8.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
-      <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Azure.Monitor.OpenTelemetry.AspNetCore" />
@@ -32,8 +32,12 @@
     <PackageReference Include="Serilog.Sinks.ApplicationInsights" />
     <PackageReference Include="Serilog.AspNetCore" />
     <PackageReference Include="Serilog.Sinks.AzureApp " />
+    <PackageReference Include="Serilog.Extensions.Hosting" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="LICENSE.md" Pack="true" PackagePath="LICENSE.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="./lib/**/*.*" />
   </ItemGroup>
 </Project>
