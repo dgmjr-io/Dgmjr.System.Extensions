@@ -264,6 +264,6 @@ static class FlagExtensions
             individualFlags.Add((T)Enum.ToObject(typeof(T), 0));
         }
 
-        return [.. individualFlags];
+        return [..individualFlags];
     }
 }
