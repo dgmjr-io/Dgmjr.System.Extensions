@@ -1,13 +1,10 @@
 ﻿/*
  * Randoms.cs
- *
- *   Created: 2022-10-23-11:42:05
- *   Modified: 2022-12-02-11:19:03
- *
- *   Author: David G. Moore, Jr. <david@dgmjr.io>
- *
- *   Copyright © 2022-2023 David G. Moore, Jr., All Rights Reserved
- *      License: MIT (https://opensource.org/licenses/MIT)
+ *     Created: 2023-30-14T18:30:21-04:00
+ *    Modified: 2024-30-19T13:30:36-04:00
+ *      Author: David G. Moore, Jr. <david@dgmjr.io>
+ *   Copyright: © 2022 - 2024 David G. Moore, Jr., All Rights Reserved
+ *     License: MIT (https://opensource.org/licenses/MIT)
  */
 
 using System;

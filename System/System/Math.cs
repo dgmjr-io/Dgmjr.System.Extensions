@@ -1,15 +1,10 @@
 /*
- *
  * Math.cs
- *
- *   Created: 2022-11-12-07:23:53
- *   Modified: 2022-11-12-07:25:59
- *
- *   Author: David G. Moore, Jr. <david@dgmjr.io>
- *
- *   Copyright © 2022-2023 David G. Moore, Jr., All Rights Reserved
- *      License: MIT (https://opensource.org/licenses/MIT)
- *
+ *     Created: 2023-30-14T18:30:21-04:00
+ *    Modified: 2024-29-19T13:29:57-04:00
+ *      Author: David G. Moore, Jr. <david@dgmjr.io>
+ *   Copyright: © 2022 - 2024 David G. Moore, Jr., All Rights Reserved
+ *     License: MIT (https://opensource.org/licenses/MIT)
  */
 
 namespace System;

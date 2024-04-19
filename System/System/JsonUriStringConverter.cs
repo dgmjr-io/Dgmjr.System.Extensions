@@ -1,3 +1,12 @@
+/*
+ * JsonUriStringConverter.cs
+ *     Created: 2023-46-22T02:46:39-05:00
+ *    Modified: 2024-29-19T13:29:48-04:00
+ *      Author: David G. Moore, Jr. <david@dgmjr.io>
+ *   Copyright: © 2022 - 2024 David G. Moore, Jr., All Rights Reserved
+ *     License: MIT (https://opensource.org/licenses/MIT)
+ */
+
 namespace System;
 
 public class JsonUriStringConverter : System.Text.Json.Serialization.JsonConverter<Uri>

@@ -1,15 +1,11 @@
-//
-// ICloneable.cs
-//
-//   Created: 2022-10-23-11:39:49
-//   Modified: 2022-11-11-06:11:07
-//
-//   Author: David G. Moore, Jr. <david@dgmjr.io>
-//
-//   Copyright © 2022-2023 David G. Moore, Jr., All Rights Reserved
-//      License: MIT (https://opensource.org/licenses/MIT)
-//
-
+/*
+ * ICloneable{TSelf}.cs
+ *     Created: 2023-30-14T18:30:21-04:00
+ *    Modified: 2024-29-19T13:29:23-04:00
+ *      Author: David G. Moore, Jr. <david@dgmjr.io>
+ *   Copyright: © 2022 - 2024 David G. Moore, Jr., All Rights Reserved
+ *     License: MIT (https://opensource.org/licenses/MIT)
+ */
 
 namespace System;
 

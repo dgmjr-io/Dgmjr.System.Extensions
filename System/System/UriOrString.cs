@@ -1,6 +1,13 @@
-namespace System;
+/*
+ * UriOrString.cs
+ *     Created: 2023-46-22T02:46:39-05:00
+ *    Modified: 2024-31-19T13:31:46-04:00
+ *      Author: David G. Moore, Jr. <david@dgmjr.io>
+ *   Copyright: © 2022 - 2024 David G. Moore, Jr., All Rights Reserved
+ *     License: MIT (https://opensource.org/licenses/MIT)
+ */
 
-using OneOf;
+namespace System;
 
 public class UriOrString
 {

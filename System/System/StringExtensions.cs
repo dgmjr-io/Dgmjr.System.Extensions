@@ -1,14 +1,12 @@
 ﻿/*
  * StringExtensions.cs
- *
- *   Created: 2022-11-11-06:06:01
- *   Modified: 2022-11-14-04:11:14
- *
- *   Author: David G. Moore, Jr. <david@dgmjr.io>
- *
- *   Copyright © 2022-2023 David G. Moore, Jr., All Rights Reserved
- *      License: MIT (https://opensource.org/licenses/MIT)
+ *     Created: 2023-30-14T18:30:21-04:00
+ *    Modified: 2024-30-19T13:30:44-04:00
+ *      Author: David G. Moore, Jr. <david@dgmjr.io>
+ *   Copyright: © 2022 - 2024 David G. Moore, Jr., All Rights Reserved
+ *     License: MIT (https://opensource.org/licenses/MIT)
  */
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -50,7 +48,7 @@ public static class StringExtensions
     /// <param name="str">The string to see whether it's null or empty</param>
     /// <returns>A <see langword="bool"/> value indicating whether the string
     ///     was null or empty</returns>
-    public static bool IsNullOrEmpty(this string? str) => IsNullOrEmpty(str);
+    public static bool IsNullOrEmpty(this string? str) => string.IsNullOrEmpty(str);
 
     /// <summary>
     /// This is a C# extension method that converts a Base64-encoded string to a byte array.

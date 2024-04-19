@@ -51,9 +51,3 @@ public class JsonUnixTimeMillisecondsDateTimeOffsetConverter : JsonConverter<Dat
     public override void Write(Utf8JsonWriter writer, DateTimeOffset value, Jso options) =>
         writer.WriteNumberValue(value.ToUnixTimeMilliseconds());
 }
-
-public class JsonConverterAttribute<T> : JConverterAttribute
-{
-    public JsonConverterAttribute()
-        : base(typeof(T)) { }
-}

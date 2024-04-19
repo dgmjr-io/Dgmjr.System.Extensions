@@ -1,18 +1,18 @@
 namespace Microsoft.Extensions.Logging;
 
-using Serilog;
-using Serilog.Extensions.Logging;
-using Serilog.Extensions.Hosting;
-
-using Log = Serilog.Log;
-using SeriloggerFactory = Serilog.Extensions.Logging.SerilogLoggerFactory;
-
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading;
+
+using Serilog;
 using Serilog.Core;
 using Serilog.Events;
+using Serilog.Extensions.Hosting;
+using Serilog.Extensions.Logging;
+
+using Log = Serilog.Log;
+using SeriloggerFactory = Serilog.Extensions.Logging.SerilogLoggerFactory;
 
 public static class StaticLogger
 {
@@ -27,14 +27,14 @@ public static class StaticLogger
     >(
         key =>
             (
-                Factory.CreateLogger(key.FullName ?? key.Name)
+                Factory.CreateLogger(key.GetDisplayName() ?? key.Name)
                 ?? throw new InvalidOperationException("Logger creation failed")
             )!
     );
 
-    public static readonly ILoggerFactory Factory = new SeriloggerFactory(NewSerilogger());
+    private static readonly ILoggerFactory Factory = new SeriloggerFactory(NewSerilogger());
 
-    public static ILogger<T> GetLogger<T>() => Factory.CreateLogger<T>();
+    public static ILogger<T> GetLogger<T>() => new Logger<T>(Factory);
 
     public static ILogger GetLogger([CallerMemberName] string? name = default) => Loggers[name];
 
