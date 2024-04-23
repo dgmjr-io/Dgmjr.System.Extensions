@@ -1,13 +1,10 @@
 ﻿/*
- * DefaultableDictionary.cs
- *
- *   Created: 2022-12-23-05:20:21
- *   Modified: 2022-12-23-05:20:21
- *
- *   Author: David G. Moore, Jr. <david@dgmjr.io>
- *
- *   Copyright © 2022-2023 David G. Moore, Jr., All Rights Reserved
- *      License: MIT (https://opensource.org/licenses/MIT)
+ * DefaultableDictionary{TKey,TValue}.cs
+ *     Created: 2023-30-14T18:30:21-04:00
+ *    Modified: 2024-52-19T17:52:25-04:00
+ *      Author: David G. Moore, Jr. <david@dgmjr.io>
+ *   Copyright: © 2022 - 2024 David G. Moore, Jr., All Rights Reserved
+ *     License: MIT (https://opensource.org/licenses/MIT)
  */
 
 #if !DEFAULTABLE_DICTIONARY
@@ -92,16 +89,20 @@ public class DefaultableDictionary<TKey, TValue> : IDictionary<TKey, TValue>
         TValue defaultValue,
         IDictionary<TKey, TValue> original,
         IEqualityComparer<TKey> keyComparer
-    ) : this(_ => defaultValue, original, keyComparer) { }
+    )
+        : this(_ => defaultValue, original, keyComparer) { }
 
     public DefaultableDictionary(
         Func<TKey, TValue> defaultValueFactory,
-        IDictionary<TKey, TValue> original = null,
-        IEqualityComparer<TKey> keyComparer = null
+        IDictionary<TKey, TValue>? original = default,
+        IEqualityComparer<TKey>? keyComparer = default
     )
     {
         DefaultValueFactory = defaultValueFactory;
-        _dictionary = new(original ?? new Dictionary<TKey, TValue>(), keyComparer ?? EqualityComparer<TKey>.Default);
+        _dictionary = new(
+            original ?? new Dictionary<TKey, TValue>(),
+            keyComparer ?? EqualityComparer<TKey>.Default
+        );
     }
 
     public virtual ICollection<TKey> Keys => ((IDictionary<TKey, TValue>)this._dictionary).Keys;

@@ -23,12 +23,12 @@ public static class TypeExtensions
         try
         {
             return type.IsGenericType || type.IsGenericTypeDefinition
-                ? $"{type.Name.Substring(0, type.Name.IndexOf('`'))}<{string.Join(", ", type.GetGenericArguments().Select(GetDisplayName))}>"
+                ? $"{type.Name[0..type.Name.IndexOf('`')]}<{string.Join(", ", type.GetGenericArguments().Select(GetDisplayName))}>"
                 : type.Name;
         }
         catch
         {
-            return type.FullName!;
+            return type?.FullName ?? "null";
         }
     }
 }

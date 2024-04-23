@@ -1,4 +1,5 @@
 namespace System.Text.Json;
+
 using System.Text;
 
 /// <summary>
@@ -30,7 +31,7 @@ public static class JsonExtensions
         {
             return Parse(json, options);
         }
-        catch (JsonException)
+        catch (JException)
         {
             return null;
         }

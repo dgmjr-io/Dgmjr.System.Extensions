@@ -23,14 +23,14 @@ public static class ObjectExtensions
             $"Resource {resourceName} not found in assembly {typeof(T).Assembly.FullName}"
         );
 
-    public static async Task<byte[]> GetManifestResourceBytesAsync<T>(
+    public static async Task<byte[]?> GetManifestResourceBytesAsync<T>(
         this T _,
         string resourceName
     ) =>
         (
             await (
                 typeof(T).Assembly.GetManifestResourceStream(resourceName)?.ReadAllBytesAsync()
-                ?? Task.FromResult(default(byte[]))
+                ?? Task.FromResult(Empty<byte>())
             )
         )
         ?? throw new FileNotFoundException(
