@@ -26,7 +26,7 @@ internal static class JsoGetter
             .GetValue(null) as ConditionalWeakTable<Jso, object>)!;
 
     static object? ToContainer(this ConditionalWeakTable<Jso, object> all)
-        => typeof(ConditionalWeakTable<Jso,object>).GetRuntimeFields().First(f => f.FieldType.Name == ContainerName).GetValue(all);
+        => typeof(ConditionalWeakTable<Jso, object>).GetRuntimeFields().First(f => f.FieldType.Name == ContainerName).GetValue(all);
 
     static IEnumerable ToEntries(this object container)
         => (container.GetType().GetRuntimeFields().First(f => f.Name.Contains(entriesName)).GetValue(container) as IEnumerable)!;
@@ -47,21 +47,21 @@ internal static class JsoGetter
         => ts.Where(t => t is not null)!;
 
     static readonly Jso DefaultJso = new()
-        {
-            AllowTrailingCommas = true,
-            MaxDepth = 10,
-            DefaultIgnoreCondition = JIgnore.Never,
-            ReferenceHandler = ReferenceHandler.Preserve,
-            UnmappedMemberHandling = JsonUnmappedMemberHandling.Skip,
-            NumberHandling =
+    {
+        AllowTrailingCommas = true,
+        MaxDepth = 10,
+        DefaultIgnoreCondition = JIgnore.Never,
+        ReferenceHandler = ReferenceHandler.Preserve,
+        UnmappedMemberHandling = JsonUnmappedMemberHandling.Skip,
+        NumberHandling =
                 JNumbers.AllowNamedFloatingPointLiterals | JNumbers.AllowReadingFromString,
-            DictionaryKeyPolicy = JNaming.CamelCase,
-            UnknownTypeHandling = JUnknownTypes.JsonElement,
-            WriteIndented = false,
-            IgnoreReadOnlyFields = false,
-            PropertyNameCaseInsensitive = true,
-            ReadCommentHandling = JComments.Skip
-        };
+        DictionaryKeyPolicy = JNaming.CamelCase,
+        UnknownTypeHandling = JUnknownTypes.JsonElement,
+        WriteIndented = false,
+        IgnoreReadOnlyFields = false,
+        PropertyNameCaseInsensitive = true,
+        ReadCommentHandling = JComments.Skip
+    };
 
     /// <summary>We're going to assume that the JSO that we want was the first one added to this collection, at startup</summary>
     public static Jso GetJso()
