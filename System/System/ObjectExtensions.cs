@@ -45,7 +45,8 @@ public static class ObjectExtensions
         string resourceName
     ) => await Extensions.ReadAssemblyResourceAllTextAsync(typeof(T).Assembly, resourceName);
 
-    public static T To<T>(this object value) => (T)Convert.ChangeType(value, typeof(T));
+    public static T To<T>(this object value) =>
+        value is T t ? t : (T)Convert.ChangeType(value, typeof(T));
 
     public static object? GetPropertyValue(this object obj, string propertyName)
     {

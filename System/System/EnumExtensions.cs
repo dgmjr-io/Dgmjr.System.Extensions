@@ -123,4 +123,35 @@ public static class EnumExtensions
         var attribute = e.GetCustomAttribute<UriAttribute>();
         return attribute?.Value;
     }
+
+    public static System.Runtime.Serialization.EnumMemberAttribute? GetEnumMember<T>(this T e)
+        where T : Enum
+    {
+        var attribute = e.GetCustomAttribute<System.Runtime.Serialization.EnumMemberAttribute>();
+        return attribute;
+    }
+
+    public static string GetEnumMemberValue<T>(this T e)
+        where T : Enum
+    {
+        var attribute = e.GetEnumMember();
+        return attribute?.Value ?? e.ToString();
+    }
+
+    public static string[] GetStringValues<T>(this T e)
+        where T : Enum
+    {
+        return new[]
+        {
+            e.ToString(),
+            e.GetName(),
+            e.GetShortName(),
+            e.GetDisplayName(),
+            e.GetUri().ToString(),
+            e.GetGuid().ToString()
+        }
+            .Concat(e.GetSynonyms())
+            .Distinct()
+            .ToArray();
+    }
 }

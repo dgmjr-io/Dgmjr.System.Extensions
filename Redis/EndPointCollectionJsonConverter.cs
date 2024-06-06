@@ -10,9 +10,9 @@ using StackExchange.Redis;
 
 public class EndPointCollectionJsonConverter : JsonConverter<EndPointCollection>
 {
-    const int StandardPort = 6379;
+    private const int StandardPort = 6379;
 
-    const string Localhost = "localhost";
+    private const string Localhost = "localhost";
 
     public override bool CanConvert(type typeToConvert)
     {
@@ -68,7 +68,9 @@ public class EndPointCollectionJsonConverter : JsonConverter<EndPointCollection>
                                 }
                                 else
                                 {
-                                    endpoint = endpoint is DnsEndPoint dnsEndPoint ? new DnsEndPoint(dnsEndPoint.Host, port) : (EndPoint)new DnsEndPoint(Localhost, port);
+                                    endpoint = endpoint is DnsEndPoint dnsEndPoint
+                                        ? new DnsEndPoint(dnsEndPoint.Host, port)
+                                        : (EndPoint)new DnsEndPoint(Localhost, port);
                                 }
                                 break;
                             case nameof(IPEndPoint.Address):

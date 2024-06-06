@@ -17,6 +17,15 @@ public static class Enums
         return Enum.GetValues(typeof(T)).OfType<T>().ToArray();
     }
 
+    public static T? SlowParse<T>(string s)
+        where T : Enum
+    {
+        return Find(
+            GetValues<T>(),
+            e => e.GetStringValues().Contains(s, StringComparer.OrdinalIgnoreCase)
+        );
+    }
+
     public static T Parse<T>(string s)
         where T : Enum
     {

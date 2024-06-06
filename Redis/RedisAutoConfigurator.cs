@@ -6,37 +6,30 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Hosting;
 
-public class RedisAutoConfigurator : IHostingStartup, IStartupFilter
+public class RedisAutoConfigurator : ConfiguratorBase<RedisAutoConfigurator>
 {
     private const string Redis = nameof(Redis);
     private const string ResponseCaching = nameof(ResponseCaching);
     public ConfigurationOrder Order => ConfigurationOrder.AnyTime;
 
-    public void Configure(IWebHostBuilder builder)
+    protected override void ConfigureServices(IServiceCollection services)
     {
-        builder.ConfigureServices((context, services) =>
+        var redisOptions = Configuration.GetSection(Redis).Get<RedisCacheOptions>();
+        if (redisOptions?.UseRedis == true)
         {
-            var redisOptions = context.Configuration.GetSection(Redis).Get<RedisCacheOptions>();
-            if (redisOptions?.UseRedis == true)
-            {
-                services.AddRedisCaching(context.Configuration);
-            }
-        });
+            services.AddRedisCaching(Configuration);
+        }
     }
 
-    public Action<IApplicationBuilder> Configure(Action<IApplicationBuilder> next)
+    protected override void Configure(IApplicationBuilder app)
     {
-        return builder =>
+        var redisOptions = app.ApplicationServices
+            .GetRequiredService<IConfiguration>()
+            .GetSection(Redis)
+            .Get<RedisCacheOptions>();
+        if (redisOptions?.UseRedis == true)
         {
-            var redisOptions = builder.ApplicationServices
-                .GetRequiredService<IConfiguration>()
-                .GetSection(Redis)
-                .Get<RedisCacheOptions>();
-            if (redisOptions?.UseRedis == true)
-            {
-                builder.UseRedisCaching();
-            }
-            next(builder);
-        };
+            app.UseRedisCaching();
+        }
     }
 }

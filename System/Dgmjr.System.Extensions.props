@@ -39,6 +39,8 @@
     <Using Include="System.Xml.Linq.XName" Alias="XN"/>
     <Using Include="System.Xml.Linq.XNamespace" Alias="XNS"/>
     <Using Include="System.Xml.Linq.XNode" Alias="XO"/>
+    <Using Include="System.Collections.Generic.Dictionary%3cstring,object%3e" Alias="StringObjectDictionary" />
+    <Using Include="System.Collections.Generic.IDictionary%3cstring,object%3e" Alias="IStringObjectDictionary" />
     <Using Include="System.Collections.Generic.CaseInsensitiveKeyDictionary%3cstring%3e" Alias="CaseInsensitiveStringDictionary" />
     <Using Include="System.Collections.Generic.CaseInsensitiveKeyDictionary%3cstring%3e" Alias="CaseInsensitiveStringKeyDictionary" />
     <Using Include="System.Int128" Alias="vlong /* very long */" Condition="$(DefineConstants.Contains('NET7_0_OR_GREATER'))" />

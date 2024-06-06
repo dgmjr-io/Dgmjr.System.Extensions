@@ -4,8 +4,8 @@ using System.Runtime.CompilerServices;
 
 public static class ArgumentNullExceptionExtensions
 {
-    public static void ThrowIfNull(
-        this object? value,
+    public static T ThrowIfNull<T>(
+        this T? value,
         [CallerArgumentExpression("value")] string? paramName = null
     )
     {
@@ -13,20 +13,24 @@ public static class ArgumentNullExceptionExtensions
         {
             throw new ArgumentNullException(paramName);
         }
+        else
+            return value;
     }
 }
 
 public static class ArgumentExceptionExtensions
 {
-    public static void ThrowIfNullOrEmpty(
-        this object? value,
+    public static T ThrowIfNullOrEmpty<T>(
+        this T? value,
         [CallerArgumentExpression("value")] string? paramName = null
     )
     {
-        if (IsNullOrEmpty(value.ToString()))
+        if (IsNullOrEmpty(value?.ToString()))
         {
             throw new ArgumentException(paramName);
         }
+        else
+            return value;
     }
 }
 
